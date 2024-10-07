@@ -65,15 +65,26 @@ public class user {
 
     // Méthode pour afficher les informations de l'utilisateur
     public void afficher() {
+    	System.out.println("*** Informations sur l'utilisateur ***");
         System.out.println("Nom: " + nom);
         System.out.println("Prénom: " + prenom);
         System.out.println("Email: " + email);
         System.out.println("Âge: " + age);
         System.out.println("Adresse: " + adresse);
+        System.out.println("**************************************");
     }
 
-    //methode pour poster un avis ici ou dans avis ??
+    //Methode pour poster un avis à quelqu'un
 
-
+	 public void posterAvis(user pourQui, int nbEtoiles, String description) {
+	    	avis monAvis = new avis(this, pourQui, nbEtoiles,description);
+	    	System.out.println("Votre avis a bien été posté " + monAvis.deQui.nom);
+	 }
+	 
+	 public void posterAvis(user pourQui, int nbEtoiles) {
+		 	avis monAvis = new avis(this, pourQui, nbEtoiles);
+		 	System.out.println("Votre avis a bien été posté "  + monAvis.deQui.nom);
+	 }
+    
     
 }

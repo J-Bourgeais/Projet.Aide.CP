@@ -26,5 +26,9 @@ public class requete {
     public requete getRequete() {
         return this;
     }
+    
+    public void afficherRequete() {
+    	System.out.println("Requete");
+    }
 
 }

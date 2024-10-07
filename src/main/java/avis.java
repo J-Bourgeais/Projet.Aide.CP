@@ -23,7 +23,9 @@ public class avis{
     }
 
     public void getAvis() {
-        System.out.println("Nombre d'étoiles attribuées à " + this.pourQui + ":" + this.nbEtoiles + " , Posté par : " + this.deQui + " à " + this.date);
+        System.out.println("Nombre d'étoiles attribuées à " + this.pourQui.getNom() + ":" + this.nbEtoiles + " , Posté par : " + this.deQui.getNom() + " à " + this.date);
     }
 
+ 
+    
 }
