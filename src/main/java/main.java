@@ -19,16 +19,43 @@ et on appelle la fct correspondant
  * 
  */
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args) {
         //récuperer ce que l'user écris
+
+
+        //Liaison SQL
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Chargement du driver
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String url = "jdbc:mysql://localhost:3306/SQL_Project"; // Remplace par ton URL de base de données
+        String user = "projet_gei_035";  // Nom d'utilisateur de la base
+        String password = "quiaw0Di";  // Mot de passe de la base
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Connexion réussie !");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         //Se connecter ou s'inscrire
         //TODO
+        //Case et connection --> Faire 
 
 
         // Affichage du menu à l'utilisateur
