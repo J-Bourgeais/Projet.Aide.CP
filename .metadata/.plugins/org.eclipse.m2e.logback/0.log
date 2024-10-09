@@ -144,3 +144,146 @@
 2024-10-09 16:40:29,866 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-10-09 16:40:29,872 [Worker-1: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2024-10-09 16:40:29,873 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:44:38,474 [Worker-9: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: fr.insa.Maven.project:ProjectMaven:0.0.1-SNAPSHOT @ C:\Users\bourg\OneDrive\Bureau\INSA_4A\S1\Prjet\ProjectMaven\pom.xml.
+2024-10-09 16:44:38,503 [Worker-9: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2024-10-09 16:44:38,646 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:44:38,650 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:44:38,653 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:44:38,655 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:44:39,695 [Worker-20: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33-sources.jar
+2024-10-09 16:44:39,922 [Worker-20: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33-sources.jar
+2024-10-09 16:44:39,925 [Worker-20: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.mysql:mysql-connector-j:8.0.33
+2024-10-09 16:44:39,981 [Worker-20: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9-sources.jar
+2024-10-09 16:44:40,054 [Worker-8: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:44:40,055 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:44:40,058 [Worker-8: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:44:40,060 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:44:40,218 [Worker-20: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9-sources.jar
+2024-10-09 16:44:40,223 [Worker-20: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.google.protobuf:protobuf-java:3.21.9
+2024-10-09 16:47:28,225 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:47:28,227 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:47:28,230 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:47:28,232 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:47:43,586 [Worker-1: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2024-10-09 16:47:43,768 [Worker-1: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: fr.insa.Maven.project:ProjectMaven:0.0.1-SNAPSHOT @ C:\Users\bourg\OneDrive\Bureau\INSA_4A\S1\Prjet\ProjectMaven\pom.xml.
+2024-10-09 16:47:43,787 [Worker-1: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2024-10-09 16:47:43,893 [Worker-1: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /ProjectMaven/src/main/java
+2024-10-09 16:47:43,893 [Worker-1: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /ProjectMaven/src/main/resources
+2024-10-09 16:47:43,894 [Worker-1: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /ProjectMaven/src/test/java
+2024-10-09 16:47:43,895 [Worker-1: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /ProjectMaven/src/test/resources
+2024-10-09 16:47:43,940 [Worker-1: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0,00 sec, refresh facades takes 0,00 sec, update config takes 0,00 sec 
+2024-10-09 16:47:44,099 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:47:44,101 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:47:44,105 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:47:44,106 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:47:49,742 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2024-10-09 16:48:02,389 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409 [299])
+2024-10-09 16:48:02,391 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409
+2024-10-09 16:48:02,391 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\aopalliance-1.0.jar
+2024-10-09 16:48:02,391 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\guice-5.1.0.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\httpclient-4.5.14.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\httpcore-4.4.16.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\jansi-2.4.1.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\jcl-over-slf4j-1.7.36.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-artifact-3.9.9.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-builder-support-3.9.9.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-compat-3.9.9.jar
+2024-10-09 16:48:02,392 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-core-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-embedder-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-model-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-model-builder-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-plugin-api-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-repository-metadata-3.9.9.jar
+2024-10-09 16:48:02,393 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-api-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-connector-basic-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-impl-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-named-locks-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-provider-3.9.9.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-spi-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-transport-file-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-transport-http-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-transport-wagon-1.9.22.jar
+2024-10-09 16:48:02,394 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-resolver-util-1.9.22.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-settings-3.9.9.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-settings-builder-3.9.9.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\maven-shared-utils-3.4.2.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\org.eclipse.sisu.inject-0.9.0.M3.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\org.eclipse.sisu.plexus-0.9.0.M3.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-build-api-0.0.7.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-build-api-1.2.0.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-cipher-2.0.jar
+2024-10-09 16:48:02,395 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-classworlds-2.8.0.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-component-annotations-2.1.0.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-interpolation-1.27.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-sec-dispatcher-2.0.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-utils-3.5.1.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\plexus-xml-3.0.1.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\wagon-file-3.5.3.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\wagon-http-3.5.3.jar
+2024-10-09 16:48:02,396 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\wagon-http-shared-3.5.3.jar
+2024-10-09 16:48:02,397 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_3.9.900.20240824-1409\jars\wagon-provider-api-3.5.3.jar
+2024-10-09 16:48:02,398 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=com.google.guava_33.3.0.jre [10])
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\com.google.guava_33.3.0.jre.jar
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=slf4j.api_2.0.16 [521])
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\slf4j.api_2.0.16.jar
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=jakarta.inject.jakarta.inject-api_1.0.5 [22])
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\jakarta.inject.jakarta.inject-api_1.0.5.jar
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=jakarta.annotation-api_1.3.5 [20])
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\jakarta.annotation-api_1.3.5.jar
+2024-10-09 16:48:02,399 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=org.apache.commons.cli_1.9.0 [47])
+2024-10-09 16:48:02,400 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.apache.commons.cli_1.9.0.jar
+2024-10-09 16:48:02,400 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=org.apache.commons.commons-codec_1.16.0 [50])
+2024-10-09 16:48:02,400 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\org.apache.commons.commons-codec_1.16.0.jar
+2024-10-09 16:48:02,400 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - getClasspathEntries(Bundle=com.google.guava.failureaccess_1.0.2 [11])
+2024-10-09 16:48:02,400 [Worker-9: Launching ProjectMaven] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\com.google.guava.failureaccess_1.0.2.jar
+2024-10-09 16:48:02,403 [Worker-9: Launching ProjectMaven] INFO  o.e.m.i.launch.MavenLaunchDelegate - Run build in "C:\Users\bourg\OneDrive\Bureau\INSA_4A\S1\Prjet\ProjectMaven":
+2024-10-09 16:48:02,407 [Worker-9: Launching ProjectMaven] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B -Dstyle.color=always clean package
+2024-10-09 16:55:11,736 [Worker-1: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:11,739 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:55:11,742 [Worker-1: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:11,743 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:55:40,675 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:40,676 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:55:40,679 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:40,680 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:55:55,069 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:55,071 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:55:55,073 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:55:55,074 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:57:50,202 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:57:50,203 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:57:50,205 [Worker-20: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:57:50,206 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 16:59:10,664 [Worker-1: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:59:10,666 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 16:59:10,668 [Worker-1: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 16:59:10,670 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:14:36,137 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:14:36,138 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 17:14:36,140 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:14:36,142 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:21:11,390 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:11,391 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 17:21:11,394 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:11,395 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:21:16,447 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:16,448 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 17:21:16,451 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:16,452 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:21:40,677 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:40,678 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 17:21:40,680 [Worker-9: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:40,681 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:21:48,755 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2024-10-09 17:21:49,016 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: fr.insa.Maven.project:ProjectMaven:0.0.1-SNAPSHOT @ C:\Users\bourg\OneDrive\Bureau\INSA_4A\S1\Prjet\ProjectMaven\pom.xml.
+2024-10-09 17:21:49,040 [Worker-19: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+2024-10-09 17:21:49,173 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /ProjectMaven/src/main/java
+2024-10-09 17:21:49,173 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /ProjectMaven/src/main/resources
+2024-10-09 17:21:49,174 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /ProjectMaven/src/test/java
+2024-10-09 17:21:49,174 [Worker-19: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /ProjectMaven/src/test/resources
+2024-10-09 17:21:49,218 [Worker-19: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0,00 sec, refresh facades takes 0,00 sec, update config takes 0,00 sec 
+2024-10-09 17:21:49,412 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:49,413 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-10-09 17:21:49,418 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-10-09 17:21:49,419 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2024-10-09 17:21:55,067 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
