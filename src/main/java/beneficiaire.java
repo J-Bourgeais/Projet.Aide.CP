@@ -6,8 +6,8 @@ public class beneficiaire extends user {
     protected String[] enCours=null; //demande en cours de réalisation
 
     // Constructeur avec toutes les informations, y compris les demandes
-    public beneficiaire(String nom, String prenom, String email, String adresse, int age, String[] demandes, String[] enCours) {
-        super(nom, prenom, email, adresse, age); // Appel au constructeur de la classe parent
+    public beneficiaire(String nom, String prenom, String email, String adresse, int age,  String password, String[] demandes, String[] enCours) {
+        super(nom, prenom, email, adresse, age, password); // Appel au constructeur de la classe parent
         this.demandes = demandes;
         this.enCours = enCours;
     }

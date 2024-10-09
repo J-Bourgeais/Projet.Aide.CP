@@ -2,8 +2,8 @@
 
 public class structure extends user {
 	
-	public structure(String nom, String email, String adresse) {
-		super(nom,email,adresse);
+	public structure(String nom, String email, String adresse, String password) {
+		super(nom,email,adresse,password);
 	}
 	
 	public void validerService(boolean estValidee, requete requeteAValider) {

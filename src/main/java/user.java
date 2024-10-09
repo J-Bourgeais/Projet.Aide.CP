@@ -5,22 +5,25 @@ public class user {
     private String email;
     private String adresse;
     private int age;
+    private String password;
 
 
     // Constructeur
-    public user(String nom, String prenom, String email, String adresse, int age) {
+    public user(String nom, String prenom, String email, String adresse, int age, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.adresse=adresse;
         this.age = age;
+        this.password= password;
     }
 
     // Si qqc est pas obligatoire : pour structure
-    public user(String nom, String email, String adresse) {
+    public user(String nom, String email, String adresse, String password) {
         this.nom = nom;
         this.email = email;
         this.adresse=adresse;
+        this.password= password;
     }
 
     public String getNom() {

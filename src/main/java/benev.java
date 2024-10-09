@@ -7,8 +7,8 @@ public class benev extends user {
     protected String[] enCours=null; //demande en cours de réalisation
 
     // Constructeur avec toutes les informations, y compris les demandes
-    public benev(String nom, String prenom, String email, String adresse, int age, String[] offres, String[] enCours) {
-        super(nom, prenom, email, adresse, age); // Appel au constructeur de la classe parent
+    public benev(String nom, String prenom, String email, String adresse, int age, String password, String[] offres, String[] enCours) {
+        super(nom, prenom, email, adresse, age, password); // Appel au constructeur de la classe parent
         this.offres = offres;
         this.enCours = enCours;
     }
