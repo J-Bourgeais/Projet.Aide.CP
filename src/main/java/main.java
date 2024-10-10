@@ -98,6 +98,7 @@ et on appelle la fct correspondant
              case 1 :
                  System.out.println("Veuier entrer vtre adresse mai");
                  String email1 = scanner.nextLine();
+                 //On dirait que ca s'affiche d'un coup --> Voir pourquoi
                  System.out.println("Veuier entrer vtre mt de passe");
                  String password1 = scanner.nextLine();
                  
@@ -124,11 +125,9 @@ et on appelle la fct correspondant
  
                  } catch (SQLException e) {
                      e.printStackTrace();
-                 }
-                 
-                 
-                 
-                 
+                 }                 
+            
+            //Mauvaise gestion des case : apparait meme si 1
              case 2 :
                  //Demander chacun des eements
                  
@@ -186,7 +185,10 @@ et on appelle la fct correspondant
          }
          
          
- 
+         //Le mettre dans un if connecté
+         
+         //Peut etre faire des sous programme de gestion des inscription, connexion, menu
+         //SOulage main mais pas vraiment utile ??
  
  
          // Affichage du menu à l'utilisateur
