@@ -1,23 +1,5 @@
 //main 
-/* Un menu : que voulez vous faire : 
-1. S'inscire
-2. ...
-et on appelle la fct correspondant
- * Créer des gens
- * "Voulez vous vous inscrire ?"
- * oui
- * non
- * 
- * SI ui
- * entrz nm, prénm, ...
- * 
- * Vus etes qui ?
- * 
- * ENtrez de telle ou telle manière 
- * 
- * on créé le mec
- * 
- */
+
 
  import java.util.Scanner;
  import java.sql.Connection;
@@ -57,7 +39,8 @@ et on appelle la fct correspondant
                  + "email VARCHAR(100), "
                  + "adresse VARCHAR(100), "
                  + "age INT, "
-                 + "password VARCHAR(50)"
+                 + "password VARCHAR(50), "
+                 + "type VARCHAR(50)"
                  + ")";
          
          
@@ -150,8 +133,11 @@ et on appelle la fct correspondant
  
                  System.out.println("Mot de passe : ");
                  String password = scanner.nextLine();
+
+                 System.out.println("Type (Benevole, Beneficiaire, Structure) : ");
+                 String type = scanner.nextLine();
  
-                 String strInsert = "INSERT INTO utilisateurs (nom, prenom, email, adresse, age, password) VALUES (?, ?, ?, ?, ?, ?)";
+                 String strInsert = "INSERT INTO utilisateurs (nom, prenom, email, adresse, age, password, type) VALUES (?, ?, ?, ?, ?, ?, ?)";
                  
                //Insertin
                  
@@ -165,6 +151,7 @@ et on appelle la fct correspondant
                      preparedStatement.setString(4, adresse);
                      preparedStatement.setInt(5, age);
                      preparedStatement.setString(6, password);
+                     preparedStatement.setString(7, type);
                      
                      int lignesAffectees = preparedStatement.executeUpdate();
                      
@@ -181,6 +168,13 @@ et on appelle la fct correspondant
                      e.printStackTrace();
                  }
                  
+
+                 /* Est ce qu'il y a vraiment besoin de classes dans ce cas ?
+                  * On a créé nos utilisateurs dans la base de données,
+                  et ils peuvent avoir leurs choix d'actions ici (via des case)
+                  C'est pas très beau, mais à quoi servirais le reste ?
+                  On peut rajouter un élément dans la base de donnée "Requêtes" qui est un tableau
+                  */
          
          }
          
