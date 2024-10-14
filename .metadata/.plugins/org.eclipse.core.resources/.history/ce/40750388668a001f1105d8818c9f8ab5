@@ -15,15 +15,15 @@ public class main {
         
      // Direct sur le truc de bdd
     
+        
       //--------------------------Création Base de Donnée Requête------------------------------
         
         // Direct sur le truc de bdd
 
+      
       //--------------------------Inscription et connexion------------------------------
         //récuperer ce que l'user écris
         Scanner scanner = new Scanner(System.in);
-
-        
         
         //Inscriptin
         System.out.println("Bienvenue sur notre plateforme d'aide. Tapez 1 si vous avez déjà un compte, et 2 si vous voulez vous inscrire");
@@ -38,7 +38,7 @@ public class main {
            //Mauvaise gestion des case : apparait meme si 1
             case 2 :
                 Connection connexion1=ConnexionBDD.GetConnexion();
-                UserConnect.UserInscription(connexion1);
+                UserConnect.UserConnection(connexion1);
                 ConnexionBDD.CloseConnexion(connexion1);
         }
         

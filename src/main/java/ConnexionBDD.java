@@ -62,9 +62,4 @@ public class ConnexionBDD {
     }
 
 
-
-    //INSERT IN BDD WITH PREPARED STATEMENT ?????
-    
-    
-
     }
