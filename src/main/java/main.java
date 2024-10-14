@@ -15,6 +15,11 @@ public class main {
     public static void main(String[] args) {
 
 
+
+        //ConnexionBDD.GetConnexion();
+
+
+
         //--------------------------Connexion à MySql------------------------------
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Chargement du driver
