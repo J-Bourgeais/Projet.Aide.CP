@@ -56,6 +56,8 @@ public class main {
         System.out.println("3. Supprimer une demande");
         System.out.println("4. Quitter");
 
+         // Mettre + de choix et rajouter (si structure) ValiderRequete()
+
         boolean quit = false;
 
         while (!(quit)){
@@ -63,19 +65,20 @@ public class main {
             System.out.print("Tapez un numéro (1-4) : ");
             int choix = scanner.nextInt();
 
+
             // Gestion des choix
             switch (choix) {
                 case 1:
                     System.out.println("Vous avez choisi de formuler une demande.");
-                    //formuler une demande
+                    Menu.DoRequete();
                     break;
                 case 2:
                     System.out.println("Vous avez choisi de consulter vos demandes.");
-                    //consulter une demande
+                    Menu.ConsultRequete();
                     break;
                 case 3:
                     System.out.println("Vous avez choisi de supprimer votre demande.");
-                    //modifier une demande
+                    Menu.ModifRequete();
                     break;
                 case 4:
                     System.out.println("Vous avez choisi de quitter l'application. A bientot !");
