@@ -13,6 +13,7 @@ public class Menu {
     public static void ConsultRequete() {
         //Consulter une demande ou une offre
         //"vuez vus accepter cette requete ?"
+        //Seln le status de la demande
         //Engagement a a faire si beneve
     }
 
