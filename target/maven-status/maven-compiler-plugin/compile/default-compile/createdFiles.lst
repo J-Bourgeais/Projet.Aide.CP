@@ -2,7 +2,11 @@ avis.class
 main.class
 user.class
 beneficiaire.class
+structure.class
+ConnexionBDD.class
+UserConnect.class
 demande.class
+Menu.class
 offre.class
 requete.class
 benev.class
