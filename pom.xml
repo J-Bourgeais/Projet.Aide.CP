@@ -38,7 +38,7 @@
 	 				<manifest>
 	 					<addClasspath>true</addClasspath>
 	
-	 					<mainClass>fr.insa.Maven.project.main</mainClass>
+	 					<mainClass>main</mainClass>
 					</manifest>
 	 			</archive>
  			</configuration>

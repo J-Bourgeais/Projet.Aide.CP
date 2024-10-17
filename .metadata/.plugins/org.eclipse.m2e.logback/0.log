@@ -2452,3 +2452,4 @@ Caused by: org.eclipse.core.runtime.CoreException: Cannot determine URI for '/Pr
 2024-10-14 21:58:13,289 [Worker-20: Launching ProjectMaven (23)] INFO  o.eclipse.m2e.core.internal.Bundles - 	Entry: C:\Users\bourg\.p2\pool\plugins\com.google.guava.failureaccess_1.0.2.jar
 2024-10-14 21:58:13,290 [Worker-20: Launching ProjectMaven (23)] INFO  o.e.m.i.launch.MavenLaunchDelegate - Run build in "C:\Users\bourg\OneDrive\Bureau\INSA_4A\S1\Prjet\ProjectMaven":
 2024-10-14 21:58:13,291 [Worker-20: Launching ProjectMaven (23)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B -Dstyle.color=always clean package
+2024-10-16 16:59:04,262 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

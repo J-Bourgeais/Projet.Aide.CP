@@ -1,5 +1,24 @@
 import java.util.*;
 
+/*INFO REQUETE BDD
+ * 
+ * table name = requetes
+ * 
+ * colonnes :
+ * idrequetes (auto-increment, on s'en fou)
+ * NameRequete
+ * FromUser (nom prenom ??)
+ * Description
+ * Date
+ * TypeRequete
+ * Contact (l'email, foreign key ??)
+ * 
+ * 
+ * */
+
+
+
+
 public class requete {
 
     protected String nom;

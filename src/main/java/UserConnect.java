@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class UserConnect {
     
-    public static void UserConnection(Connection connexion) {
+    public static boolean UserConnection(Connection connexion) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Veuillez entrer votre adresse mail");
@@ -15,7 +15,8 @@ public class UserConnect {
         System.out.println("Veuillez entrer votre mot de passe");
         String password = scanner.nextLine();
         
-        String requeteSQL = "SELECT * FROM utilisateurs WHERE email = ? AND password = ?";
+        String requeteSQL = "SELECT * FROM Users WHERE email = ? AND password = ?";
+        boolean connected = false;
 
         try {
                     
@@ -25,9 +26,11 @@ public class UserConnect {
             preparedStatement.setString(2, password);
 
             ResultSet resultat = preparedStatement.executeQuery();
+          
 
             if (resultat.next()) {
                 System.out.println("Vous êtes connecté !");
+                connected = true;
             } else {
                 System.out.println("Mauvaise email et/ou mauvaix mdp. Avez vous un compte ?");
             }
@@ -40,12 +43,15 @@ public class UserConnect {
             e.printStackTrace();
         }
         scanner.close();
+        return connected;
 
     }
 
-    public static void UserInscription(Connection connexion) {
+    public static boolean UserInscription(Connection connexion) {
 
         Scanner scanner = new Scanner(System.in);
+        
+        boolean succes = false;
 
         System.out.println("Veuiller saisir vos informations");
         System.out.println("Nom : ");
@@ -70,7 +76,7 @@ public class UserConnect {
         System.out.println("Type (Benevole, Beneficiaire, Structure) : ");
         String type = scanner.nextLine();
 
-        String strInsert = "INSERT INTO utilisateurs (nom, prenom, email, adresse, age, password, type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String strInsert = "INSERT INTO Users (Nom, Prenom, email, Adresse, Age, Password, UserType) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -87,6 +93,7 @@ public class UserConnect {
             
             if (lignesAffectees > 0) {
                 System.out.println("Compte créé avec succès !");
+                succes=true;
             } else {
                 System.out.println("L'inscription a échoué.");
             }
@@ -97,6 +104,7 @@ public class UserConnect {
             e.printStackTrace();
         }
         scanner.close();
+        return succes;
 
     }
 
