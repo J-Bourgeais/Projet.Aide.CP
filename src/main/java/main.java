@@ -7,6 +7,50 @@ import java.sql.Connection;
 
 
 public class main {
+	
+	
+	public static Object[] UserInfoConnexion() {
+		Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Veuillez entrer votre adresse mail");
+        String email = scanner.nextLine();
+        //On dirait que ca s'affiche d'un coup --> Voir pourquoi
+        System.out.println("Veuillez entrer votre mot de passe");
+        String password = scanner.nextLine();
+        scanner.close();
+        return new Object[]{email, password};
+	}
+	
+	public static Object[] UserInfoInscription() {
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Veuiller saisir vos informations");
+        System.out.println("Nom : ");
+        String nom = scanner.nextLine();
+
+        System.out.println("Prénom : ");
+        String prenom = scanner.nextLine();
+
+        System.out.println("Email : ");
+        String email = scanner.nextLine();
+
+        System.out.println("Adresse : ");
+        String adresse = scanner.nextLine();
+
+        System.out.println("Age : ");
+        int age = scanner.nextInt();
+        scanner.nextLine();  // Nettoyer la ligne restante
+
+        System.out.println("Mot de passe : ");
+        String password = scanner.nextLine();
+
+        System.out.println("Type (Benevole, Beneficiaire, Structure) : ");
+        String type = scanner.nextLine();
+        scanner.close();
+        return new Object[]{nom, prenom, email, adresse, age, password, type};
+	}
+	
+	
 
     public static void main(String[] args) {
 
@@ -30,14 +74,14 @@ public class main {
             switch (choix1) {
                 case 1 :
                     Connection connexion=ConnexionBDD.GetConnexion();
-                    connected = UserConnect.UserConnection(connexion);
+                    connected = UserConnect.UserConnection(connexion, UserInfoConnexion());
                     ConnexionBDD.CloseConnexion(connexion);
                     break;
 
                //Mauvaise gestion des case : apparait meme si 1
                 case 2 :
                     Connection connexion1=ConnexionBDD.GetConnexion();
-                    connected = UserConnect.UserInscription(connexion1);
+                    connected = UserConnect.UserInscription(connexion1, UserInfoInscription());
                     ConnexionBDD.CloseConnexion(connexion1);
                     break;
             }

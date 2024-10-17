@@ -5,15 +5,14 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserConnect {
+	
+
     
-    public static boolean UserConnection(Connection connexion) {
+    public static boolean UserConnection(Connection connexion, Object[] infos) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Veuillez entrer votre adresse mail");
-        String email = scanner.nextLine();
-        //On dirait que ca s'affiche d'un coup --> Voir pourquoi
-        System.out.println("Veuillez entrer votre mot de passe");
-        String password = scanner.nextLine();
+        String email = (String) infos[0];
+        String password = (String) infos[1];
         
         String requeteSQL = "SELECT * FROM Users WHERE email = ? AND password = ?";
         boolean connected = false;
@@ -47,34 +46,19 @@ public class UserConnect {
 
     }
 
-    public static boolean UserInscription(Connection connexion) {
+    public static boolean UserInscription(Connection connexion, Object[] infos) {
 
         Scanner scanner = new Scanner(System.in);
         
         boolean succes = false;
 
-        System.out.println("Veuiller saisir vos informations");
-        System.out.println("Nom : ");
-        String nom = scanner.nextLine();
-
-        System.out.println("Prénom : ");
-        String prenom = scanner.nextLine();
-
-        System.out.println("Email : ");
-        String email = scanner.nextLine();
-
-        System.out.println("Adresse : ");
-        String adresse = scanner.nextLine();
-
-        System.out.println("Age : ");
-        int age = scanner.nextInt();
-        scanner.nextLine();  // Nettoyer la ligne restante
-
-        System.out.println("Mot de passe : ");
-        String password = scanner.nextLine();
-
-        System.out.println("Type (Benevole, Beneficiaire, Structure) : ");
-        String type = scanner.nextLine();
+        String nom = (String) infos[0];
+        String prenom = (String) infos[1];
+        String email = (String) infos[2];
+        String adresse =(String) infos[3];
+        int age = (int) infos[4];
+        String password = (String) infos[5];
+        String type = (String) infos[6];
 
         String strInsert = "INSERT INTO Users (Nom, Prenom, email, Adresse, Age, Password, UserType) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
