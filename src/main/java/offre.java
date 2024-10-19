@@ -10,10 +10,7 @@ public class offre extends requete{
         super(nom);
     }
     
-    @Override
-    public void afficherRequete() {
-    	System.out.println("Offre : " + this.nom);
-    }
+    
 
 
 }

@@ -73,6 +73,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         while (!connected) {
         	int choix1 = scanner.nextInt();
+        	scanner.nextLine();
             
             switch (choix1) {
                 case 1 :
@@ -91,13 +92,15 @@ public class main {
                     ConnexionBDD.CloseConnexion(connexion1);
                     break;
             }
-            scanner.close();
+            
         }
+        scanner.close();
         
         
         
         if (connected) {
         	// Affichage du menu à l'utilisateur
+            Scanner scanner1 = new Scanner(System.in);
             System.out.println("Bienvenue dans le menu principal. Veuillez sélectionner une option :");
             System.out.println("1. Formuler une demande");
             System.out.println("2. Consulter vos demandes");
@@ -107,7 +110,6 @@ public class main {
              // Mettre + de choix et rajouter (si structure) ValiderRequete()
 
             boolean quit = false;
-            Scanner scanner1 = new Scanner(System.in);
 
             while (!(quit)){
                 // Récupérer le choix de l'utilisateur
@@ -117,17 +119,22 @@ public class main {
                 //ca laisse pas le temps d'écrire
                 
                 //pourquoi ????
+                //int choix=scanner1.nextInt();
+                //scanner1.nextLine();
+                
+                String input = scanner1.nextLine();
 
-                int choix = 0;
-                if (scanner1.hasNextInt()) {
+                //int choix = 0;
+                /*if (scanner1.hasNextInt()) {
                 	choix=scanner1.nextInt();
                 } else {
                 	choix=0;
                 	System.out.println("nothing written");
+                	//scanner1.nextLine();
                 	break;
-                }
+                }*/
                 
-
+                int choix = Integer.parseInt(input);
                 
                 System.out.print("Test");
 
@@ -155,7 +162,7 @@ public class main {
                 }
             }
          // Fermeture du scanner
-            scanner1.close();
+         scanner1.close();
         }
 
         
