@@ -63,10 +63,13 @@ public class main {
     	 *
     	 * 
     	 * */
+
+
         
         //Inscription
         System.out.println("Bienvenue sur notre plateforme d'aide. Tapez 1 si vous avez déjà un compte, et 2 si vous voulez vous inscrire");
         boolean connected = false;
+        String email="";
         Scanner scanner = new Scanner(System.in);
         while (!connected) {
         	int choix1 = scanner.nextInt();
@@ -74,19 +77,23 @@ public class main {
             switch (choix1) {
                 case 1 :
                     Connection connexion=ConnexionBDD.GetConnexion();
-                    connected = UserConnect.UserConnection(connexion, UserInfoConnexion());
+                    Object[] UserInfo = UserInfoConnexion();
+                    email=(String)UserInfo[0];
+                    connected = UserConnect.UserConnection(connexion, UserInfo);
                     ConnexionBDD.CloseConnexion(connexion);
                     break;
 
-               //Mauvaise gestion des case : apparait meme si 1
                 case 2 :
                     Connection connexion1=ConnexionBDD.GetConnexion();
-                    connected = UserConnect.UserInscription(connexion1, UserInfoInscription());
+                    Object[] UserInfo2 = UserInfoInscription();
+                    email=(String)UserInfo2[0];
+                    connected= UserConnect.UserInscription(connexion1, UserInfo2);
                     ConnexionBDD.CloseConnexion(connexion1);
                     break;
             }
             scanner.close();
         }
+        
         
         
         if (connected) {
@@ -110,6 +117,7 @@ public class main {
                 //ca laisse pas le temps d'écrire
                 
                 //pourquoi ????
+
                 int choix = 0;
                 if (scanner1.hasNextInt()) {
                 	choix=scanner1.nextInt();
@@ -132,7 +140,7 @@ public class main {
                         break;
                     case 2:
                         System.out.println("Vous avez choisi de consulter vos demandes.");
-                        Menu.ConsultRequete();
+                        Menu.ConsultRequete(email);
                         break;
                     case 3:
                         System.out.println("Vous avez choisi de supprimer votre demande.");
