@@ -1,11 +1,11 @@
 avis.class
 main.class
-user.class
 beneficiaire.class
 structure.class
+user.class
 ConnexionBDD.class
-UserConnect.class
 demande.class
+UserConnect.class
 Menu.class
 offre.class
 requete.class

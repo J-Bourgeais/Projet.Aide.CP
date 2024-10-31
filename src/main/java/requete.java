@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Date;
 
 public class requete {
 
@@ -28,7 +28,9 @@ public class requete {
     }
     
     public void afficherRequete() {
-    	System.out.println("Requete");
+        System.out.println("Requête : " + nom + " - " + desc);
+        System.out.println("Statut : " + status);
+        System.out.println("Date : " + date);
     }
 
 }

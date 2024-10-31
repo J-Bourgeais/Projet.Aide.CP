@@ -1,52 +1,63 @@
 //benev
 //Beneficiaire
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class benev extends user {
 
-    // A modifier type demande
-    protected String[] offres;
-    protected String[] enCours=null; //demande en cours de réalisation
+    // A modifier type OFFRE @Julie du coup au vu du commentaire plus bas sur proposerOffre j'ai mis offre ici et non demande
+    protected List<offre> offres;
+    protected List<demande> enCours; // Demandes en cours de réalisation
 
-    // Constructeur avec toutes les informations, y compris les demandes
-    public benev(String nom, String prenom, String email, String adresse, int age, String password, String[] offres, String[] enCours) {
-        super(nom, prenom, email, adresse, age, password); // Appel au constructeur de la classe parent
-        this.offres = offres;
-        this.enCours = enCours;
+    // Constructeur avec toutes les informations
+    public benev(String nom, String prenom, String email, String adresse, int age, String password) {
+        super(nom, prenom, email, adresse, age, password);
+        this.offres = new ArrayList<>(); // Initialisation de la liste d'offres
+        this.enCours = new ArrayList<>(); // Initialisation de la liste de demandes en cours
     }
 
-    // Getter pour obtenir les demandes
-    public String[] getOffres() {
+    // Getter pour obtenir les offres
+    public List<offre> getOffres() {
         return offres;
     }
 
-    // Setter pour modifier les demandes
-    public void setOffres(String[] offres) {
+    // Setter pour modifier les offres
+    public void setOffres(List<offre> offres) {
         this.offres = offres;
     }
 
-    // Override de demande --> a mdifier car demande va etre une classe --> utilisaiton de son afficher()
+    // Méthode pour afficher les informations du bénévole et ses offres
     @Override
     public void afficher() {
-        super.afficher(); // Appel à la méthode afficher() de la classe parent
-        System.out.println("Offres :");
-        if (offres != null) {
-            for (String offre : offres) {
-                System.out.println("- " + offre);
-            }
+        super.afficher();
+        System.out.println("Offres proposées :");
+        if (offres.isEmpty()) {
+            System.out.println("Aucune offre.");
         } else {
-            System.out.println("Aucune offre");
+            for (offre o : offres) {
+                o.afficherRequete();
+            }
         }
     }
 
     // a modifier avec le type demande --> new demande(a, b, x, ...)
-    public void formulerOffre(String nouvelleOffre) {
-        if (offres == null) {
-            offres = new String[]{nouvelleOffre};
-        } else {
-            String[] nouvellesOffres = new String[offres.length + 1];
-            System.arraycopy(offres, 0, nouvellesOffres, 0, offres.length);
-            nouvellesOffres[offres.length] = nouvelleOffre;
-            offres = nouvellesOffres;
-        }
+    // public void formulerOffre(String nouvelleOffre) {
+    //     if (offres == null) {
+    //         offres = new String[]{nouvelleOffre};
+    //     } else {
+    //         String[] nouvellesOffres = new String[offres.length + 1];
+    //         System.arraycopy(offres, 0, nouvellesOffres, 0, offres.length);
+    //         nouvellesOffres[offres.length] = nouvelleOffre;
+    //         offres = nouvellesOffres;
+    //     }
+    // }
+
+    // Proposer une offre via la classe offre
+    // @Julie j'ai préféré utilisé la classe offre plutôt que demande comme t'avais indiqué (ça me paraissait plus logique ??)
+    public void proposerOffre(String nom, String description) {
+        offre nouvelleOffre = new offre(nom, description);
+        offres.add(nouvelleOffre);
     }
 
 
