@@ -5,17 +5,17 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserConnect {
+	
+
     
-    public static void UserConnection(Connection connexion) {
+    public static boolean UserConnection(Connection connexion, Object[] infos) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Veuillez entrer votre adresse mail");
-        String email = scanner.nextLine();
-        //On dirait que ca s'affiche d'un coup --> Voir pourquoi
-        System.out.println("Veuillez entrer votre mot de passe");
-        String password = scanner.nextLine();
+        String email = (String) infos[0];
+        String password = (String) infos[1];
         
-        String requeteSQL = "SELECT * FROM utilisateurs WHERE email = ? AND password = ?";
+        String requeteSQL = "SELECT * FROM Users WHERE email = ? AND password = ?";
+        boolean connected = false;
 
         try {
                     
@@ -25,9 +25,11 @@ public class UserConnect {
             preparedStatement.setString(2, password);
 
             ResultSet resultat = preparedStatement.executeQuery();
+          
 
             if (resultat.next()) {
                 System.out.println("Vous êtes connecté !");
+                connected = true;
             } else {
                 System.out.println("Mauvaise email et/ou mauvaix mdp. Avez vous un compte ?");
             }
@@ -40,37 +42,25 @@ public class UserConnect {
             e.printStackTrace();
         }
         scanner.close();
+        return connected;
 
     }
 
-    public static void UserInscription(Connection connexion) {
+    public static boolean UserInscription(Connection connexion, Object[] infos) {
 
         Scanner scanner = new Scanner(System.in);
+        
+        boolean succes = false;
 
-        System.out.println("Veuiller saisir vos informations");
-        System.out.println("Nom : ");
-        String nom = scanner.nextLine();
+        String nom = (String) infos[0];
+        String prenom = (String) infos[1];
+        String email = (String) infos[2];
+        String adresse =(String) infos[3];
+        int age = (int) infos[4];
+        String password = (String) infos[5];
+        String type = (String) infos[6];
 
-        System.out.println("Prénom : ");
-        String prenom = scanner.nextLine();
-
-        System.out.println("Email : ");
-        String email = scanner.nextLine();
-
-        System.out.println("Adresse : ");
-        String adresse = scanner.nextLine();
-
-        System.out.println("Age : ");
-        int age = scanner.nextInt();
-        scanner.nextLine();  // Nettoyer la ligne restante
-
-        System.out.println("Mot de passe : ");
-        String password = scanner.nextLine();
-
-        System.out.println("Type (Benevole, Beneficiaire, Structure) : ");
-        String type = scanner.nextLine();
-
-        String strInsert = "INSERT INTO utilisateurs (nom, prenom, email, adresse, age, password, type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String strInsert = "INSERT INTO Users (Nom, Prenom, email, Adresse, Age, Password, UserType) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -87,6 +77,7 @@ public class UserConnect {
             
             if (lignesAffectees > 0) {
                 System.out.println("Compte créé avec succès !");
+                succes=true;
             } else {
                 System.out.println("L'inscription a échoué.");
             }
@@ -97,6 +88,7 @@ public class UserConnect {
             e.printStackTrace();
         }
         scanner.close();
+        return succes;
 
     }
 

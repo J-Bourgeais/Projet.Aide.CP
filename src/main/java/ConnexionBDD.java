@@ -6,24 +6,21 @@ import java.sql.Statement;
 public class ConnexionBDD {
 
     public static Connection GetConnexion() {
-        
-        //--------------------------Connexion à MySql------------------------------
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Chargement du driver
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
+    
+    	
         
       //--------------------------Info de Connexion------------------------------
-        String url = "jdbc:mysql://localhost:3306/SQL_Project"; // Remplace par ton URL de base de données
+        String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_035"; // Remplace par ton URL de base de données
         String user = "projet_gei_035";  // Nom d'utilisateur de la base
         String mdp = "quiaw0Di";  // Mot de passe de la base
         Connection connexion = null;
 
         try {
+            System.out.println("//////");
             // Établir la connexion à la base de données
-            connexion = DriverManager.getConnection(url, user, mdp);            
+            connexion = DriverManager.getConnection(url, user, mdp);  
+            System.out.println("****");
 
         } catch (SQLException a) {
             a.printStackTrace();
