@@ -50,68 +50,46 @@ public class requete {
         return this;
     }
 
+    public String getNom() {
+        return nom;
+    }
 
+    public String getDesc() {
+        return desc;
+    }
 
-    //Afficher des requetes d'une prsn en particuier
+    //Afficher des requêtes selon un critère (méthode générique)
     
-    public static void afficherRequetesParEmail(String email) {
+    public static void afficherRequetesParCritere(String critere, String valeur) {
+        String requeteSQL = "SELECT NameRequete, FromUser, Description, Date, TypeRequete FROM requetes WHERE " + critere + " = ?";
 
-        Connection connexion=ConnexionBDD.GetConnexion();
+        try (Connection connexion = ConnexionBDD.GetConnexion();
+             PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
 
-        String requeteSQL = "SELECT NameRequete, FromUser, Description, Date, TypeRequete FROM requetes WHERE ContactUser = ?";
-        
-        try (PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
-            stmt.setString(1, email);
+            stmt.setString(1, valeur);
             ResultSet rs = stmt.executeQuery();
-            
-            System.out.println("Requêtes De la part de l'utilisateur " + rs.getString("FromUser" + ":"));
+
+            System.out.println("Requêtes de type " + critere + " avec la valeur " + valeur + " :");
 
             while (rs.next()) {
-                System.out.println("Requête: " + rs.getString("NameRequete"));
-                System.out.println("de type: " + rs.getString("TypeRequete"));
-                System.out.println("De la part de l'utilisateur: " + rs.getString("FromUser"));
-                System.out.println("Date: " + rs.getDate("Date"));
-                System.out.println("Description: " + rs.getString("Description"));
+                System.out.println("Requête : " + rs.getString("NameRequete"));
+                System.out.println("Type : " + rs.getString("TypeRequete"));
+                System.out.println("Description : " + rs.getString("Description"));
+                System.out.println("Date : " + rs.getDate("Date"));
                 System.out.println("-----------------------------");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ConnexionBDD.CloseConnexion(connexion);
     }
 
-
-    //Afficher des requetes d'un type en particuier
-
-    public static void afficherRequetesParType(String typeRequete) {
-
-        Connection connexion=ConnexionBDD.GetConnexion();
-
-        String requeteSQL = "SELECT NameRequete, FromUser, Description, Date, TypeRequete, ContactUser FROM requetes WHERE TypeRequete = ?";
-        
-        try (PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
-            stmt.setString(1, typeRequete);
-            ResultSet rs = stmt.executeQuery();
-            
-            System.out.println("Requêtes de type " + rs.getString("TypeRequete" + ":"));
-
-            while (rs.next()) {
-                System.out.println("Nom de la requête: " + rs.getString("NameRequete"));
-                System.out.println("De la part de l'utilisateur: " + rs.getString("FromUser"));
-                System.out.println("Contact (Email): " + rs.getString("ContactUser"));
-                System.out.println("Date: " + rs.getDate("Date"));
-                System.out.println("Description: " + rs.getString("Description"));
-                
-                
-                System.out.println("-----------------------------");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        ConnexionBDD.CloseConnexion(connexion);
+    public static void afficherDemandesParEmail(String email) {
+        afficherRequetesParCritere("ContactUser", email);
     }
 
-
-
+    public static void afficherDemandesParType(String typeRequete) {
+        afficherRequetesParCritere("TypeRequete", typeRequete);
+    }
 
 }

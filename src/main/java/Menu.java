@@ -1,4 +1,3 @@
-import java.sql.Connection;
 import java.util.Scanner;
 
 public class Menu {
@@ -29,17 +28,17 @@ public class Menu {
         int choix = scanner.nextInt();
         switch (choix) {
             case 1 :
-                requete.afficherRequetesParEmail(email);
+                requete.afficherRequetesParCritere("ContactUser",email);
                 break;
             case 2 :
-                requete.afficherRequetesParType("Offre");
+                requete.afficherRequetesParCritere("Offre",email);
                 //"vuez vus accepter cette requete ?"
         //Seln le status de la demande
         //Engagement a a faire si beneve
 
                 break;
             case 3 :
-                requete.afficherRequetesParType("Demande");
+                requete.afficherRequetesParCritere("Demande",email);
                 //"vuez vus accepter cette requete ?"
         //Seln le status de la demande
         //Engagement a a faire si beneve
