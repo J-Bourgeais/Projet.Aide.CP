@@ -6,6 +6,7 @@ import java.util.List;
 
 public class beneficiaire extends user {
 
+    //Listes plus vraiment utiles
     protected List<demande> demandes; // Liste des demandes du bénéficiaire
     protected offre enCours = null; // Offre en cours acceptée par le bénéficiaire
 
@@ -19,7 +20,7 @@ public class beneficiaire extends user {
         return demandes;
     }
 
-    // Méthode pour afficher toutes les demandes
+    // Méthode pour afficher toutes les demandes --> A modifier version sql
     @Override
     public void afficher() {
         super.afficher();
@@ -36,11 +37,11 @@ public class beneficiaire extends user {
     // Formuler une nouvelle demande
     public void formulerDemande(Connection connexion, String nom, String description) {
         // Création de l'objet demande
-        demande nouvelleDemande = new demande(nom, description);
-        demandes.add(nouvelleDemande); // Ajout de la demande à la liste de demandes du bénéficiaire
+        demande nouvelleDemande = new demande(nom, description); //Plus vraiment utile
+        //demandes.add(nouvelleDemande); // Plus utile avec SQL
 
         //  SQL pour insérer la demande dans la base de données
-        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?)";
+        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser, Status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, nom);                
@@ -48,7 +49,8 @@ public class beneficiaire extends user {
             etat.setString(3, description);           
             etat.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
             etat.setString(5, "demande");              
-            etat.setString(6, this.getEmail());             
+            etat.setString(6, this.getEmail());  
+            etat.setString(7, "En attente");             
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
@@ -57,7 +59,7 @@ public class beneficiaire extends user {
                 System.out.println("L'ajout de la demande a échoué.");
             }
         } catch (SQLException e) {
-            e.printStackTrace(); //levée d'exception en SQL (cf lib SQLException)
+            e.printStackTrace();
         }
     }
 

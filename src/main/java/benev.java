@@ -32,7 +32,7 @@ public class benev extends user {
         this.offres = offres;
     }
 
-    // afficher les informations du bénévole et ses offres
+    // afficher les informations du bénévole et ses offres --> A modifier avec SQL
     @Override
     public void afficher() {
         super.afficher();
@@ -53,11 +53,11 @@ public class benev extends user {
     // Proposer une offre via la classe offre
     public void proposerOffre(Connection connexion, String nom, String description) {
         // Création de l'objet offre
-        offre nouvelleOffre = new offre(nom, description);
+        offre nouvelleOffre = new offre(nom, description); //Plus vraiment utile
         offres.add(nouvelleOffre);
 
         // SQL pour insérer l'offre dans la base de données
-        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?)";
+        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser, Status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, nom);    
@@ -66,6 +66,8 @@ public class benev extends user {
             etat.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
             etat.setString(5, "offre");        
             etat.setString(6, this.getEmail());  
+            etat.setString(7, "En attente");  
+
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
@@ -79,7 +81,7 @@ public class benev extends user {
     }
 
     // Répondre à une demande en utilisant l'email
-    public void repondreDemande(String emailBeneficiaire, String idDemande, String reponse) {
+    public void repondreDemande(String emailBeneficiaire, String idDemande, String reponse) { //Faire comme répondre demande --> Utilisation de Status
         // Enregistrer la réponse à la demande dans la base de données
         String requeteSQL = "INSERT INTO ReponsesDemande (EmailBenevole, IdDemande, Reponse) VALUES (?, ?, ?)";
 

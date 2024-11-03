@@ -103,9 +103,10 @@ public class main {
             Scanner scanner1 = new Scanner(System.in);
             System.out.println("Bienvenue dans le menu principal. Veuillez sélectionner une option :");
             System.out.println("1. Formuler une demande");
-            System.out.println("2. Consulter vos demandes");
-            System.out.println("3. Supprimer une demande");
-            System.out.println("4. Quitter");
+            System.out.println("2. Formuler une offre");
+            System.out.println("3. Consulter vos demandes");
+            System.out.println("4. Supprimer une demande");
+            System.out.println("5. Quitter");
 
              // Mettre + de choix et rajouter (si structure) ValiderRequete()
 
@@ -137,23 +138,38 @@ public class main {
                 int choix = Integer.parseInt(input);
                 
                 System.out.print("Test");
-
+                String nom;
+                String description;
 
                 // Gestion des choix
                 switch (choix) {
                     case 1:
                         System.out.println("Vous avez choisi de formuler une demande.");
-                        Menu.DoRequete();
+                        Scanner scanner2 = new Scanner(System.in);
+                        System.out.println("Quel est le nom de votre demande ?");
+                        nom = scanner2.nextLine();
+                        System.out.println("Quelle est la description de votre demande ?");
+                        description = scanner2.nextLine();
+                        beneficiaire.formulerDemande(connexion, nom, description);
                         break;
                     case 2:
+                        System.out.println("Vous avez choisi de formuler une offre.");
+                        Scanner scanner3 = new Scanner(System.in);
+                        System.out.println("Quel est le nom de votre offre ?");
+                        nom = scanner3.nextLine();
+                        System.out.println("Quelle est la description de votre offre ?");
+                        description = scanner3.nextLine();
+                        benev.proposerOffre(connexion, nom, description);
+                        break;
+                    case 3:
                         System.out.println("Vous avez choisi de consulter vos demandes.");
                         Menu.ConsultRequete(email);
                         break;
-                    case 3:
+                    case 4:
                         System.out.println("Vous avez choisi de supprimer votre demande.");
                         Menu.ModifRequete();
                         break;
-                    case 4:
+                    case 5:
                         System.out.println("Vous avez choisi de quitter l'application. A bientot !");
                         quit=true;
                         break;
