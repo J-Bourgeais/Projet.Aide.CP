@@ -119,16 +119,17 @@ public class user {
     // Proposer une offre via la classe offre
     public void proposerRequete(Connection connexion, String nom, String description, String typeRequete) {
         // SQL pour insérer l'offre dans la base de données
-        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser, Status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, nom);    
             etat.setString(2, this.getNom() + " " + this.getPrenom()); 
-            etat.setString(3, description);          
-            etat.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
-            etat.setString(5, typeRequete);        
-            etat.setString(6, this.getEmail());  
-            etat.setString(7, "En attente");  
+            etat.setString(3, description); 
+            etat.setString(4, "En attente");          
+            etat.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+            etat.setString(6, typeRequete);        
+            etat.setString(7, this.getEmail());  
+             
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {

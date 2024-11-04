@@ -13,9 +13,10 @@ import java.util.Date;
  * NameRequete
  * FromUser (nom prenom ??)
  * Description
+ * Status
  * Date
  * TypeRequete
- * ContactUser (l'email, foreign key ??)
+ * Contact (l'email, foreign key ??)
  * 
  * 
  * */
@@ -64,7 +65,7 @@ public class requete {
     //Afficher des requêtes selon un critère (méthode générique)
     
     public static void afficherRequetesParCritere(String critere, String valeur) {
-        String requeteSQL = "SELECT NameRequete, FromUser, Description, Date, TypeRequete FROM requetes WHERE " + critere + " = ?";
+        String requeteSQL = "SELECT NameRequete, FromUser, Description, Status, Date, TypeRequete FROM requetes WHERE " + critere + " = ?";
 
         try (Connection connexion = ConnexionBDD.GetConnexion();
              PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
@@ -79,6 +80,7 @@ public class requete {
                 System.out.println("Type : " + rs.getString("TypeRequete"));
                 System.out.println("Description : " + rs.getString("Description"));
                 System.out.println("Date : " + rs.getDate("Date"));
+                System.out.println("Status : " + rs.getString("Status"));
                 System.out.println("-----------------------------");
             }
 
