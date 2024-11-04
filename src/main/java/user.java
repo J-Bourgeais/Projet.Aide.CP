@@ -116,7 +116,7 @@ public class user {
     // Proposer une offre via la classe offre
     public void proposerRequete(Connection connexion, String nom, String description, String typeRequete) {
         // SQL pour insérer l'offre dans la base de données
-        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?)";
+        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Date, TypeRequete, ContactUser, Status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, nom);    
@@ -125,6 +125,7 @@ public class user {
             etat.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
             etat.setString(5, typeRequete);        
             etat.setString(6, this.getEmail());  
+            etat.setString(7, "En attente");  
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
@@ -135,5 +136,11 @@ public class user {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void modifierRequete(Connection connexion, requete requete) {
+        // Scanr "que voulez-vous modifier ?"
+        // Case modification (nom, description, date)
+        String requeteSQL = "UPDATE requetes SET NameRequete = 'valeur 1', Description = 'valeur 2', Date = 'valeur 3';
     }
 }
