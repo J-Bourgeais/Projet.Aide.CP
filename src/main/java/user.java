@@ -1,6 +1,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class user {
 
@@ -139,8 +142,84 @@ public class user {
     }
 
     public void modifierRequete(Connection connexion, requete requete) {
-        // Scanr "que voulez-vous modifier ?"
-        // Case modification (nom, description, date)
-        String requeteSQL = "UPDATE requetes SET NameRequete = 'valeur 1', Description = 'valeur 2', Date = 'valeur 3';
+        Scanner scanner = new Scanner(System.in);
+        boolean modificationEffectuee = false;
+
+        try  {
+            // Affichage des options de modifications à l'utilisateur
+            System.out.println("Sélectionnez ce que vous souhaitez modifier :");
+            System.out.println("1. Nom");
+            System.out.println("2. Description");
+            System.out.println("3. Date");
+            System.out.println("4. Terminer les modifications");
+
+            while (true){
+
+                System.out.print("Choix : ");
+                int choix = scanner.nextInt();
+                scanner.nextLine(); // Consomme le saut de ligne après l'entier
+
+                String updateSQL = "UPDATE requetes SET "; // Début de la requête SQL
+
+                // Gestion des choix
+                switch (choix) {
+                    case 1:
+                        System.out.print("Entrez le nouveau nom : ");
+                        String nouveauNom = scanner.nextLine();
+                        updateSQL += "NameRequete = ? WHERE idrequetes = ?";
+                        try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
+                            stmt.setString(1, nouveauNom);
+                            stmt.setInt(2, requete.getId()); // Utilise l'ID de la requête
+                            modificationEffectuee = stmt.executeUpdate() > 0;
+                            requete.setNom(nouveauNom); // Met à jour l'objet localement
+                        }
+                        break;
+
+                    case 2:
+                        System.out.print("Entrez la nouvelle description : ");
+                        String nouvelleDescription = scanner.nextLine();
+                        updateSQL += "Description = ? WHERE idrequetes = ?";
+                        try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
+                            stmt.setString(1, nouvelleDescription);
+                            stmt.setInt(2, requete.getId());
+                            modificationEffectuee = stmt.executeUpdate() > 0;
+                            requete.setDesc(nouvelleDescription);
+                        }
+                        break;
+
+                    case 3:
+                        System.out.print("Entrez la nouvelle date (format yyyy-MM-dd) : ");
+                        String nouvelleDateStr = scanner.nextLine();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date nouvelleDate;
+                        try {
+                            nouvelleDate = sdf.parse(nouvelleDateStr);
+                            updateSQL += "Date = ? WHERE idrequetes = ?";
+                            try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
+                                stmt.setDate(1, new java.sql.Date(nouvelleDate.getTime()));
+                                stmt.setInt(2, requete.getId());
+                                modificationEffectuee = stmt.executeUpdate() > 0;
+                                requete.setDate(nouvelleDate);
+                            }
+                        } catch (ParseException e) {
+                            System.out.println("Format de date incorrect. Veuillez réessayer.");
+                        }
+                        break;
+                    case 4:
+                        if (modificationEffectuee) {
+                            System.out.println("Modifications enregistrées avec succès.");
+                        } else {
+                            System.out.println("Aucune modification enregistrée.");
+                        }
+                        return; // Quitte la boucle et termine la méthode
+                    default:
+                        System.out.println("Choix invalide. Veuillez sélectionner une option valide.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
     }
 }
