@@ -83,18 +83,7 @@ public class user {
         System.out.println("Adresse: " + adresse);
         System.out.println("**************************************");
     }
-
-    //Methode pour poster un avis à quelqu'un
-
-	 public void posterAvis(user pourQui, int nbEtoiles, String description) {
-	    	avis monAvis = new avis(this, pourQui, nbEtoiles,description);
-	    	System.out.println("Votre avis a bien été posté " + monAvis.deQui.nom);
-	 }
 	 
-	 public void posterAvis(user pourQui, int nbEtoiles) {
-		 	avis monAvis = new avis(this, pourQui, nbEtoiles);
-		 	System.out.println("Votre avis a bien été posté "  + monAvis.deQui.nom);
-	 }
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
     public void repondreRequete(Connection connexion, int idRequete) {

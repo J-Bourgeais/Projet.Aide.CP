@@ -108,6 +108,16 @@ public class main {
             System.out.println("4. Supprimer une demande");
             System.out.println("5. Quitter");
 
+            /*
+             * A Ajouter  :
+             * 
+             * consulter les offres --> En accepter une
+             * consulter les demandes --> En accepter une
+             * consulter les avis sur qqn
+             * poster un avis
+             * 
+             */
+
              // Mettre + de choix et rajouter (si structure) ValiderRequete()
 
             boolean quit = false;
