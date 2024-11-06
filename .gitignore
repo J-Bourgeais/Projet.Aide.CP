@@ -2,7 +2,6 @@
 /.metadata/
 # Eclipse
 .classpath
-.project
 .settings/
 bin/
 target/
