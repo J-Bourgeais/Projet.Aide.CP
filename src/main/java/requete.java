@@ -9,7 +9,7 @@ import java.util.Date;
  * table name = requetes
  * 
  * colonnes :
- * idrequetes (auto-increment, on s'en fou)
+ * idrequetes
  * NameRequete
  * FromUser (nom prenom ??)
  * Description
@@ -60,6 +60,26 @@ public class requete {
 
     public String getDesc() {
         return desc;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String s) {
+        this.status = s;
+    }
+
+    public void setDesc(String description) {
+        this.desc = description;
+    }
+
+    public void setNom(String n) {
+        this.nom = n;
+    }
+
+    public void setDate(Date d) {
+        this.date = d;
     }
 
     //Afficher des requêtes selon un critère (méthode générique)

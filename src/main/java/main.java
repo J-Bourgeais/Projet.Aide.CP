@@ -150,7 +150,7 @@ public class main {
                 System.out.print("Test");
                 String nom;
                 String description;
-
+                Connection connexion = ConnexionBDD.GetConnexion(); //@Julie je l'ai rajouté car sinon connexion était pas défini
                 // Gestion des choix
                 switch (choix) {
                     case 1:
@@ -163,6 +163,7 @@ public class main {
                         beneficiaire.formulerDemande(connexion, nom, description);
                         break;
                     case 2:
+                         
                         System.out.println("Vous avez choisi de formuler une offre.");
                         Scanner scanner3 = new Scanner(System.in);
                         System.out.println("Quel est le nom de votre offre ?");

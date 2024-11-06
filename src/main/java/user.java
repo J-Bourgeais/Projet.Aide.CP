@@ -1,9 +1,19 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.Date;
+
+// Colonnes DB - table User
+// nom
+// prenom
+// email
+// adresse
+// age
+
 
 public class user {
 
@@ -212,4 +222,30 @@ public class user {
             scanner.close();
         }
     }
+
+    public void consulterProfilUtilisateur(Connection connexion, String email) {
+    String query = "SELECT Nom, Prenom, email, Adresse, Age, UserType FROM Users WHERE email = ?";
+    
+    try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        
+        // verif si le profil existe et afficher les informations
+        if (rs.next()) {
+            System.out.println("Profil de l'utilisateur :");
+            System.out.println("Nom : " + rs.getString("nom"));
+            System.out.println("Prénom : " + rs.getString("prenom"));
+            System.out.println("Email : " + rs.getString("email"));
+            System.out.println("Adresse : " + rs.getString("adresse"));
+            System.out.println("Âge : " + rs.getInt("age"));
+            System.out.println("Type de compte : " + rs.getString("UserType")); // benevole ou beneficiaire
+        } else {
+            System.out.println("Aucun profil trouvé pour cet email.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
 }
