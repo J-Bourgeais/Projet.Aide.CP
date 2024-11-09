@@ -29,5 +29,15 @@ class mainTest {
         ConnexionBDD.CloseConnexion(connexion);
 
     }
+	
+	/* Tests à faire
+	 * 
+	 * Poster un avis --> apparait dans la bdd
+	 * Poster une requête 
+	 * Consulter avis --> Comment tester ??
+	 * Afficher requete par critère --> test bon critere, affichage, ...
+	 * Valider service --> Modification de la bdd
+	 * 
+	 * */
 
 }
