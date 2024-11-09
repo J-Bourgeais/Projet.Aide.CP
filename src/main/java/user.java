@@ -17,9 +17,9 @@ import java.util.Date;
 
 public class user {
 
-    private String nom;
-    private String prenom;
-    private String email;
+    private static String nom;
+    private static String prenom;
+    private static String email;
     private String adresse;
     private int age;
     private String password;
@@ -43,15 +43,15 @@ public class user {
         this.password= password;
     }
 
-    public String getNom() {
+    public static String getNom() {
         return nom;
     }
 
-    public String getPrenom() {
+    public static String getPrenom() {
         return prenom;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 
@@ -116,18 +116,18 @@ public class user {
     }
 
     // Proposer une offre via la classe offre
-    public void proposerRequete(Connection connexion, String nom, String description, String typeRequete) {
+    public static void proposerRequete(Connection connexion, String nom, String description, String typeRequete) {
         // SQL pour insérer l'offre dans la base de données
         String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, nom);    
-            etat.setString(2, this.getNom() + " " + this.getPrenom()); 
+            etat.setString(2, getNom() + " " + getPrenom()); 
             etat.setString(3, description); 
             etat.setString(4, "En attente");          
             etat.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
             etat.setString(6, typeRequete);        
-            etat.setString(7, this.getEmail());  
+            etat.setString(7, getEmail());  
              
 
             int lignesAffectees = etat.executeUpdate();

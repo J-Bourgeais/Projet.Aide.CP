@@ -9,13 +9,13 @@ public class Avis {
 
     //Methode pour poster un avis à quelqu'un
 
-	 public void posterAvis(Connection connexion, String pourNom, String pourPrenom, int nbEtoiles, String description) {
+	 public void posterAvis(Connection connexion, String pourNom, String pourPrenom, int nbEtoiles, String description) throws SQLException {
         //Récupérer les avis existants
         String requeteSelect = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";
         JSONArray listeAvis = new JSONArray();
         try (PreparedStatement etat = connexion.prepareStatement(requeteSelect)) {
-            selectEtat.setString(1, pourNom);
-            selectEtat.setString(2, pourPrenom);
+            etat.setString(1, pourNom);
+            etat.setString(2, pourPrenom);
             ResultSet rs = etat.executeQuery();
 
             if (rs.next()) {

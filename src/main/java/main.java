@@ -160,7 +160,7 @@ public class main {
                         nom = scanner2.nextLine();
                         System.out.println("Quelle est la description de votre demande ?");
                         description = scanner2.nextLine();
-                        beneficiaire.formulerDemande(connexion, nom, description);
+                        beneficiaire.proposerRequete(connexion, nom, description, "demande");
                         break;
                     case 2:
                          
@@ -170,7 +170,7 @@ public class main {
                         nom = scanner3.nextLine();
                         System.out.println("Quelle est la description de votre offre ?");
                         description = scanner3.nextLine();
-                        benev.proposerOffre(connexion, nom, description);
+                        benev.proposerRequete(connexion, nom, description, "offre");
                         break;
                     case 3:
                         System.out.println("Vous avez choisi de consulter vos demandes.");
