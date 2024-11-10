@@ -1,14 +1,47 @@
-//main 
-
-
 import java.util.Scanner;
 import java.sql.Connection;
-
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class main {
 	
+	/* SQL error in ALlUserInfo fct
+	 * Il reste a mettre en option d'accepter une mission et de la valider
+	 * présentation
+	 * Erreur dans les line found --> toujours la meme : a résoudre
+	 * */
 	
+	
+	
+	
+	
+	
+    public static Object[] AllUserInfo(Connection connexion, String email){
+        String requeteSQL = "SELECT Nom, Prenom, email, Adresse, Age, Password, UserType FROM Users WHERE " + email + " = ?";
+
+        try (
+             PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
+        	
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            String Nom=rs.getString("Nom");
+            String Prenom=rs.getString("Prenom");
+            String Email=rs.getString("email");
+            String Adresse=rs.getString("Adresse");
+            int Age=rs.getInt("Age");
+            String Password=rs.getString("Password");
+            String UserType=rs.getString("UserType");
+            return new Object[]{Nom, Prenom, Email, Adresse, Age, Password, UserType};
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 	public static Object[] UserInfoConnexion() {
 		Scanner scanner = new Scanner(System.in);
 
@@ -52,18 +85,16 @@ public class main {
 	
 	
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
     	/*Pour tester :
     	 * User deja inscrit : 
     	 * - email : melo@gmail.com
     	 * - mdp : chien
-    	 * 
-    	 *	d'autres infos --> Ne se connecte pas 
-    	 *
-    	 * 
     	 * */
 
+    	
+    	//Ouvrir une nouvelle connexion à chaque fois, ou la laisser ouverte tout du long ????
 
         
         //Inscription
@@ -71,124 +102,124 @@ public class main {
         boolean connected = false;
         String email="";
         Scanner scanner = new Scanner(System.in);
+
+        Connection connexion=ConnexionBDD.GetConnexion();
+
         while (!connected) {
         	int choix1 = scanner.nextInt();
         	scanner.nextLine();
             
             switch (choix1) {
                 case 1 :
-                    Connection connexion=ConnexionBDD.GetConnexion();
+                    //Connection connexion=ConnexionBDD.GetConnexion();
                     Object[] UserInfo = UserInfoConnexion();
                     email=(String)UserInfo[0];
                     connected = UserConnect.UserConnection(connexion, UserInfo);
-                    ConnexionBDD.CloseConnexion(connexion);
+                    //ConnexionBDD.CloseConnexion(connexion); //Pourquoi ici ? --> dépend de la question l 86
                     break;
 
                 case 2 :
-                    Connection connexion1=ConnexionBDD.GetConnexion();
+                    //Connection connexion1=ConnexionBDD.GetConnexion();
                     Object[] UserInfo2 = UserInfoInscription();
                     email=(String)UserInfo2[0];
-                    connected= UserConnect.UserInscription(connexion1, UserInfo2);
-                    ConnexionBDD.CloseConnexion(connexion1);
+                    connected= UserConnect.UserInscription(connexion, UserInfo2);
+                    //ConnexionBDD.CloseConnexion(connexion); //Pourquoi ici ? --> dépend de la question l 86
                     break;
             }
             
         }
         scanner.close();
         
-        
-        
+        Object[] Alluserinfos = AllUserInfo(connexion, email); //SQL error maybe here
+
+        //Connection connexion = ConnexionBDD.GetConnexion(); 
         if (connected) {
         	// Affichage du menu à l'utilisateur
             Scanner scanner1 = new Scanner(System.in);
             System.out.println("Bienvenue dans le menu principal. Veuillez sélectionner une option :");
-            System.out.println("1. Formuler une demande");
-            System.out.println("2. Formuler une offre");
-            System.out.println("3. Consulter vos demandes");
-            System.out.println("4. Supprimer une demande");
-            System.out.println("5. Quitter");
+            System.out.println("1. Formuler une requête (offre ou demande)");
+            System.out.println("2. Consulter des requêtes"); //Consulter les siennes, ceux des autres (offres, demandes), possibilité de valider et modifier une requete une fois la bas
+            System.out.println("3. Poster un avis");
+            System.out.println("4. Consulter les avis");
+            System.out.println("5. Consulter un profil");
+            System.out.println("6. Quitter\n\n");
 
-            /*
-             * A Ajouter  :
-             * 
-             * consulter les offres --> En accepter une
-             * consulter les demandes --> En accepter une
-             * consulter les avis sur qqn
-             * poster un avis
-             * 
-             */
-
-             // Mettre + de choix et rajouter (si structure) ValiderRequete()
+            System.out.println("Il faut d'abord consulter les demandes afin de pouvoir les modifier ou les valider\n");
+            System.out.println("-----------------------------------------------------------------------------------\n");
 
             boolean quit = false;
 
             while (!(quit)){
                 // Récupérer le choix de l'utilisateur
                 System.out.print("Tapez un numéro (1-4) : ");
-                //y'a rien ecrit, ca capte rien
-                
-                //ca laisse pas le temps d'écrire
-                
-                //pourquoi ????
-                //int choix=scanner1.nextInt();
-                //scanner1.nextLine();
-                
-                String input = scanner1.nextLine();
-
-                //int choix = 0;
-                /*if (scanner1.hasNextInt()) {
-                	choix=scanner1.nextInt();
-                } else {
-                	choix=0;
-                	System.out.println("nothing written");
-                	//scanner1.nextLine();
-                	break;
-                }*/
-                
+                String input = scanner1.nextLine();      
                 int choix = Integer.parseInt(input);
                 
                 System.out.print("Test");
-                String nom;
-                String description;
-                Connection connexion = ConnexionBDD.GetConnexion(); //@Julie je l'ai rajouté car sinon connexion était pas défini
                 // Gestion des choix
+                
+                String nom, description, type, PourQui, prenom, DeQui;
+                
                 switch (choix) {
                     case 1:
-                        System.out.println("Vous avez choisi de formuler une demande.");
+                        System.out.println("Vous avez choisi de formuler une requête.");
                         Scanner scanner2 = new Scanner(System.in);
-                        System.out.println("Quel est le nom de votre demande ?");
+                        System.out.println("Quel est le type de votre requête ? Tapez 'offre' ou 'requête'");
+                        type = scanner2.nextLine();
+                        System.out.println("Quel est le nom de votre requête ?");
                         nom = scanner2.nextLine();
-                        System.out.println("Quelle est la description de votre demande ?");
+                        System.out.println("Quelle est la description de votre requête ?");
                         description = scanner2.nextLine();
-                        beneficiaire.proposerRequete(connexion, nom, description, "demande");
+                        beneficiaire.proposerRequete(connexion, nom, description, type, Alluserinfos);
+                        scanner2.close();
                         break;
                     case 2:
-                         
-                        System.out.println("Vous avez choisi de formuler une offre.");
-                        Scanner scanner3 = new Scanner(System.in);
-                        System.out.println("Quel est le nom de votre offre ?");
-                        nom = scanner3.nextLine();
-                        System.out.println("Quelle est la description de votre offre ?");
-                        description = scanner3.nextLine();
-                        benev.proposerRequete(connexion, nom, description, "offre");
+                        System.out.println("Vous avez choisi de consulter les requêtes.");
+                        Menu.ConsultRequete(connexion, email);
                         break;
                     case 3:
-                        System.out.println("Vous avez choisi de consulter vos demandes.");
-                        Menu.ConsultRequete(email);
+                        System.out.println("Vous avez choisi de poster un avis");
+                        Scanner scanner3 = new Scanner(System.in);
+                        System.out.println("Votre avis est à destination de qui ? (Nom Prenom)");
+                        PourQui = scanner3.nextLine();
+                        String[] words = PourQui.split(" ");
+                        nom=words[0];
+                        prenom=words[1];
+                        System.out.println("Combien d'étoile donnez vous au service par/pour "+ prenom + " ?");
+                        int etoile = scanner3.nextInt();
+                        System.out.println("Décrivez votre expérience. Tapez simplement un espace si vous ne souhaitez rien écrire");
+                        description = scanner3.nextLine();
+                        Avis.posterAvis(connexion, nom, prenom, etoile, description);
+                        scanner3.close();
                         break;
+
                     case 4:
-                        System.out.println("Vous avez choisi de supprimer votre demande.");
-                        Menu.ModifRequete();
+                        System.out.println("Vous avez choisi de consulter les avis");
+                        Scanner scanner4 = new Scanner(System.in);
+                        System.out.println("De qui voulez vous consulter les avis (Nom Prenom)");
+                        DeQui = scanner4.nextLine();
+                        String[] word = DeQui.split(" ");
+                        nom=word[0];
+                        prenom=word[1];
+                        Avis.consulterAvis(connexion, nom, prenom);
+                        scanner4.close();
                         break;
                     case 5:
+                        System.out.println("Vous avez choisi de consulter un profil");
+                        Scanner scanner5 = new Scanner(System.in);
+                        System.out.println("Quelle est l'adresse mail de la personne dont vous souhaitez consulter le profil ?");
+                        email = scanner5.nextLine();
+                        user.consulterProfilUtilisateur(connexion, email);
+                        break;
+                    case 6:
                         System.out.println("Vous avez choisi de quitter l'application. A bientot !");
+                        ConnexionBDD.CloseConnexion(connexion);
                         quit=true;
                         break;
                     default:
-                        System.out.println("Option non valide. Veuillez entrer un numéro entre 1 et 4.");
+                        System.out.println("Option non valide. Veuillez entrer un numéro entre 1 et 6.");
                 }
             }
-         // Fermeture du scanner
          scanner1.close();
         }
 

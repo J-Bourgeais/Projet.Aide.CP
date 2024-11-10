@@ -16,71 +16,14 @@ import java.util.Date;
  * Status
  * Date
  * TypeRequete
- * Contact (l'email, foreign key ??)
+ * Contact (l'email)
  * 
  * 
  * */
 
 
- //Need to add a status to the SQL List
-
-
-
-
 public class requete {
 
-    protected String nom;
-    protected String desc;
-    protected String status;
-    protected Date date;
-
-    public requete(String nom, String description) {
-        this.nom = nom;
-        this.desc = description;
-        this.date = new Date();
-        this.status = "en attente";
-
-    }
-
-    // deuxième constructeur car la description est optionnelle
-    public requete(String nom) {
-        this.nom = nom;
-        this.date = new Date();
-        this.status = "en attente";
-
-    }
-
-    public requete getRequete() {
-        return this;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String s) {
-        this.status = s;
-    }
-
-    public void setDesc(String description) {
-        this.desc = description;
-    }
-
-    public void setNom(String n) {
-        this.nom = n;
-    }
-
-    public void setDate(Date d) {
-        this.date = d;
-    }
 
     //Afficher des requêtes selon un critère (méthode générique)
     
@@ -101,7 +44,7 @@ public class requete {
                 System.out.println("Description : " + rs.getString("Description"));
                 System.out.println("Date : " + rs.getDate("Date"));
                 System.out.println("Status : " + rs.getString("Status"));
-                System.out.println("-----------------------------");
+                System.out.println("-----------------------------\n");
             }
 
         } catch (SQLException e) {
@@ -110,7 +53,7 @@ public class requete {
     }
 
     public static void afficherDemandesParEmail(String email) {
-        afficherRequetesParCritere("ContactUser", email);
+        afficherRequetesParCritere("Contact", email);
     }
 
     public static void afficherDemandesParType(String typeRequete) {

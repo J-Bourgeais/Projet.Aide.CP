@@ -7,141 +7,89 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
 
-// Colonnes DB - table User
-// nom
-// prenom
-// email
-// adresse
-// age
 
 
 public class user {
 
-    private static String nom;
-    private static String prenom;
-    private static String email;
-    private String adresse;
-    private int age;
-    private String password;
-
-
-    // Constructeur
-    public user(String nom, String prenom, String email, String adresse, int age, String password) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.adresse=adresse;
-        this.age = age;
-        this.password= password;
-    }
-
-    // Si qqc est pas obligatoire : pour structure
-    public user(String nom, String email, String adresse, String password) {
-        this.nom = nom;
-        this.email = email;
-        this.adresse=adresse;
-        this.password= password;
-    }
-
-    public static String getNom() {
-        return nom;
-    }
-
-    public static String getPrenom() {
-        return prenom;
-    }
-
-    public static String getEmail() {
-        return email;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    // Méthode pour afficher les informations de l'utilisateur
-    public void afficher() {
-    	System.out.println("*** Informations sur l'utilisateur ***");
-        System.out.println("Nom: " + nom);
-        System.out.println("Prénom: " + prenom);
-        System.out.println("Email: " + email);
-        System.out.println("Âge: " + age);
-        System.out.println("Adresse: " + adresse);
-        System.out.println("**************************************");
-    }
-	 
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
-    public void repondreRequete(Connection connexion, int idRequete) {
-        String requeteSQL = "UPDATE requetes SET Status = ?, ContactUser = ? WHERE idrequetes = ? AND TypeRequete = 'offre'";
+    public void repondreRequete(Connection connexion, String NameRequete) {
+        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ?";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
-            etat.setString(1, "acceptée");  // MAJ l’offre à "acceptée"
-            etat.setString(2, this.getEmail());
-            etat.setInt(3, idRequete);
+            etat.setString(1, "acceptée");  // MAJ l’offre ou demande à "acceptée"
+            etat.setString(2, NameRequete);
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
-                System.out.println("Offre acceptée avec succès !");
+                System.out.println("Requête acceptée avec succès !");
             } else {
-                System.out.println("Erreur : l'offre n'a pas été trouvée ou mise à jour.");
+                System.out.println("Erreur : la requête n'a pas été trouvée ou a été mise à jour.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+
+
+    public static boolean checkName(Connection connexion, String nom, Object[] Alluserinfos){
+        String requeteSQL = "SELECT NameRequete FROM requetes WHERE Contact = ?";
+
+        try (
+            PreparedStatement stmt = connexion.prepareStatement(requeteSQL)) {
+            stmt.setString(1, (String) Alluserinfos[2]);
+            ResultSet rs = stmt.executeQuery();
+            boolean ok=true;
+
+            while (rs.next()) {
+                if (rs.getString("NameRequete")==nom){
+                    ok=false;
+                }
+            }
+            return ok;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
     // Proposer une offre via la classe offre
-    public static void proposerRequete(Connection connexion, String nom, String description, String typeRequete) {
-        // SQL pour insérer l'offre dans la base de données
-        String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, ContactUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public static void proposerRequete(Connection connexion, String nom, String description, String typeRequete, Object[] Alluserinfos) {
+        
+        //Alluserinfos : Nom, Prenom, email, Adresse, Age, Password, UserType
 
-        try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
-            etat.setString(1, nom);    
-            etat.setString(2, getNom() + " " + getPrenom()); 
-            etat.setString(3, description); 
-            etat.setString(4, "En attente");          
-            etat.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
-            etat.setString(6, typeRequete);        
-            etat.setString(7, getEmail());  
-             
+        if (checkName(connexion, nom, Alluserinfos)){ //Verifier qu'aucune autre requete du même user n'a le meme nom
+            String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            int lignesAffectees = etat.executeUpdate();
-            if (lignesAffectees > 0) {
-                System.out.println("Offre ajoutée avec succès dans la base de données !");
-            } else {
-                System.out.println("L'ajout de l'offre a échoué.");
+            try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
+                etat.setString(1, nom);    
+                etat.setString(2, (String) Alluserinfos[0] + " " + Alluserinfos[1]); 
+                etat.setString(3, description); 
+                etat.setString(4, "En attente");          
+                etat.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+                etat.setString(6, typeRequete);        
+                etat.setString(7, (String) Alluserinfos[2]);  
+                
+
+                int lignesAffectees = etat.executeUpdate();
+                if (lignesAffectees > 0) {
+                    System.out.println("Offre ajoutée avec succès dans la base de données !");
+                } else {
+                    System.out.println("L'ajout de l'offre a échoué.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        
     }
 
-    public void modifierRequete(Connection connexion, requete requete) {
+
+    //Interdire d'appeler 2 de ses requete pareil
+
+    public static void modifierRequete(Connection connexion, String nom) { //requete requete
         Scanner scanner = new Scanner(System.in);
         boolean modificationEffectuee = false;
 
@@ -166,24 +114,24 @@ public class user {
                     case 1:
                         System.out.print("Entrez le nouveau nom : ");
                         String nouveauNom = scanner.nextLine();
-                        updateSQL += "NameRequete = ? WHERE idrequetes = ?";
+                        updateSQL += "NameRequete = ? WHERE NameRequete = ?";
                         try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                             stmt.setString(1, nouveauNom);
-                            stmt.setInt(2, requete.getId()); // Utilise l'ID de la requête
+                            stmt.setString(2, nom); // Utilise le nom unique précédent de la requete
                             modificationEffectuee = stmt.executeUpdate() > 0;
-                            requete.setNom(nouveauNom); // Met à jour l'objet localement
+                            //requete.setNom(nouveauNom); // Met à jour l'objet localement --> On a rien localement
                         }
                         break;
 
                     case 2:
                         System.out.print("Entrez la nouvelle description : ");
                         String nouvelleDescription = scanner.nextLine();
-                        updateSQL += "Description = ? WHERE idrequetes = ?";
+                        updateSQL += "Description = ? WHERE NameRequete = ?";
                         try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                             stmt.setString(1, nouvelleDescription);
-                            stmt.setInt(2, requete.getId());
+                            stmt.setString(2, nom);
                             modificationEffectuee = stmt.executeUpdate() > 0;
-                            requete.setDesc(nouvelleDescription);
+                            //requete.setDesc(nouvelleDescription); --> On a rien en local
                         }
                         break;
 
@@ -194,12 +142,12 @@ public class user {
                         Date nouvelleDate;
                         try {
                             nouvelleDate = sdf.parse(nouvelleDateStr);
-                            updateSQL += "Date = ? WHERE idrequetes = ?";
+                            updateSQL += "Date = ? WHERE NameRequete = ?";
                             try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                                 stmt.setDate(1, new java.sql.Date(nouvelleDate.getTime()));
-                                stmt.setInt(2, requete.getId());
+                                stmt.setString(2, nom);
                                 modificationEffectuee = stmt.executeUpdate() > 0;
-                                requete.setDate(nouvelleDate);
+                                //requete.setDate(nouvelleDate); --> On a rien en local
                             }
                         } catch (ParseException e) {
                             System.out.println("Format de date incorrect. Veuillez réessayer.");
@@ -223,7 +171,7 @@ public class user {
         }
     }
 
-    public void consulterProfilUtilisateur(Connection connexion, String email) {
+    public static void consulterProfilUtilisateur(Connection connexion, String email) {
     String query = "SELECT Nom, Prenom, email, Adresse, Age, UserType FROM Users WHERE email = ?";
     
     try (PreparedStatement stmt = connexion.prepareStatement(query)) {

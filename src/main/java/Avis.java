@@ -9,7 +9,7 @@ public class Avis {
 
     //Methode pour poster un avis à quelqu'un
 
-	 public void posterAvis(Connection connexion, String pourNom, String pourPrenom, int nbEtoiles, String description) throws SQLException {
+	 public static void posterAvis(Connection connexion, String pourNom, String pourPrenom, int nbEtoiles, String description) throws SQLException {
         //Récupérer les avis existants
         String requeteSelect = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";
         JSONArray listeAvis = new JSONArray();
@@ -50,7 +50,7 @@ public class Avis {
 
     }
 
-    public void consulterAvis(Connection connexion, String pourNom, String pourPrenom) {
+    public static void consulterAvis(Connection connexion, String pourNom, String pourPrenom) {
         String requeteSQL = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, pourNom);
