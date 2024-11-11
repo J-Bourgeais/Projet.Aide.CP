@@ -13,12 +13,13 @@ public class user {
 
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
-    public void repondreRequete(Connection connexion, String NameRequete) {
-        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ?";
+    public static void repondreRequete(Connection connexion, String NameRequete, String email) {
+        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ? AND email = ?";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, "acceptée");  // MAJ l’offre ou demande à "acceptée"
             etat.setString(2, NameRequete);
+            etat.setString(3, email);
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {

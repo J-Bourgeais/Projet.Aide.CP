@@ -13,8 +13,7 @@ public class main {
 	 * */
 	
 	
-	
-	
+
 	
 	
     public static Object[] AllUserInfo(Connection connexion, String email){
@@ -158,7 +157,7 @@ public class main {
                 System.out.print("Test");
                 // Gestion des choix
                 
-                String nom, description, type, PourQui, prenom, DeQui;
+                String nom, description, type, PourQui, prenom, DeQui, mail;
                 
                 switch (choix) {
                     case 1:
@@ -176,6 +175,40 @@ public class main {
                     case 2:
                         System.out.println("Vous avez choisi de consulter les requêtes.");
                         Menu.ConsultRequete(connexion, email);
+                        Scanner scanner6 = new Scanner(System.in);
+                        System.out.println("Voulez-vous accepter une de ces requêtes ? [y/n]");
+                        String accept = scanner6.nextLine();
+                        if (accept=="y") {
+                        	System.out.println("Quelle est le nom de la requête ?");
+                        	nom=scanner6.nextLine();
+                        	System.out.println("Quel est l'adresse mail de l'émetteur de la requête ?");
+                        	mail=scanner6.nextLine();
+                        	user.repondreRequete(connexion, nom, mail);
+                        }
+                        if(Alluserinfos[6]=="Structure") {
+                        	System.out.println("Voulez-vous changer le status d'une de ces requêtes ? [y/n]");
+                        	accept = scanner6.nextLine();
+                            if (accept=="y") {
+                            	System.out.println("Quelle est le nom de la requête ?");
+                            	nom=scanner6.nextLine();
+                            	System.out.println("Quel est l'adresse mail de l'émetteur de la requête ?");
+                            	mail=scanner6.nextLine();
+                            	System.out.println("Tapez 1 si la requête est validée, 2 si elle est refusée");
+                            	int val = scanner6.nextInt();
+                            	String raison="";
+                            	boolean valide;
+                            	if (val==1) {
+                            		valide=true;
+                            	} else {
+                            		valide=false;
+                            		System.out.println("Quelle est la raison du refus ?");
+                            		raison=scanner6.nextLine();
+                            	}
+                            	structure.validerService(connexion, nom, mail, valide, raison);
+                            	
+                            }
+                        }
+                        
                         break;
                     case 3:
                         System.out.println("Vous avez choisi de poster un avis");
