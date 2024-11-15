@@ -13,9 +13,6 @@ public class main {
 	 * */
 	
 	
-
-	
-	
     public static Object[] AllUserInfo(Connection connexion, String email){
         String requeteSQL = "SELECT Nom, Prenom, email, Adresse, Age, Password, UserType FROM Users WHERE " + email + " = ?";
 
@@ -150,7 +147,7 @@ public class main {
 
             while (!(quit)){
                 // Récupérer le choix de l'utilisateur
-                System.out.print("Tapez un numéro (1-4) : ");
+                System.out.print("Tapez un numéro (1-6) : ");
                 String input = scanner1.nextLine();      
                 int choix = Integer.parseInt(input);
                 
@@ -169,7 +166,7 @@ public class main {
                         nom = scanner2.nextLine();
                         System.out.println("Quelle est la description de votre requête ?");
                         description = scanner2.nextLine();
-                        beneficiaire.proposerRequete(connexion, nom, description, type, Alluserinfos);
+                        user.proposerRequete(connexion, nom, description, type, Alluserinfos);
                         scanner2.close();
                         break;
                     case 2:
@@ -215,7 +212,7 @@ public class main {
                         Scanner scanner3 = new Scanner(System.in);
                         System.out.println("Votre avis est à destination de qui ? (Nom Prenom)");
                         PourQui = scanner3.nextLine();
-                        String[] words = PourQui.split(" ");
+                        String[] words = PourQui.split(" "); //MELO
                         nom=words[0];
                         prenom=words[1];
                         System.out.println("Combien d'étoile donnez vous au service par/pour "+ prenom + " ?");

@@ -34,7 +34,7 @@ public class user {
 
 
 
-    public static boolean checkName(Connection connexion, String nom, Object[] Alluserinfos){
+    public static boolean checkName(Connection connexion, String nomRequete, Object[] Alluserinfos){
         String requeteSQL = "SELECT NameRequete FROM requetes WHERE Contact = ?";
 
         try (
@@ -44,7 +44,7 @@ public class user {
             boolean ok=true;
 
             while (rs.next()) {
-                if (rs.getString("NameRequete")==nom){
+                if (rs.getString("NameRequete")==nomRequete){
                     ok=false;
                 }
             }
@@ -57,15 +57,15 @@ public class user {
     }
 
     // Proposer une offre via la classe offre
-    public static void proposerRequete(Connection connexion, String nom, String description, String typeRequete, Object[] Alluserinfos) {
+    public static void proposerRequete(Connection connexion, String nomRequete, String description, String typeRequete, Object[] Alluserinfos) {
         
         //Alluserinfos : Nom, Prenom, email, Adresse, Age, Password, UserType
 
-        if (checkName(connexion, nom, Alluserinfos)){ //Verifier qu'aucune autre requete du même user n'a le meme nom
+        if (checkName(connexion, nomRequete, Alluserinfos)){ //Verifier qu'aucune autre requete du même user n'a le meme nom
             String requeteSQL = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
-                etat.setString(1, nom);    
+                etat.setString(1, nomRequete);    
                 etat.setString(2, (String) Alluserinfos[0] + " " + Alluserinfos[1]); 
                 etat.setString(3, description); 
                 etat.setString(4, "En attente");          
@@ -90,7 +90,7 @@ public class user {
 
     //Interdire d'appeler 2 de ses requete pareil
 
-    public static void modifierRequete(Connection connexion, String nom) { //requete requete
+    public static void modifierRequete(Connection connexion, String nomRequete) {
         Scanner scanner = new Scanner(System.in);
         boolean modificationEffectuee = false;
 
@@ -118,7 +118,7 @@ public class user {
                         updateSQL += "NameRequete = ? WHERE NameRequete = ?";
                         try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                             stmt.setString(1, nouveauNom);
-                            stmt.setString(2, nom); // Utilise le nom unique précédent de la requete
+                            stmt.setString(2, nomRequete); // Utilise le nom unique précédent de la requete
                             modificationEffectuee = stmt.executeUpdate() > 0;
                             //requete.setNom(nouveauNom); // Met à jour l'objet localement --> On a rien localement
                         }
@@ -130,7 +130,7 @@ public class user {
                         updateSQL += "Description = ? WHERE NameRequete = ?";
                         try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                             stmt.setString(1, nouvelleDescription);
-                            stmt.setString(2, nom);
+                            stmt.setString(2, nomRequete);
                             modificationEffectuee = stmt.executeUpdate() > 0;
                             //requete.setDesc(nouvelleDescription); --> On a rien en local
                         }
@@ -146,7 +146,7 @@ public class user {
                             updateSQL += "Date = ? WHERE NameRequete = ?";
                             try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                                 stmt.setDate(1, new java.sql.Date(nouvelleDate.getTime()));
-                                stmt.setString(2, nom);
+                                stmt.setString(2, nomRequete);
                                 modificationEffectuee = stmt.executeUpdate() > 0;
                                 //requete.setDate(nouvelleDate); --> On a rien en local
                             }

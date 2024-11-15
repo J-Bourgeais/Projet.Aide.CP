@@ -55,14 +55,4 @@ public class Menu {
 
     }
 
-    public static void ConsultProfil() {
-        //Consulter un Profil
-    }
-
-    public static void ValiderRequete() {
-        //Valider une demande ou une offre
-        //Structure uniquement
-    }
-
-
 }

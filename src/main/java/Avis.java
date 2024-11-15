@@ -5,6 +5,19 @@ import java.sql.SQLException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// BDD : Users
+// colonne 	BDD : 
+
+// idUsers 
+// Nom
+// Prenom
+// email
+// Adresse
+// Age
+// Password
+// UserType
+// Avis
+
 public class Avis {
 
     //Methode pour poster un avis à quelqu'un

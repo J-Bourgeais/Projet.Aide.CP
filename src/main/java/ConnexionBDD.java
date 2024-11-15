@@ -40,6 +40,7 @@ public class ConnexionBDD {
 
 
     // requete a furnir dans e main
+    /*
     public static void DoStatement(Connection connexion, String requete) {
         try {
             // Créer un objet Statement pour exécuter des requêtes SQL
@@ -57,6 +58,7 @@ public class ConnexionBDD {
             e.printStackTrace();
         }
     }
+    */
 
 
     }

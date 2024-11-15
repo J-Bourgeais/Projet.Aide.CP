@@ -22,8 +22,7 @@ class mainTest {
 	@Test
     public void testInscription() throws SQLException {
         // Ajouter un utilisateur pour le test
-
-		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", 65, "charlette", "Beneficiaire"};
+		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", 65, "charlette", "Beneficiaire"};
 		Connection connexion=ConnexionBDD.GetConnexion();
         assertTrue(UserConnect.UserInscription(connexion, liste)==true);
         ConnexionBDD.CloseConnexion(connexion);
@@ -33,7 +32,7 @@ class mainTest {
 	/* Tests à faire
 	 * 
 	 * Poster un avis --> apparait dans la bdd
-	 * Poster une requête 
+	 * Poster une requête --> apparait dans la bdd
 	 * Consulter avis --> Comment tester ??
 	 * Afficher requete par critère --> test bon critere, affichage, ...
 	 * Valider service --> Modification de la bdd

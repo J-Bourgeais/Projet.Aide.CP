@@ -1,20 +1,13 @@
-<<<<<<< HEAD
 avis.class
 main.class
 user.class
-beneficiaire.class
-demande.class
-=======
-main.class
-Avis.class
-beneficiaire.class
 structure.class
-user.class
 ConnexionBDD.class
 demande.class
+benev.class
+Avis.class
+beneficiaire.class
 UserConnect.class
 Menu.class
->>>>>>> 9656e8af5457aae373a5b65e016b3b6ad5d61a08
 offre.class
 requete.class
-benev.class
