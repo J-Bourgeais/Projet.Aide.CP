@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+<<<<<<< HEAD
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
 			<item value="/home/bourgeai/Bureau/4-IR/Projet.Aide.CP"/>
+=======
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/home/igerard/Bureau/4IR/Projet/Projet.Aide.CP"/>
+			<item value="/home/igerard/Bureau/4IR/Projet"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="/home/igerard/Bureau/4IR/Projet/Projet.Aide.CP"/>
+>>>>>>> 9656e8af5457aae373a5b65e016b3b6ad5d61a08
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -14,6 +34,10 @@
 		</list>
 	</section>
 	<section name="MavenProjectWizardArchetypePage">
+<<<<<<< HEAD
+=======
+		<item key="catalog" value="All Catalogs"/>
+>>>>>>> 9656e8af5457aae373a5b65e016b3b6ad5d61a08
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
@@ -61,8 +85,11 @@
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="org.eclipse.m2e.core.pom.overview">
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
+=======
+>>>>>>> 9656e8af5457aae373a5b65e016b3b6ad5d61a08
 </section>
