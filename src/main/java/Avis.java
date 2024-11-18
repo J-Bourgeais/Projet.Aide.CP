@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // BDD : Users
-// colonne 	BDD : 
+// colonne 	BDD : Avis
 
 // idUsers 
 // Nom
