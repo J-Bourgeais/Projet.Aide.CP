@@ -35,6 +35,8 @@ class mainTest {
 
     }
 	
+	/* Tests principaux pour les Avis */
+	
 	@Test
 	public void testPosterAvis() throws SQLException {
 	    // Préparation des éléments à insérer
@@ -143,11 +145,34 @@ class mainTest {
 	}
 
 	
+	/* Tests principaux pour les Requêtes */
+	
+	@Test
+	public void testRepondreRequete() {
+		
+	}
+	
+	@Test
+	public void testProposerRequete() {
+		
+	}
+	
+	@Test
+	public void testModifierRequete() {
+		
+	}
+
+	@Test
+	public void consulterProfilUtilisateur() {
+		
+	}
+
+	
 	/* Tests à faire
 	 * 
-	 * Poster un avis --> apparait dans la bdd
+	 * @DONE - Poster un avis --> apparait dans la bdd
 	 * Poster une requête --> apparait dans la bdd
-	 * Consulter avis --> Comment tester ??
+	 * @DONE - Consulter avis --> Comment tester ??
 	 * Afficher requete par critère --> test bon critere, affichage, ...
 	 * Valider service --> Modification de la bdd
 	 * 

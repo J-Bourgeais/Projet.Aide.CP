@@ -33,7 +33,6 @@ public class user {
     }
 
 
-
     public static boolean checkName(Connection connexion, String nomRequete, Object[] Alluserinfos){
         String requeteSQL = "SELECT NameRequete FROM requetes WHERE Contact = ?";
 
