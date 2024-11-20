@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class mainTest {
 
 	@Test
-	public void test() {		
+	public void Connexiontest() {		
 		//connexion
 		Object[] liste = new Object[]{"melo@gmail.com", "chien"};
 		Connection connexion=ConnexionBDD.GetConnexion();
@@ -30,6 +30,12 @@ class mainTest {
         // Ajouter un utilisateur pour le test
 		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", 65, "charlette", "Beneficiaire"};
 		Connection connexion=ConnexionBDD.GetConnexion();
+		/*String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
+	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
+	        etat.setString(1, "Jean");
+	        etat.setString(2, "Charlie");
+	        etat.executeUpdate();
+	    }*/
         assertTrue(UserConnect.UserInscription(connexion, liste)==true);
         ConnexionBDD.CloseConnexion(connexion);
 
@@ -40,8 +46,8 @@ class mainTest {
 	@Test
 	public void testPosterAvis() throws SQLException {
 	    // Préparation des éléments à insérer
-	    String nom = "Bourgeais";
-	    String prenom = "Melo";
+	    String nom = "Jean";//Bourgeais
+	    String prenom = "Charlie";//Melo
 	    int nbEtoiles = 5;
 	    String description = "Excellent service, je suis ravie de mes croquettes !";
 	    Connection connexion = ConnexionBDD.GetConnexion();

@@ -117,7 +117,7 @@ public class main {
                 case 2 :
                     //Connection connexion1=ConnexionBDD.GetConnexion();
                     Object[] UserInfo2 = UserInfoInscription();
-                    email=(String)UserInfo2[0];
+                    email=(String)UserInfo2[2];
                     connected= UserConnect.UserInscription(connexion, UserInfo2);
                     //ConnexionBDD.CloseConnexion(connexion); //Pourquoi ici ? --> dépend de la question l 86
                     break;
