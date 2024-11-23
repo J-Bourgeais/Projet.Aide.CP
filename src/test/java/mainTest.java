@@ -170,33 +170,253 @@ class mainTest {
 	}
 
 	
-	/* Tests principaux pour les Requêtes */
+	/* Tests principaux pour les actions de l'utilisateur sur les Requêtes */
 	
 	@Test
-	public void testRepondreRequete() {
-		
-	}
-	
-	@Test
-	public void testProposerRequete() {
-		
-	}
-	
-	@Test
-	public void testModifierRequete() {
-		
+	public void testRepondreRequete() throws SQLException {
+	    Connection connexion = ConnexionBDD.GetConnexion();
+
+	    // Requête fictive dans la base de données ajoutée
+	    String insertRequete = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    String nomRequete = "TestRequete";
+	    String email = "test@example.com";
+
+	    try (PreparedStatement stmt = connexion.prepareStatement(insertRequete)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.setString(2, "Melo");
+	        stmt.setString(3, "Requête test");
+	        stmt.setString(4, "En attente");
+	        stmt.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+	        stmt.setString(6, "TypeTest");
+	        stmt.setString(7, email);
+	        stmt.executeUpdate();
+	    }
+
+	    // Appel de la méthode 
+	    user.repondreRequete(connexion, nomRequete, email);
+
+	    // Vérifier statut de la requête est passé à "acceptée"
+	    String query = "SELECT Status FROM requetes WHERE NameRequete = ? AND Contact = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.setString(2, email);
+	        ResultSet rs = stmt.executeQuery();
+	        assertTrue(rs.next());
+	        assertEquals("acceptée", rs.getString("Status"));
+	    }
+
+	    // Nettoyage BDD
+	    String deleteRequete = "DELETE FROM requetes WHERE NameRequete = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.executeUpdate();
+	    }
+
+	    ConnexionBDD.CloseConnexion(connexion);
 	}
 
+	
 	@Test
-	public void consulterProfilUtilisateur() {
-		
+	public void testProposerRequete() throws SQLException {
+	    Connection connexion = ConnexionBDD.GetConnexion();
+
+	    // Info user fictif
+	    Object[] Alluserinfos = new Object[]{"Bourgeais", "Melo", "melo@example.com", "adresse", 30, "mdp", "Bénévole"};
+
+	    String nomRequete = "NouvelleRequete";
+	    String description = "Description de la requête";
+	    String typeRequete = "TypeTest";
+
+	    // Appeler la méthode à tester
+	    user.proposerRequete(connexion, nomRequete, description, typeRequete, Alluserinfos);
+
+	    // Vérifier que la requête a été insérée dans la BDD
+	    String query = "SELECT * FROM requetes WHERE NameRequete = ? AND Contact = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.setString(2, (String) Alluserinfos[2]);
+	        ResultSet rs = stmt.executeQuery();
+	        assertTrue(rs.next());
+	        assertEquals(nomRequete, rs.getString("NameRequete"));
+	        assertEquals(description, rs.getString("Description"));
+	        assertEquals(typeRequete, rs.getString("TypeRequete"));
+	        assertEquals("En attente", rs.getString("Status"));
+	    }
+
+	    // Nettoyage BDD
+	    String deleteRequete = "DELETE FROM requetes WHERE NameRequete = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.executeUpdate();
+	    }
+
+	    ConnexionBDD.CloseConnexion(connexion);
 	}
 
+	
+	@Test
+	public void testModifierRequete() throws SQLException {
+	    Connection connexion = ConnexionBDD.GetConnexion();
+
+	    // Ajoute requête fictive
+	    String insertRequete = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    String nomRequete = "RequeteAModifier";
+
+	    try (PreparedStatement stmt = connexion.prepareStatement(insertRequete)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.setString(2, "Melo");
+	        stmt.setString(3, "Description initiale");
+	        stmt.setString(4, "En attente");
+	        stmt.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+	        stmt.setString(6, "TypeTest");
+	        stmt.setString(7, "melo@example.com");
+	        stmt.executeUpdate();
+	    }
+
+	    // Appel méthode modification
+	    user.modifierRequete(connexion, nomRequete);
+
+	    // Vérifier les modifications (ex ici, description mise à jour)
+	    String query = "SELECT Description FROM requetes WHERE NameRequete = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+	        stmt.setString(1, nomRequete);
+	        ResultSet rs = stmt.executeQuery();
+	        assertTrue(rs.next());
+	        assertNotEquals("Description initiale", rs.getString("Description")); // S'assurer que la description a changé
+	    }
+
+	    // Nettoyage BDD
+	    String deleteRequete = "DELETE FROM requetes WHERE NameRequete = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.executeUpdate();
+	    }
+
+	    ConnexionBDD.CloseConnexion(connexion);
+	}
+
+
+	@Test
+	public void testConsulterProfilUtilisateur() throws SQLException {
+	    Connection connexion = ConnexionBDD.GetConnexion();
+
+	    // Ajout user fictif
+	    String insertUser = "INSERT INTO Users (Nom, Prenom, email, Adresse, Age, UserType) VALUES (?, ?, ?, ?, ?, ?)";
+	    String email = "melo@example.com";
+
+	    try (PreparedStatement stmt = connexion.prepareStatement(insertUser)) {
+	        stmt.setString(1, "Bourgeais");
+	        stmt.setString(2, "Melo");
+	        stmt.setString(3, email);
+	        stmt.setString(4, "TestAdresse");
+	        stmt.setInt(5, 5);
+	        stmt.setString(6, "Bénévole");
+	        stmt.executeUpdate();
+	    }
+
+	    // Capture de la sortie standard
+	    ByteArrayOutputStream sortieCapturee = new ByteArrayOutputStream();
+	    PrintStream fluxOriginal = System.out;
+	    System.setOut(new PrintStream(sortieCapturee));
+
+	    // appel méthode consultation
+	    user.consulterProfilUtilisateur(connexion, email);
+
+	    String sortie = sortieCapturee.toString();
+	    assertTrue(sortie.contains("Nom : Bourgeais"));
+	    assertTrue(sortie.contains("Prénom : Melo"));
+	    assertTrue(sortie.contains("Email : melo@example.com"));
+	    assertTrue(sortie.contains("Adresse : TestAdresse"));
+	    assertTrue(sortie.contains("Âge : 5"));
+
+	    // Nettoyage BDD
+	    String deleteUser = "DELETE FROM Users WHERE email = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteUser)) {
+	        stmt.setString(1, email);
+	        stmt.executeUpdate();
+	    }
+
+	    ConnexionBDD.CloseConnexion(connexion);
+	}
+
+	
+	
+	/* Test pour la validation d'un service de la part d'une structure */
+	
+	@Test
+    public void testValiderService() throws SQLException {
+        Connection connexion = ConnexionBDD.GetConnexion();
+
+        // Requête de test
+        String nomRequete = "Nourrir Melo";
+        String email = "melo@test.com";
+        String description = "Test de validation ou refus";
+        String typeRequete = "Service";
+        String statusInitial = "en attente";
+
+        // Suppression des anciennes données
+        String deleteRequete = "DELETE FROM requetes WHERE NameRequete = ?";
+        try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+            stmt.setString(1, nomRequete);
+            stmt.executeUpdate();
+        }
+
+        // Insertion de la requête de tests
+        String insertRequete = "INSERT INTO requetes (NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact) VALUES (?, ?, ?, ?, CURRENT_DATE, ?, ?)";
+        try (PreparedStatement stmt = connexion.prepareStatement(insertRequete)) {
+            stmt.setString(1, nomRequete);
+            stmt.setString(2, "John Doe");
+            stmt.setString(3, description);
+            stmt.setString(4, statusInitial);
+            stmt.setString(5, typeRequete);
+            stmt.setString(6, email);
+            stmt.executeUpdate();
+        }
+
+        // Test 1 : Validation de la requête (pas de motif)
+        structure.validerService(connexion, nomRequete, email, true, null);
+
+        String selectRequete = "SELECT Status FROM requetes WHERE NameRequete = ? AND Contact = ?";
+        try (PreparedStatement stmt = connexion.prepareStatement(selectRequete)) {
+            stmt.setString(1, nomRequete);
+            stmt.setString(2, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                assertEquals("validé", rs.getString("Status"), "Le statut doit être 'validé'.");
+            } else {
+                fail("Requête non trouvée dans la base de données après validation.");
+            }
+        }
+
+        // Test 2 : Refus de la requête avec une raison
+        String raisonRefus = "Les informations sont incomplètes.";
+        structure.validerService(connexion, nomRequete, email, false, raisonRefus);
+
+        try (PreparedStatement stmt = connexion.prepareStatement(selectRequete)) {
+            stmt.setString(1, nomRequete);
+            stmt.setString(2, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                assertEquals("refusé", rs.getString("Status"), "Le statut doit être 'refusé'.");
+            } else {
+                fail("Requête non trouvée dans la base de données après refus.");
+            }
+        }
+
+        // Nettoyage des données après test
+        try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+            stmt.setString(1, nomRequete);
+            stmt.executeUpdate();
+        }
+
+        ConnexionBDD.CloseConnexion(connexion);
+    }
+	
 	
 	/* Tests à faire
 	 * 
 	 * @DONE - Poster un avis --> apparait dans la bdd
-	 * Poster une requête --> apparait dans la bdd
+	 * @DONE - Poster une requête --> apparait dans la bdd
 	 * @DONE - Consulter avis --> Comment tester ??
 	 * Afficher requete par critère --> test bon critere, affichage, ...
 	 * Valider service --> Modification de la bdd
