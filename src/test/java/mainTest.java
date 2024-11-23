@@ -27,9 +27,16 @@ class mainTest {
 	
 	@Test
     public void testInscription() throws SQLException {
-        // Ajouter un utilisateur pour le test
-		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", 65, "charlette", "Beneficiaire"};
 		Connection connexion=ConnexionBDD.GetConnexion();
+        // Ajouter un utilisateur pour le test
+		String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
+	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
+	        etat.setString(1, "Jean");
+	        etat.setString(2, "Charlie");
+	        etat.executeUpdate();
+	    }
+		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", 65, "charlette", "Beneficiaire"};
+		
 		/*String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
 	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
 	        etat.setString(1, "Jean");
@@ -45,13 +52,21 @@ class mainTest {
 	
 	@Test
 	public void testPosterAvis() throws SQLException {
+		Connection connexion = ConnexionBDD.GetConnexion();
+
+		
+		//Delete all Avis
+    	String deleteAvis = "UPDATE Users SET Avis = null";
+ 	    try (PreparedStatement etat = connexion.prepareStatement(deleteAvis)) {
+ 	        etat.executeUpdate();
+ 	    }
+		
 	    // Préparation des éléments à insérer
 	    String nom = "Jean";//Bourgeais
 	    String prenom = "Charlie";//Melo
 	    int nbEtoiles = 5;
 	    String description = "Excellent service, je suis ravie de mes croquettes !";
-	    Connection connexion = ConnexionBDD.GetConnexion();
-
+	    
 	    // Ajout de l'utilisateur
 	    String insertUser = "INSERT INTO Users (Nom, Prenom, Avis) VALUES (?, ?, ?)";
 	    try (PreparedStatement etat = connexion.prepareStatement(insertUser)) {
@@ -66,7 +81,11 @@ class mainTest {
 
 	    // Verif résultats
 	    String requeteSelect = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";
+	    
+	  
+	    
 	    try (PreparedStatement etat = connexion.prepareStatement(requeteSelect)) {
+	    
 	        etat.setString(1, nom);
 	        etat.setString(2, prenom);
 	        ResultSet rs = etat.executeQuery();
