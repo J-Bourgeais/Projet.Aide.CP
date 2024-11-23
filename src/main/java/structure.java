@@ -8,11 +8,12 @@ public class structure extends user {
 	
 	
 	
+	
 	public static void validerService(Connection connexion, String NameRequete, String email, boolean estValidee, String raison) {
     // Déterminer le nouveau statut en fonction de estValidee
 	//MAJ avec le nom de la requête (en considérant qu'elle est unique - evite d'avoir ID)
     String nouveauStatut = estValidee ? "validé" : "refusé";
-    String updateSQL = "UPDATE requetes SET status = ? WHERE NameRequete = ? AND email = ?";
+    String updateSQL = "UPDATE requetes SET status = ? WHERE NameRequete = ? AND Contact = ?";
     
     try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
         stmt.setString(1, nouveauStatut);
