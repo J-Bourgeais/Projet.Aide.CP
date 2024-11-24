@@ -14,7 +14,7 @@ public class user {
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
     public static void repondreRequete(Connection connexion, String NameRequete, String email) {
-        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ? AND email = ?";
+        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ? AND Contact = ?";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, "acceptée");  // MAJ l’offre ou demande à "acceptée"
@@ -86,26 +86,26 @@ public class user {
         
     }
 
-
+    
     //Interdire d'appeler 2 de ses requete pareil
 
-    public static void modifierRequete(Connection connexion, String nomRequete) {
+    public static void modifierRequete(Connection connexion, String nomRequete, int choix) {
         Scanner scanner = new Scanner(System.in);
         boolean modificationEffectuee = false;
 
         try  {
             // Affichage des options de modifications à l'utilisateur
-            System.out.println("Sélectionnez ce que vous souhaitez modifier :");
+            /*System.out.println("Sélectionnez ce que vous souhaitez modifier :");
             System.out.println("1. Nom");
             System.out.println("2. Description");
             System.out.println("3. Date");
-            System.out.println("4. Terminer les modifications");
+            System.out.println("4. Terminer les modifications");*/
 
             while (true){
 
                 System.out.print("Choix : ");
-                int choix = scanner.nextInt();
-                scanner.nextLine(); // Consomme le saut de ligne après l'entier
+                //int choix = scanner.nextInt();
+                //scanner.nextLine(); // Consomme le saut de ligne après l'entier
 
                 String updateSQL = "UPDATE requetes SET "; // Début de la requête SQL
 
@@ -153,13 +153,13 @@ public class user {
                             System.out.println("Format de date incorrect. Veuillez réessayer.");
                         }
                         break;
-                    case 4:
+                    /*case 4:
                         if (modificationEffectuee) {
                             System.out.println("Modifications enregistrées avec succès.");
                         } else {
                             System.out.println("Aucune modification enregistrée.");
                         }
-                        return; // Quitte la boucle et termine la méthode
+                        return; // Quitte la boucle et termine la méthode*/
                     default:
                         System.out.println("Choix invalide. Veuillez sélectionner une option valide.");
                 }

@@ -274,7 +274,7 @@ class mainTest {
 	    }
 
 	    // Appel méthode modification
-	    user.modifierRequete(connexion, nomRequete);
+	    user.modifierRequete(connexion, nomRequete, 2);
 
 	    // Vérifier les modifications (ex ici, description mise à jour)
 	    String query = "SELECT Description FROM requetes WHERE NameRequete = ?";
