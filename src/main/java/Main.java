@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class main {
+public class Main {
 	
 	/* SQL error in ALlUserInfo fct
 	 * Il reste a mettre en option d'accepter une mission et de la valider
@@ -162,24 +162,24 @@ public class main {
             	System.out.print("Tapez un numéro (1-6) : ");
             	
             	
-            	//pb sql mais je sais pas pourquoi !!!!!!
+            	//pb mais je sais pas pourquoi !!!!!!
             	
                
 				// Check if the input is an integer
-            	int choix = 0;
-            	
-				if (!scanner.hasNextInt()) {
-				    // If not, consume the invalid input and display a message
-				    System.out.println("Erreur : Vous devez entrer un nombre entier entre 1 et 6.");
-				    System.out.println(scanner.next()); // Consume the invalid input
-				    continue; // Retry
-				} else {
-					String input = scanner.nextLine();
-	            	choix = Integer.parseInt(input);
-				}
+            	//int choix = 0;
+            	//
+				//if (!scanner.hasNextInt()) {
+				//    // If not, consume the invalid input and display a message
+				//    System.out.println("Erreur : Vous devez entrer un nombre entier entre 1 et 6.");
+				//    System.out.println(scanner.next()); // Consume the invalid input
+				//    continue; 
+				//} else {
+				//	String input = scanner.nextLine();
+	            //	choix = Integer.parseInt(input);
+				//}
 
 				
-				//int choix = scanner.nextInt();
+				int choix = scanner.nextInt();
         	
         	
             
@@ -199,7 +199,7 @@ public class main {
 				        nom = scanner2.nextLine();
 				        System.out.println("Quelle est la description de votre requête ?");
 				        description = scanner2.nextLine();
-				        user.proposerRequete(connexion, nom, description, type, Alluserinfos);
+				        User.proposerRequete(connexion, nom, description, type, Alluserinfos);
 				        scanner2.close();
 				        break;
 				    case 2:
@@ -213,7 +213,7 @@ public class main {
 				        	nom=scanner6.nextLine();
 				        	System.out.println("Quel est l'adresse mail de l'émetteur de la requête ?");
 				        	mail=scanner6.nextLine();
-				        	user.repondreRequete(connexion, nom, mail);
+				        	User.repondreRequete(connexion, nom, mail);
 				        }
 				        if(Alluserinfos[6]=="Structure") {
 				        	System.out.println("Voulez-vous changer le status d'une de ces requêtes ? [y/n]");
@@ -272,7 +272,7 @@ public class main {
 				        Scanner scanner5 = new Scanner(System.in);
 				        System.out.println("Quelle est l'adresse mail de la personne dont vous souhaitez consulter le profil ?");
 				        email = scanner5.nextLine();
-				        user.consulterProfilUtilisateur(connexion, email);
+				        User.consulterProfilUtilisateur(connexion, email);
 				        break;
 				    case 6:
 				        System.out.println("Vous avez choisi de quitter l'application. A bientot !");

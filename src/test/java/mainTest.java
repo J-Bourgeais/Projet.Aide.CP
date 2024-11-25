@@ -193,7 +193,7 @@ class mainTest {
 	    }
 
 	    // Appel de la méthode 
-	    user.repondreRequete(connexion, nomRequete, email);
+	    User.repondreRequete(connexion, nomRequete, email);
 
 	    // Vérifier statut de la requête est passé à "acceptée"
 	    String query = "SELECT Status FROM requetes WHERE NameRequete = ? AND Contact = ?";
@@ -228,7 +228,7 @@ class mainTest {
 	    String typeRequete = "TypeTest";
 
 	    // Appeler la méthode à tester
-	    user.proposerRequete(connexion, nomRequete, description, typeRequete, Alluserinfos);
+	    User.proposerRequete(connexion, nomRequete, description, typeRequete, Alluserinfos);
 
 	    // Vérifier que la requête a été insérée dans la BDD
 	    String query = "SELECT * FROM requetes WHERE NameRequete = ? AND Contact = ?";
@@ -274,7 +274,7 @@ class mainTest {
 	    }
 
 	    // Appel méthode modification
-	    user.modifierRequete(connexion, nomRequete, 2);
+	    User.modifierRequete(connexion, nomRequete, 2);
 
 	    // Vérifier les modifications (ex ici, description mise à jour)
 	    String query = "SELECT Description FROM requetes WHERE NameRequete = ?";
@@ -320,7 +320,7 @@ class mainTest {
 	    System.setOut(new PrintStream(sortieCapturee));
 
 	    // appel méthode consultation
-	    user.consulterProfilUtilisateur(connexion, email);
+	    User.consulterProfilUtilisateur(connexion, email);
 
 	    String sortie = sortieCapturee.toString();
 	    assertTrue(sortie.contains("Nom : Bourgeais"));

@@ -20,7 +20,7 @@ public class Menu {
             System.out.println("2. Description");
             System.out.println("3. Date");
             nbr = scannermodif.nextInt();
-            user.modifierRequete(connexion, name, nbr);
+            User.modifierRequete(connexion, name, nbr);
             System.out.println("Voulez-vous modifier autre chose ? [y/n]");
             choix=scannermodif.nextLine();
                 
@@ -44,17 +44,17 @@ public class Menu {
         int choix = scanner.nextInt();
         switch (choix) {
             case 1 :
-                requete.afficherRequetesParCritere("ContactUser",email);
+                Requete.afficherRequetesParCritere("ContactUser",email);
                 ModifRequete(connexion);
                 break;
             case 2 :
-                requete.afficherRequetesParCritere("Offre",email);
+                Requete.afficherRequetesParCritere("Offre",email);
                 
                 //Un Beneficiaire doit pouvoir accepter cette offre --> Le benevole en est informé
 
                 break;
             case 3 :
-                requete.afficherRequetesParCritere("Demande",email);
+                Requete.afficherRequetesParCritere("Demande",email);
                 
                 //Un benevole doit pouvoir remplir cette demande --> le beneficiaire en est informé
                 //Le benevole ne peut accepté que si la demande a un statut de "validé"

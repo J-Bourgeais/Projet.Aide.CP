@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 
-public class user {
+public class User {
 
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
@@ -90,6 +90,7 @@ public class user {
     //Interdire d'appeler 2 de ses requete pareil
 
     public static void modifierRequete(Connection connexion, String nomRequete, int choix) {
+    	System.out.println("kikou");
         Scanner scanner = new Scanner(System.in);
         boolean modificationEffectuee = false;
 
@@ -101,7 +102,7 @@ public class user {
             System.out.println("3. Date");
             System.out.println("4. Terminer les modifications");*/
 
-            while (true){
+            //while (true){
 
                 System.out.print("Choix : ");
                 //int choix = scanner.nextInt();
@@ -125,7 +126,10 @@ public class user {
 
                     case 2:
                         System.out.print("Entrez la nouvelle description : ");
-                        String nouvelleDescription = scanner.nextLine();
+                        String nouvelleDescription = "Description";
+                        if(scanner.hasNextLine()) {
+                        	nouvelleDescription = scanner.nextLine();
+                        } 
                         updateSQL += "Description = ? WHERE NameRequete = ?";
                         try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
                             stmt.setString(1, nouvelleDescription);
@@ -163,7 +167,7 @@ public class user {
                     default:
                         System.out.println("Choix invalide. Veuillez sélectionner une option valide.");
                 }
-            }
+            //}
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

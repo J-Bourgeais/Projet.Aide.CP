@@ -22,7 +22,7 @@ import java.util.Date;
  * */
 
 
-public class requete {
+public class Requete {
 
 
     //Afficher des requêtes selon un critère (méthode générique)
