@@ -299,17 +299,24 @@ class mainTest {
 	@Test
 	public void testConsulterProfilUtilisateur() throws SQLException {
 	    Connection connexion = ConnexionBDD.GetConnexion();
+	    
+	    String email = "melo@example.com";
+	    String deleteUser = "DELETE FROM Users WHERE email = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteUser)) {
+	        stmt.setString(1, email);
+	        stmt.executeUpdate();
+	    }
 
 	    // Ajout user fictif
 	    String insertUser = "INSERT INTO Users (Nom, Prenom, email, Adresse, Age, UserType) VALUES (?, ?, ?, ?, ?, ?)";
-	    String email = "melo@example.com";
+	    
 
 	    try (PreparedStatement stmt = connexion.prepareStatement(insertUser)) {
 	        stmt.setString(1, "Bourgeais");
 	        stmt.setString(2, "Melo");
 	        stmt.setString(3, email);
 	        stmt.setString(4, "TestAdresse");
-	        stmt.setInt(5, 5);
+	        stmt.setInt(5, 2);
 	        stmt.setString(6, "Bénévole");
 	        stmt.executeUpdate();
 	    }
@@ -320,21 +327,23 @@ class mainTest {
 	    System.setOut(new PrintStream(sortieCapturee));
 
 	    // appel méthode consultation
-	    User.consulterProfilUtilisateur(connexion, email);
+	    Object[] user = User.consulterProfilUtilisateur(connexion, email);
+	    assertTrue((String)user[0]=="Bourgeais");
+	    assertTrue((String)user[1]=="Melo");
+	    assertTrue((String)user[2]=="melo@example.com");
+	    assertTrue((String)user[3]=="TestAdresse");
+	    assertTrue((int)user[4]==2);
 
+	    /*
 	    String sortie = sortieCapturee.toString();
 	    assertTrue(sortie.contains("Nom : Bourgeais"));
-	    assertTrue(sortie.contains("Prénom : Melo"));
+	    assertTrue(sortie.contains("Prénom : MelO"));
 	    assertTrue(sortie.contains("Email : melo@example.com"));
 	    assertTrue(sortie.contains("Adresse : TestAdresse"));
-	    assertTrue(sortie.contains("Âge : 5"));
+	    assertTrue(sortie.contains("Âge : 5"));*/
 
 	    // Nettoyage BDD
-	    String deleteUser = "DELETE FROM Users WHERE email = ?";
-	    try (PreparedStatement stmt = connexion.prepareStatement(deleteUser)) {
-	        stmt.setString(1, email);
-	        stmt.executeUpdate();
-	    }
+	   
 
 	    ConnexionBDD.CloseConnexion(connexion);
 	}

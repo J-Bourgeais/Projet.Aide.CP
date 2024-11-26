@@ -11,6 +11,19 @@ import java.sql.SQLException;
 public class Main {
 
 	
+	/*TODO encore : 
+	 * 
+	 * Affichage si mdp ou email faux
+	 * Supprimer son compte --> entièrement à faire
+	 * Modifier une requete --> Faire le lien interface graphique
+	 * Supprimer une requête
+	 * Plus bel affichage
+	 * 
+	 */
+	
+	
+	
+	
 	
     public static Object[] AllUserInfo(Connection connexion, String email){
         String requeteSQL = "SELECT Nom, Prenom, email, Adresse, Age, Password, UserType FROM Users WHERE email = ?";

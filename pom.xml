@@ -40,7 +40,7 @@
 	 				<manifest>
 	 					<addClasspath>true</addClasspath>
 	
-	 					<mainClass>main</mainClass>
+	 					<mainClass>Main</mainClass>
 					</manifest>
 	 			</archive>
  			</configuration>
