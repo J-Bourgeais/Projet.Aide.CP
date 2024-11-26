@@ -30,7 +30,8 @@ public class Menu {
     }
 
 
-    public static void ConsultRequete(Connection connexion, String email) {
+
+    /*public static void ConsultRequete(Connection connexion, String email) {
         //Consulter une demande ou une offre
         //"vuez vus accepter cette requete ?"
         //Seln le status de la demande
@@ -66,6 +67,6 @@ public class Menu {
         scanner.close();
 
 
-    }
+    }*/
 
 }

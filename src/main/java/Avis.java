@@ -2,6 +2,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -63,7 +66,15 @@ public class Avis {
 
     }
 
-    public static void consulterAvis(Connection connexion, String pourNom, String pourPrenom) {
+	 
+	 //Retourne la liste des avis pour l'affichage via InterfaceGUI
+	 
+    public static List<String> consulterAvis(Connection connexion, String pourNom, String pourPrenom) {
+    	
+    	List<String> Listeavis = new ArrayList<>();
+    	Listeavis=null;
+    	String Av="";
+  
         String requeteSQL = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, pourNom);
@@ -76,15 +87,17 @@ public class Avis {
                 if (avisJson != null && !avisJson.isEmpty()) {
                     
                     // Charger les avis dans un JSONArray
-                    JSONArray listeAvis = new JSONArray(avisJson);
+                    JSONArray listAvis = new JSONArray(avisJson);
     
                     // Afficher chaque avis
                     System.out.println("Liste des avis pour " + pourNom + " " + pourPrenom + ":");
-                    for (int i = 0; i < listeAvis.length(); i++) {
-                        JSONObject avis = listeAvis.getJSONObject(i);
+                    for (int i = 0; i < listAvis.length(); i++) {
+                        JSONObject avis = listAvis.getJSONObject(i);
                         int nbEtoiles = avis.getInt("nbEtoiles");
                         String description = avis.getString("description");
-                        System.out.println("Avis " + (i + 1) + ": " + nbEtoiles + " étoiles - " + description);
+                        Av="Avis " + (i + 1) + ": " + nbEtoiles + " étoiles - " + description;
+                        Listeavis.add(Av);
+                        //System.out.println("Avis " + (i + 1) + ": " + nbEtoiles + " étoiles - " + description);
                     }
                 } else {
                     System.out.println("Aucun avis disponible pour cet utilisateur.");
@@ -92,9 +105,13 @@ public class Avis {
             } else {
                 System.out.println("Utilisateur non trouvé.");
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        
+        return Listeavis;
     }
 
 

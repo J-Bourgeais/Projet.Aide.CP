@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class structure extends User {
 	
 	
-	
+	//Utilisé par InterfaceGUI
 	
 	public static void validerService(Connection connexion, String NameRequete, String email, boolean estValidee, String raison) {
     // Déterminer le nouveau statut en fonction de estValidee

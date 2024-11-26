@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class UserConnect {
 	
 
-    
+    //Utilisé par InterfaceGUI
     public static boolean UserConnection(Connection connexion, Object[] infos) {
         Scanner scanner = new Scanner(System.in);
 
@@ -46,6 +46,8 @@ public class UserConnect {
 
     }
 
+    
+    //Utilisé par InterfaceGUI
     public static boolean UserInscription(Connection connexion, Object[] infos) {
 
         Scanner scanner = new Scanner(System.in);

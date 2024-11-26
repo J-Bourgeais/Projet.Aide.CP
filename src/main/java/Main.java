@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import javax.swing.SwingUtilities;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Main {
-	
-	/* SQL error in ALlUserInfo fct
-	 * Il reste a mettre en option d'accepter une mission et de la valider
-	 * présentation
-	 * Erreur dans les line found --> toujours la meme : a résoudre
-	 * */
+
 	
 	
     public static Object[] AllUserInfo(Connection connexion, String email){
@@ -48,7 +46,12 @@ public class Main {
         }
     }
 
-	public static Object[] UserInfoConnexion() {
+    //INTERFACE
+    
+	
+    
+    //Fait dans InterfaceGUI
+    /*public static Object[] UserInfoConnexion() {
 		Scanner scanner = new Scanner(System.in);
 
         System.out.println("Veuillez entrer votre adresse mail");
@@ -59,6 +62,9 @@ public class Main {
         scanner.close();
         return new Object[]{email, password};
 	}
+    
+    
+  //Fait dans InterfaceGUI
 	
 	public static Object[] UserInfoInscription() {
 		Scanner scanner = new Scanner(System.in);
@@ -87,11 +93,19 @@ public class Main {
         String type = scanner.nextLine();
         scanner.close();
         return new Object[]{nom, prenom, email, adresse, age, password, type};
-	}
+	}*/
 	
 	
 
     public static void main(String[] args) throws SQLException {
+    	
+    	
+    	Connection connexion = ConnexionBDD.GetConnexion();
+    	
+    	SwingUtilities.invokeLater(() -> new InterfaceGUI(connexion).createAndShowGUI());
+    	
+    	//Lancer InterfaceGUI
+    	
 
     	/*Pour tester :
     	 * User deja inscrit : 
@@ -99,12 +113,13 @@ public class Main {
     	 * - mdp : chien
     	 * */
 
-    	
-    	//Ouvrir une nouvelle connexion à chaque fois, ou la laisser ouverte tout du long ????
 
+    	//Fait dans InterfaceGUI
+    	
+    	
         
         //Inscription
-        System.out.println("Bienvenue sur notre plateforme d'aide. Tapez 1 si vous avez déjà un compte, et 2 si vous voulez vous inscrire");
+        /*System.out.println("Bienvenue sur notre plateforme d'aide. Tapez 1 si vous avez déjà un compte, et 2 si vous voulez vous inscrire");
         boolean connected = false;
         String email="";
         Scanner scanner = new Scanner(System.in);
@@ -118,24 +133,24 @@ public class Main {
             switch (choix1) {
                 case 1 :
                     //Connection connexion=ConnexionBDD.GetConnexion();
-                    Object[] UserInfo = UserInfoConnexion();
-                    email=(String)UserInfo[0];
-                    connected = UserConnect.UserConnection(connexion, UserInfo);
+                    //Object[] UserInfo = UserInfoConnexion();
+                
+                    //connected = UserConnect.UserConnection(connexion, UserInfo);
                     //ConnexionBDD.CloseConnexion(connexion); //Pourquoi ici ? --> dépend de la question l 86
                     break;
 
                 case 2 :
                     //Connection connexion1=ConnexionBDD.GetConnexion();
-                    Object[] UserInfo2 = UserInfoInscription();
-                    email=(String)UserInfo2[2];
-                    connected= UserConnect.UserInscription(connexion, UserInfo2);
+                    //Object[] UserInfo2 = UserInfoInscription();
+                	
+                    //connected= UserConnect.UserInscription(connexion, UserInfo2);
                     //ConnexionBDD.CloseConnexion(connexion); //Pourquoi ici ? --> dépend de la question l 86
                     break;
             }
-            
+  
         }
         
-        
+        email=InterfaceGUI.getEmail();
         Object[] Alluserinfos = AllUserInfo(connexion, email); 
 
         //Connection connexion = ConnexionBDD.GetConnexion(); 
@@ -286,7 +301,7 @@ public class Main {
             	}
             //scanner1.close();
             scanner.close();
-            }
+            }*/
          
         }
 

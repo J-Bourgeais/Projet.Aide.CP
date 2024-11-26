@@ -84,10 +84,12 @@ public class User {
             }
         }
         
-    }
+    } //OK INTERFACE
 
     
     //Interdire d'appeler 2 de ses requete pareil
+    
+    //N'est actuellement pas utilisé
 
     public static void modifierRequete(Connection connexion, String nomRequete, int choix) {
     	System.out.println("kikou");
@@ -175,7 +177,41 @@ public class User {
         }
     }
 
-    public static void consulterProfilUtilisateur(Connection connexion, String email) {
+    //Retourne les infos du profil pour ensuite être affiché par InterfaceGUI
+    
+    public static Object[] consulterProfilUtilisateur(Connection connexion, String email) {
+        String query = "SELECT Nom, Prenom, email, Adresse, Age, UserType FROM Users WHERE email = ?";
+        
+        Object[] profil = null;
+        
+        try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            
+            // verif si le profil existe et afficher les informations
+            if (rs.next()) {
+            	String Nom = rs.getString("Nom");
+                String Prenom = rs.getString("Prenom");
+                String Email = rs.getString("email");
+                String Adresse = rs.getString("Adresse");
+                int Age = rs.getInt("Age");
+                String UserType = rs.getString("UserType");
+
+                // Return an array with all the user information
+                profil = new Object[]{Nom, Prenom, Email, Adresse, Age, UserType};
+       
+            } else {
+                System.out.println("Aucun profil trouvé pour cet email.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return profil;
+
+    }
+    
+    
+    /*public static void consulterProfilUtilisateur(Connection connexion, String email) {
     String query = "SELECT Nom, Prenom, email, Adresse, Age, UserType FROM Users WHERE email = ?";
     
     try (PreparedStatement stmt = connexion.prepareStatement(query)) {
@@ -197,7 +233,7 @@ public class User {
     } catch (SQLException e) {
         e.printStackTrace();
     }
-}
+}*/
 
 
 }

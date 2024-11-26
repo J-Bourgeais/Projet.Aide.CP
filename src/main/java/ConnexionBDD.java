@@ -7,13 +7,11 @@ public class ConnexionBDD {
 
     public static Connection GetConnexion() {
 
-    
-    	
         
       //--------------------------Info de Connexion------------------------------
-        String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_035"; // Remplace par ton URL de base de données
-        String user = "projet_gei_035";  // Nom d'utilisateur de la base
-        String mdp = "quiaw0Di";  // Mot de passe de la base
+        String url = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_035"; 
+        String user = "projet_gei_035";  
+        String mdp = "quiaw0Di";  
         Connection connexion = null;
 
         try {
@@ -39,26 +37,6 @@ public class ConnexionBDD {
     }
 
 
-    // requete a furnir dans e main
-    /*
-    public static void DoStatement(Connection connexion, String requete) {
-        try {
-            // Créer un objet Statement pour exécuter des requêtes SQL
-            Statement statement = connexion.createStatement();
-
-            // Exécuter la requête pour créer la table
-            statement.execute(requete);
-            System.out.println("Requete executé avec succès !");
-
-            statement.close();
-            // Fermer la connexion dans e main
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    */
 
 
     }
