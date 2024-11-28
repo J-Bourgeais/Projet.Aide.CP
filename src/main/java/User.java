@@ -11,6 +11,23 @@ import java.util.Date;
 
 public class User {
 
+	
+	public static boolean SupprimerCompte(Connection connexion, String email) {
+		String deleteUser = "DELETE FROM Users WHERE email= ?";
+		boolean ok=false;
+	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
+	        etat.setString(1, email);
+	        int lignesAffectees = etat.executeUpdate();
+            if (lignesAffectees > 0) {
+                ok=true;
+            } 
+	    } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	    return ok;
+	}
+	
+	
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
     public static void repondreRequete(Connection connexion, String NameRequete, String email) {
@@ -30,6 +47,27 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    //Possibilité de supprimer uniquement une de ses requêtes
+    public static boolean SupprimerRequete(Connection connexion, String NameRequete, String email) {
+    	boolean supp = false;
+    	String deleteRequete = "DELETE FROM requetes WHERE NameRequete = ? and Contact = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(deleteRequete)) {
+	        stmt.setString(1, NameRequete);
+	        stmt.setString(2,  email);
+	        int lignesAffectees = stmt.executeUpdate();
+            if (lignesAffectees > 0) {
+                System.out.println("Requête supprimée avec succès");
+                supp=true;
+            } else {
+                System.out.println("Erreur : la requête n'a pas été trouvée ou a été mise à jour.");
+            }
+	    } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	    return supp;
+ 
     }
 
 

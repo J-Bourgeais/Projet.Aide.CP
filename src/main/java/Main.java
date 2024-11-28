@@ -14,10 +14,11 @@ public class Main {
 	/*TODO encore : 
 	 * 
 	 * Affichage si mdp ou email faux
-	 * Supprimer son compte --> entièrement à faire
+	 * DONE --> Supprimer son compte --> entièrement à faire
 	 * Modifier une requete --> Faire le lien interface graphique
 	 * Supprimer une requête
 	 * Plus bel affichage
+	 * Affichage Faire une requête comme inscription
 	 * 
 	 */
 	

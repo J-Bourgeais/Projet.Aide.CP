@@ -58,7 +58,7 @@ public class UserConnect {
         String prenom = (String) infos[1];
         String email = (String) infos[2];
         String adresse =(String) infos[3];
-        int age = (int) infos[4];
+        int age = Integer.parseInt((String)infos[4]);
         String password = (String) infos[5];
         String type = (String) infos[6];
 

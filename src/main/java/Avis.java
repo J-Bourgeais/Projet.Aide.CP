@@ -72,7 +72,7 @@ public class Avis {
     public static List<String> consulterAvis(Connection connexion, String pourNom, String pourPrenom) {
     	
     	List<String> Listeavis = new ArrayList<>();
-    	Listeavis=null;
+    	
     	String Av="";
   
         String requeteSQL = "SELECT Avis FROM Users WHERE Nom = ? AND Prenom = ?";

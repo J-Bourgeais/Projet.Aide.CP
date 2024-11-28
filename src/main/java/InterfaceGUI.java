@@ -21,16 +21,7 @@ public class InterfaceGUI {
     public InterfaceGUI(Connection connexion) {
         this.connexion = connexion; // Sauvegarde la connexion
     }
-    
-    
 
-    /*public static void main(String[] args) {
-    	
-    	//connexion=ConnexionBDD.GetConnexion();
-        SwingUtilities.invokeLater(() -> new InterfaceGUI().createAndShowGUI());
-        
-    }*/
-    
     
 
     public void createAndShowGUI() {
@@ -201,11 +192,14 @@ public class InterfaceGUI {
     
     private void validateConnexion(Object[] data) {
         // Ici, appelez votre fonction externe pour valider les données (connexion ou inscription)
-    	
+   
+    	JLabel displayLabel = new JLabel("");
+    	displayLabel.setHorizontalAlignment(SwingConstants.CENTER);
     	//Se connecter : Enlever les parties de scanner
     	boolean connected=UserConnect.UserConnection(connexion, data);
-    	setEmail((String)data[1]);
+    	setEmail((String)data[0]);
     	if(connected) {
+    		displayLabel.setText("Connexion Réussie ! ");
     		showMenu();
     	}
         
@@ -240,6 +234,7 @@ public class InterfaceGUI {
         JButton option3 = new JButton("Poster un avis");
         JButton option4 = new JButton("Consulter des avis");
         JButton option5 = new JButton("Consulter un profil");
+        JButton option6 = new JButton("Supprimer son compte");
         JButton logoutButton = new JButton("Se déconnecter");
 
         option1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -247,6 +242,7 @@ public class InterfaceGUI {
         option3.setAlignmentX(Component.CENTER_ALIGNMENT);
         option4.setAlignmentX(Component.CENTER_ALIGNMENT);
         option5.setAlignmentX(Component.CENTER_ALIGNMENT);
+        option6.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -261,6 +257,8 @@ public class InterfaceGUI {
         panel.add(option4);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
         panel.add(option5);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(option6);
         
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
         panel.add(logoutButton);
@@ -276,6 +274,7 @@ public class InterfaceGUI {
         option3.addActionListener(e -> handlePostReview());
         option4.addActionListener(e -> handleViewReviews());
         option5.addActionListener(e -> handleViewProfile());
+        option6.addActionListener(e -> handleSuppression());
         logoutButton.addActionListener(e -> showWelcomePage());
     }
     
@@ -462,6 +461,8 @@ public class InterfaceGUI {
                     }
                 }
             });
+            
+            
             
             
             //PARTIE STRUCTURE
@@ -752,6 +753,11 @@ public class InterfaceGUI {
                 JOptionPane.showMessageDialog(profileFrame, profileLabel, "Profil de " + profile[0] + " " + profile[1], JOptionPane.INFORMATION_MESSAGE);
             }
         });
+    }
+    
+    private void handleSuppression() {
+    	boolean ok = User.SupprimerCompte(connexion, getEmail());
+    	showWelcomePage();
     }
 
 }

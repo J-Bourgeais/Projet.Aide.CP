@@ -8,11 +8,31 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.sql.ResultSet;
+import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 class mainTest {
+	
+	@BeforeEach
+	public void DelTable() throws SQLException {
+		Connection connexion=ConnexionBDD.GetConnexion();
+		String deleteUser = "DELETE FROM Users";
+	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
+	        etat.executeUpdate();
+	    } 
+	    String deleteRequetes = "DELETE FROM requetes";
+	    try (PreparedStatement etat = connexion.prepareStatement(deleteRequetes)) {
+	        etat.executeUpdate();
+	    } 
+	    
+	    //Ajouter melo
+	    
+		ConnexionBDD.CloseConnexion(connexion);
+	}
+	
 
 	@Test
 	public void Connexiontest() {		
@@ -21,7 +41,7 @@ class mainTest {
 		Connection connexion=ConnexionBDD.GetConnexion();
         assertTrue(UserConnect.UserConnection(connexion, liste)==true);
         ConnexionBDD.CloseConnexion(connexion);
-
+        
 	}
 	
 	
@@ -35,7 +55,7 @@ class mainTest {
 	        etat.setString(2, "Charlie");
 	        etat.executeUpdate();
 	    }
-		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", 65, "charlette", "Beneficiaire"};
+		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", "65", "charlette", "Beneficiaire"};
 		
 		/*String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
 	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
@@ -47,6 +67,22 @@ class mainTest {
         ConnexionBDD.CloseConnexion(connexion);
 
     }
+	
+	/*Test supprimer son compte*/
+	@Test
+	public void TestSuppression() throws SQLException {
+		Connection connexion=ConnexionBDD.GetConnexion();
+		//Inscription
+		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", "65", "charlette", "Beneficiaire"};
+		assertTrue(UserConnect.UserInscription(connexion, liste)==true);
+		assertTrue(User.SupprimerCompte(connexion, "jeancharlie@gmail.com"));
+		System.out.println("Compte supprimé avec succès");
+		
+		ConnexionBDD.CloseConnexion(connexion);
+		
+	}
+	
+	
 	
 	/* Tests principaux pour les Avis */
 	
@@ -117,16 +153,7 @@ class mainTest {
 		// Préparation des éléments à insérer puis consulter
 	    String nom = "Gerard";
 	    String prenom = "Paquito";
-	    JSONArray listeAvis = new JSONArray();
-	    JSONObject avis1 = new JSONObject();
-	    avis1.put("nbEtoiles", 5);
-	    avis1.put("description", "J'ai adoré la neige");
-	    JSONObject avis2 = new JSONObject();
-	    avis2.put("nbEtoiles", 3);
-	    avis2.put("description", "J'avais froid quand même...");
-	    listeAvis.put(avis1);
-	    listeAvis.put(avis2);
-
+	    
 	    Connection connexion = ConnexionBDD.GetConnexion();
 
 	    // Ajout de l'utilisateur
@@ -134,30 +161,21 @@ class mainTest {
 	    try (PreparedStatement etat = connexion.prepareStatement(insertUser)) {
 	        etat.setString(1, nom);
 	        etat.setString(2, prenom);
-	        etat.setString(3, listeAvis.toString());
+	        etat.setString(3, "[]");
 	        etat.executeUpdate();
 	    }
+	    
+	    Avis.posterAvis(connexion, nom, prenom, 5, "J'ai adoré la neige");
+	    Avis.posterAvis(connexion, nom, prenom, 3, "J'avais froid quand même...");
+	    
+	    
 
 	    // Verif résultats
-	    Avis.consulterAvis(connexion, nom, prenom);
+	    List<String> avis =Avis.consulterAvis(connexion, nom, prenom);
 
-	    // Verif l'affichage (via l'utilisation de la sortie standard) 
-	    // @MELO on aurait pu faire la même en regardant les logs directement, mais moins visuel ??
-	    ByteArrayOutputStream sortieCapturee = new ByteArrayOutputStream();
-	    PrintStream fluxOriginal = System.out; // Sauvegarde de la sortie originale
-	    System.setOut(new PrintStream(sortieCapturee)); // Redirection de la sortie
-
-	    try {
-	        // Appel de la méthode à tester
-	        Avis.consulterAvis(connexion, nom, prenom);
-	    } finally {
-	        System.setOut(fluxOriginal); // Rétablir la sortie standard originale
-	    }
-
-	    String sortie = sortieCapturee.toString();
-	    assertTrue(sortie.contains("Liste des avis pour Gerard Paquito:"));
-	    assertTrue(sortie.contains("Avis 1: 5 étoiles - J'ai adoré la neige"));
-	    assertTrue(sortie.contains("Avis 2: 3 étoiles - J'avais froid quand même..."));
+	    
+	    assertTrue(avis.contains("Avis 1: 5 étoiles - J'ai adoré la neige"));
+	    assertTrue(avis.contains("Avis 2: 3 étoiles - J'avais froid quand même..."));
 
 	    // Nettoyage de la BDD
 	    String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
@@ -252,6 +270,30 @@ class mainTest {
 
 	    ConnexionBDD.CloseConnexion(connexion);
 	}
+	
+	
+	@Test
+	public void testSupprimerRequete() throws SQLException {
+		Connection connexion = ConnexionBDD.GetConnexion();
+		Object[] Alluserinfos = new Object[]{"Bourgeais", "Melo", "melo@example.com", "adresse", 30, "mdp", "Bénévole"};
+		String nomRequete = "NouvelleRequete";
+	    String description = "Description de la requête";
+	    String typeRequete = "TypeTest";
+	    User.proposerRequete(connexion, nomRequete, description, typeRequete, Alluserinfos);
+	    
+	    User.SupprimerRequete(connexion, nomRequete, "melo@example.com");
+	    
+	    String query = "SELECT Description FROM requetes WHERE NameRequete = ? and Contact = ?";
+	    try (PreparedStatement stmt = connexion.prepareStatement(query)) {
+	        stmt.setString(1, nomRequete);
+	        stmt.setString(2, "melo@example.com");
+	        ResultSet rs = stmt.executeQuery();
+	        assertFalse(rs.next());
+	    }
+	    
+	    ConnexionBDD.CloseConnexion(connexion);
+		
+	}
 
 	
 	@Test
@@ -301,6 +343,8 @@ class mainTest {
 	    Connection connexion = ConnexionBDD.GetConnexion();
 	    
 	    String email = "melo@example.com";
+	    
+	 // Nettoyage BDD
 	    String deleteUser = "DELETE FROM Users WHERE email = ?";
 	    try (PreparedStatement stmt = connexion.prepareStatement(deleteUser)) {
 	        stmt.setString(1, email);
@@ -321,28 +365,18 @@ class mainTest {
 	        stmt.executeUpdate();
 	    }
 
-	    // Capture de la sortie standard
-	    ByteArrayOutputStream sortieCapturee = new ByteArrayOutputStream();
-	    PrintStream fluxOriginal = System.out;
-	    System.setOut(new PrintStream(sortieCapturee));
 
 	    // appel méthode consultation
 	    Object[] user = User.consulterProfilUtilisateur(connexion, email);
-	    assertTrue((String)user[0]=="Bourgeais");
-	    assertTrue((String)user[1]=="Melo");
-	    assertTrue((String)user[2]=="melo@example.com");
-	    assertTrue((String)user[3]=="TestAdresse");
-	    assertTrue((int)user[4]==2);
+	  
+	    
+	    assertEquals((String)user[0],"Bourgeais");
+	    assertEquals((String)user[1],"Melo");
+	    assertEquals((String)user[2],"melo@example.com");
+	    assertEquals((String)user[3],"TestAdresse");
+	    assertEquals((int)user[4],2);
 
-	    /*
-	    String sortie = sortieCapturee.toString();
-	    assertTrue(sortie.contains("Nom : Bourgeais"));
-	    assertTrue(sortie.contains("Prénom : MelO"));
-	    assertTrue(sortie.contains("Email : melo@example.com"));
-	    assertTrue(sortie.contains("Adresse : TestAdresse"));
-	    assertTrue(sortie.contains("Âge : 5"));*/
-
-	    // Nettoyage BDD
+	    
 	   
 
 	    ConnexionBDD.CloseConnexion(connexion);
