@@ -6,12 +6,8 @@ import java.sql.SQLException;
 
 public class structure extends User {
 	
-	
-	//Utilisé par InterfaceGUI
-	
 	public static void validerService(Connection connexion, String NameRequete, String email, boolean estValidee, String raison) {
     // Déterminer le nouveau statut en fonction de estValidee
-	//MAJ avec le nom de la requête (en considérant qu'elle est unique - evite d'avoir ID)
     String nouveauStatut = estValidee ? "validé" : "refusé";
     String updateSQL = "UPDATE requetes SET status = ? WHERE NameRequete = ? AND Contact = ?";
     
@@ -22,8 +18,7 @@ public class structure extends User {
         
         int lignesAffectees = stmt.executeUpdate();
         if (lignesAffectees > 0) {
-            // Mettre à jour l'objet localement si la requête SQL est réussie
-            //requeteAValider.setStatus(nouveauStatut); --> Rien de local
+        	
             System.out.println("Vous venez de " + (estValidee ? "valider" : "refuser") + " la requête " + NameRequete);
             if(estValidee==false) {
             	System.out.println("Raison du refus : "+ raison);

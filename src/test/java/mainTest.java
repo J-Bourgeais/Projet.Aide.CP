@@ -29,7 +29,9 @@ class mainTest {
 	    } 
 	    
 	    //Ajouter melo
-	    
+		Object[] liste = new Object[]{"Bourgeais", "Melo", "melo@gmail.com", "5 rue des chiens", "22", "chien", "Beneficiaire"};
+	    assertTrue(UserConnect.UserInscription(connexion, liste)==true);
+
 		ConnexionBDD.CloseConnexion(connexion);
 	}
 	
@@ -316,7 +318,8 @@ class mainTest {
 	    }
 
 	    // Appel méthode modification
-	    User.modifierRequete(connexion, nomRequete, 2);
+	    Object[] Allusersinfos = Main.AllUserInfo(connexion, InterfaceGUI.getEmail());
+	    User.modifierRequete(connexion, nomRequete, 2, "Description", Allusersinfos);
 
 	    // Vérifier les modifications (ex ici, description mise à jour)
 	    String query = "SELECT Description FROM requetes WHERE NameRequete = ?";
