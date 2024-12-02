@@ -37,6 +37,8 @@ public class User {
             etat.setString(1, "acceptée");  // MAJ l’offre ou demande à "acceptée"
             etat.setString(2, NameRequete);
             etat.setString(3, email);
+            
+            //TODO : Ajouter une colonne Benevole qui dis qui a accepté la requete
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
@@ -48,6 +50,8 @@ public class User {
             e.printStackTrace();
         }
     }
+    
+    //TODO : fonction AfficherMesMissions qui dis quand on est Benevole sur une requete
     
     //Possibilité de supprimer uniquement une de ses requêtes
     public static boolean SupprimerRequete(Connection connexion, String NameRequete, String email) {
@@ -160,16 +164,7 @@ public class User {
                         }
                         break;
 
-                    case 3:
-             
-                        updateSQL += "Date = ? WHERE NameRequete = ?";
-                        try (PreparedStatement stmt = connexion.prepareStatement(updateSQL)) {
-                            stmt.setString(1, change);
-                            stmt.setString(2, nomRequete);
-                            modificationEffectuee = stmt.executeUpdate() > 0;
-                        }
-                       
-                        break;
+                  
                     default:
                         System.out.println("Choix invalide. Veuillez sélectionner une option valide.");
                 }

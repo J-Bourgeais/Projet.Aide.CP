@@ -63,12 +63,19 @@ public class InterfaceGUI {
     }
 
     private void showWelcomePage() {
+        // Créer un panneau principal avec BorderLayout
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
+        // Titre de bienvenue
         JLabel welcomeLabel = new JLabel("Welcome to our new App : Help", SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
+        // Créer un JLabel pour l'image
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/Images/Aide.png"));
+        JLabel imageLabel = new JLabel(imageIcon);
+
+        // Créer les boutons
         JButton loginButton = new JButton("Se connecter");
         JButton registerButton = new JButton("S'inscrire");
 
@@ -76,53 +83,102 @@ public class InterfaceGUI {
         buttonPanel.add(loginButton);
         buttonPanel.add(registerButton);
 
-        panel.add(welcomeLabel, BorderLayout.CENTER);
-        panel.add(buttonPanel, BorderLayout.SOUTH);
+        // Ajouter les composants au panneau
+        panel.add(welcomeLabel, BorderLayout.NORTH); // Le titre en haut
+        panel.add(imageLabel, BorderLayout.CENTER);  // L'image au centre (entre le titre et les boutons)
+        panel.add(buttonPanel, BorderLayout.SOUTH);  // Les boutons en bas
 
+        // Mettre à jour la fenêtre
         frame.getContentPane().removeAll();
         frame.getContentPane().add(panel);
         frame.revalidate();
         frame.repaint();
 
+        // Actions pour les boutons
         loginButton.addActionListener(e -> showLoginPage());
         registerButton.addActionListener(e -> showRegisterPage());
     }
+
+
 
     
     
     
     //Appeler si le bouton "Se connecter" a été cliqué
     public void showLoginPage() {
-        JPanel panel = new JPanel(new GridLayout(3, 2, 10, 10));
+        // Créer un panneau principal avec GridBagLayout pour centrer les éléments
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout()); // Utilisation de GridBagLayout pour un alignement flexible
+        GridBagConstraints constraints = new GridBagConstraints();
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30)); // Ajout de marges autour du panneau
 
+        // Créer le titre "CONNEXION"
+        JLabel titleLabel = new JLabel("CONNEXION");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Police plus grande pour le titre
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2; // Le titre prend toute la largeur du panneau
+        constraints.insets = new Insets(0, 0, 20, 0); // Espacement sous le titre
+        panel.add(titleLabel, constraints);
+
+        // Créer un champ pour l'email
         JLabel emailLabel = new JLabel("Email:");
-        JTextField emailField = new JTextField();
+        JTextField emailField = new JTextField(20);
+        emailField.setPreferredSize(new Dimension(250, 30)); // Ajuste la taille du champ de texte
 
+        // Ajouter l'emailLabel et emailField
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1; // Le champ prend une seule colonne
+        constraints.insets = new Insets(10, 10, 5, 10); // Espacement entre les champs
+        panel.add(emailLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        panel.add(emailField, constraints);
+
+        // Créer un champ pour le mot de passe
         JLabel passwordLabel = new JLabel("Mot de passe:");
-        JPasswordField passwordField = new JPasswordField();
+        JPasswordField passwordField = new JPasswordField(20);
+        passwordField.setPreferredSize(new Dimension(250, 30)); // Ajuste la taille du champ de texte
 
+        // Ajouter le passwordLabel et passwordField
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        panel.add(passwordLabel, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 2;
+        panel.add(passwordField, constraints);
+
+        // Créer un bouton de soumission
         JButton submitButton = new JButton("Se connecter");
+        submitButton.setPreferredSize(new Dimension(250, 40)); // Taille fixe pour le bouton
+        submitButton.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrer le bouton
 
-        panel.add(emailLabel);
-        panel.add(emailField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
-        panel.add(new JLabel()); // Empty space
-        panel.add(submitButton);
+        // Ajouter le bouton de soumission
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2; // Le bouton prend toute la largeur
+        constraints.insets = new Insets(20, 10, 10, 10); // Espacement autour du bouton
+        panel.add(submitButton, constraints);
 
+        // Mettre à jour le contenu de la fenêtre
         frame.getContentPane().removeAll();
         frame.getContentPane().add(panel);
         frame.revalidate();
         frame.repaint();
 
+        // Action pour le bouton de soumission
         submitButton.addActionListener(e -> {
-            Object[] loginData = {
-                    emailField.getText(),
-                    new String(passwordField.getPassword())
-            };
-            validateConnexion(loginData); //TOSEE
+            String email = emailField.getText();
+            String password = new String(passwordField.getPassword());
+
+            Object[] loginData = { email, password };
+            validateConnexion(loginData); // Valider la connexion
         });
     }
+
     
     
     //Appelé sur le bouton "Inscription" a été cliqué
@@ -219,13 +275,9 @@ public class InterfaceGUI {
     }
     
     
-    
-  
     private void showMenu() {
-    	JTabbedPane tabbedPane = new JTabbedPane();
-    	
-    	
-    	
+        JTabbedPane tabbedPane = new JTabbedPane();
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -233,6 +285,7 @@ public class InterfaceGUI {
         menuLabel.setFont(new Font("Arial", Font.BOLD, 24));
         menuLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Déclaration des boutons
         JButton option1 = new JButton("Formuler une requête (Offre ou Demande)");
         JButton option2 = new JButton("Consulter des requêtes");
         JButton option3 = new JButton("Poster un avis");
@@ -241,41 +294,52 @@ public class InterfaceGUI {
         JButton option6 = new JButton("Supprimer son compte");
         JButton logoutButton = new JButton("Se déconnecter");
 
+        // Appliquer une taille uniforme à tous les boutons
+        Dimension buttonSize = new Dimension(300, 50); // Largeur de 300px et hauteur de 50px pour chaque bouton
+        option1.setPreferredSize(buttonSize);
+        option2.setPreferredSize(buttonSize);
+        option3.setPreferredSize(buttonSize);
+        option4.setPreferredSize(buttonSize);
+        option5.setPreferredSize(buttonSize);
+        option6.setPreferredSize(buttonSize);
+        logoutButton.setPreferredSize(buttonSize);
+
+        // Centrer les boutons
         option1.setAlignmentX(Component.CENTER_ALIGNMENT);
         option2.setAlignmentX(Component.CENTER_ALIGNMENT);
         option3.setAlignmentX(Component.CENTER_ALIGNMENT);
         option4.setAlignmentX(Component.CENTER_ALIGNMENT);
         option5.setAlignmentX(Component.CENTER_ALIGNMENT);
         option6.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Ajouter les composants au panneau
         panel.add(menuLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espace entre le titre et le premier bouton
         panel.add(option1);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(option2);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(option3);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(option4);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(option5);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(option6);
-        
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
         panel.add(logoutButton);
-        
-        
+
+        // Ajouter l'onglet Menu
         tabbedPane.addTab("Menu", panel);
 
+        // Configuration de la fenêtre
         frame.getContentPane().removeAll();
         frame.getContentPane().add(tabbedPane);
         frame.revalidate();
         frame.repaint();
 
-        
+        // Action des boutons
         option1.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Formuler une requête");
             if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
@@ -311,7 +375,7 @@ public class InterfaceGUI {
             if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
                 JPanel requestPanel = handleViewReviews();
                 tabbedPane.addTab("Consulter des Avis", requestPanel);
-                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("CConsulter des Avis"));
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Consulter des Avis"));
             } else {
                 tabbedPane.setSelectedIndex(index);
             }
@@ -326,50 +390,67 @@ public class InterfaceGUI {
                 tabbedPane.setSelectedIndex(index);
             }
         });
-        
+
         option6.addActionListener(e -> handleSuppression());
         logoutButton.addActionListener(e -> showWelcomePage());
     }
+
     
  // Fonctions correspondant aux actions possibles
     
     private JPanel handleRequestFormulation() {
         // Panel pour l'onglet "Formuler une requête"
-    	System.out.println("Action : Formuler une requete");
+        System.out.println("Action : Formuler une requête");
+
         JPanel requestPanel = new JPanel();
         requestPanel.setLayout(new BoxLayout(requestPanel, BoxLayout.Y_AXIS));
 
+        // Titre
         JLabel titleLabel = new JLabel("Formuler une Requête");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Champ "Nom de la requête" - plus petit
         JLabel nameLabel = new JLabel("Nom de la requête :");
-        JTextField nameField = new JTextField(20);
+        JTextField nameField = new JTextField(20); // Largeur du champ plus petite
+        nameField.setPreferredSize(new Dimension(50, 30));  // Taille du champ ajustée
 
+        // Champ "Description de la requête" - plus grand
         JLabel descriptionLabel = new JLabel("Description de la requête :");
-        JTextArea descriptionArea = new JTextArea(5, 20);
+        JTextArea descriptionArea = new JTextArea(5, 20); // Taille plus petite que précédemment
         descriptionArea.setLineWrap(true);
         descriptionArea.setWrapStyleWord(true);
         JScrollPane descriptionScrollPane = new JScrollPane(descriptionArea);
+        descriptionScrollPane.setPreferredSize(new Dimension(100, 100)); // Taille ajustée
 
+        // Champ "Type de la requête"
         JLabel typeLabel = new JLabel("Type de la requête :");
         String[] types = {"Offre", "Demande"};
         JComboBox<String> typeComboBox = new JComboBox<>(types);
+        typeComboBox.setPreferredSize(new Dimension(50, 30)); // Taille du combo box ajustée
 
+        // Bouton de soumission
         JButton submitButton = new JButton("Soumettre");
+        submitButton.setPreferredSize(new Dimension(250, 40)); // Taille uniforme du bouton
 
-        // Ajout des composants au panneau
+        // Centrer tous les éléments horizontalement
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        descriptionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Ajouter les composants avec espacement entre eux
         requestPanel.add(titleLabel);
-        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement entre titre et champ
         requestPanel.add(nameLabel);
         requestPanel.add(nameField);
-        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement entre champ et description
         requestPanel.add(descriptionLabel);
         requestPanel.add(descriptionScrollPane);
-        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement entre description et type
         requestPanel.add(typeLabel);
         requestPanel.add(typeComboBox);
-        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement avant bouton
         requestPanel.add(submitButton);
 
         // Action du bouton de soumission
@@ -388,242 +469,15 @@ public class InterfaceGUI {
                 return;
             }
 
+            // Soumettre la requête
             User.proposerRequete(connexion, requestName, description, requestType, Main.AllUserInfo(connexion, email));
             JOptionPane.showMessageDialog(frame, "Requête soumise avec succès !");
         });
-        System.out.println("return requestpanel");
+
         return requestPanel;
     }
 
 
-    /*private JPanel handleViewRequests(Object[] data) {
-        System.out.println("Action : Consulter des requêtes.");
-
-        // Créer un panneau pour afficher les requêtes
-        JPanel viewRpanel = new JPanel();
-        viewRpanel.setLayout(new BoxLayout(viewRpanel, BoxLayout.Y_AXIS));
-
-        // Ajouter un label pour informer l'utilisateur
-        JLabel titleLabel = new JLabel("Consulter les requêtes :", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-
-        // Créer des boutons radio pour choisir l'option de consultation des requêtes
-        JRadioButton ownRequestsButton = new JRadioButton("Voir mes propres requêtes");
-        JRadioButton allOffersButton = new JRadioButton("Voir toutes les offres");
-        JRadioButton allDemandsButton = new JRadioButton("Voir toutes les demandes");
-
-        // Grouper les boutons radio pour que l'utilisateur ne puisse en sélectionner qu'un
-        ButtonGroup group = new ButtonGroup();
-        group.add(ownRequestsButton);
-        group.add(allOffersButton);
-        group.add(allDemandsButton);
-
-        // Par défaut, sélection de "Voir mes propres requêtes"
-        ownRequestsButton.setSelected(true);
-
-        // Ajouter les boutons radio au panneau
-        viewRpanel.add(titleLabel);
-        viewRpanel.add(ownRequestsButton);
-        viewRpanel.add(allOffersButton);
-        viewRpanel.add(allDemandsButton);
-
-        // Créer un bouton pour afficher les requêtes en fonction de la sélection
-        JButton showRequestsButton = new JButton("Afficher les requêtes");
-
-        // Ajouter le bouton au panneau
-        viewRpanel.add(showRequestsButton);
-
-        // Créer la fenêtre pour afficher les requêtes
-        JFrame requestFrame = new JFrame("Consulter les Requêtes");
-        requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        requestFrame.setSize(400, 300);
-        requestFrame.getContentPane().add(viewRpanel);
-        requestFrame.setVisible(true);
-
-        // Action quand l'utilisateur clique sur le bouton pour afficher les requêtes
-        showRequestsButton.addActionListener(e -> {
-            // Déterminer le type de requête à afficher en fonction de la sélection
-            String critere = null;
-            String valeur = null;
-
-            if (ownRequestsButton.isSelected()) {
-                critere = "Contact"; // Voir les propres requêtes
-                valeur = getEmail();
-            } else if (allOffersButton.isSelected()) {
-                critere = "TypeRequete"; // Voir toutes les offres
-                valeur = "Offre";
-            } else if (allDemandsButton.isSelected()) {
-                critere = "TypeRequete"; // Voir toutes les demandes
-                valeur = "Demande" ;
-            }
-
-            // Récupérer les requêtes en fonction du type sélectionné
-            List<String> requetes =  new ArrayList<>();
-            try {
-				requetes = Requete.RequetesParCritere(critere, valeur, connexion);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} //Liste des requetes correspondant aux critères
-            
-            // Vérifier si des requêtes sont disponibles
-            if (requetes == null || requetes.size() == 0) {
-                JOptionPane.showMessageDialog(requestFrame, "Aucune requête disponible pour cette option.", "Information", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Créer une JComboBox avec les requêtes disponibles
-            JComboBox<String> requeteComboBox = new JComboBox<>(requetes.toArray(new String[0]));
-            requeteComboBox.setPreferredSize(new Dimension(300, 25));
-
-            // Créer un panneau pour afficher la liste des requêtes sélectionnées
-            JPanel listPanel = new JPanel();
-            listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-
-            // Ajouter le JComboBox au panneau
-            listPanel.add(new JLabel("Sélectionnez une requête :"));
-            listPanel.add(requeteComboBox);
-
-            // Ajouter un bouton pour accepter une requête
-            JButton acceptButton = new JButton("Accepter cette requête");
-
-            // Ajouter un bouton pour refuser
-            JButton rejectButton = new JButton("Refuser cette requête");
-
-            // Ajouter les boutons au panneau
-            listPanel.add(acceptButton);
-            listPanel.add(rejectButton);
-
-            // Créer une nouvelle fenêtre pour afficher les options de requêtes
-            JFrame listFrame = new JFrame("Sélectionner une requête");
-            listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            listFrame.setSize(400, 300);
-            listFrame.getContentPane().add(listPanel);
-            listFrame.setVisible(true);
-
-            // Action pour accepter la requête
-            acceptButton.addActionListener(e1 -> {
-                String selectedRequete = (String) requeteComboBox.getSelectedItem();
-                if (selectedRequete != null) {
-                    // Demander à l'utilisateur s'il souhaite accepter cette requête
-                    int confirmation = JOptionPane.showConfirmDialog(listFrame, "Voulez-vous accepter cette requête ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        // Demander le nom de la requête et l'email de l'émetteur
-                        String nomRequete = JOptionPane.showInputDialog(listFrame, "Quel est le nom de la requête ?");
-                        String mailEmetteur = JOptionPane.showInputDialog(listFrame, "Quel est l'adresse email de l'émetteur de la requête ?");
-
-                        // Traiter la réponse à la requête
-                        if (nomRequete != null && mailEmetteur != null) {
-                            // Appel à la méthode pour répondre à la requête
-                            User.repondreRequete(connexion, nomRequete, mailEmetteur);
-                            JOptionPane.showMessageDialog(listFrame, "Vous avez accepté la requête.");
-                        }
-                    }
-                }
-            });
-
-            // Action pour refuser la requête
-            rejectButton.addActionListener(e1 -> {
-                String selectedRequete = (String) requeteComboBox.getSelectedItem();
-                if (selectedRequete != null) {
-                    // Demander confirmation avant de refuser
-                    int confirmation = JOptionPane.showConfirmDialog(listFrame, "Voulez-vous refuser cette requête ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        JOptionPane.showMessageDialog(listFrame, "Vous avez refusé la requête.");
-                        listFrame.dispose();  // Fermer la fenêtre
-                    }
-                }
-            });
-            
-            
-            
-            
-            //PARTIE STRUCTURE
-            
-            if (data[6].equals("Structure")) {
-                // Créer un bouton pour changer le statut de la requête
-                JButton changeStatusButton = new JButton("Changer le statut de la requête");
-
-                // Ajouter le bouton au panneau
-                listPanel.add(changeStatusButton);
-
-                // Action pour le bouton "Changer le statut de la requête"
-                changeStatusButton.addActionListener(e2 -> {
-                    // Vérifier si l'utilisateur veut changer le statut
-                    int confirmation = JOptionPane.showConfirmDialog(listFrame, "Voulez-vous changer le statut d'une de ces requêtes ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        // Demander à l'utilisateur de choisir une requête
-                        String nomRequete = JOptionPane.showInputDialog(listFrame, "Quel est le nom de la requête ?");
-                        String mailEmetteur = JOptionPane.showInputDialog(listFrame, "Quel est l'adresse email de l'émetteur de la requête ?");
-
-                        // Créer des boutons pour valider ou refuser la requête
-                        JPanel statusPanel = new JPanel();
-                        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.Y_AXIS));
-
-                        // Ajouter des boutons "Validé" et "Pas Validé"
-                        JButton validateButton = new JButton("Validé");
-                        JButton notValidateButton = new JButton("Pas Validé");
-
-                        // Ajouter les boutons au panneau
-                        statusPanel.add(new JLabel("Voulez-vous valider ou refuser cette requête ?"));
-                        statusPanel.add(validateButton);
-                        statusPanel.add(notValidateButton);
-
-                        // Ajouter un champ de texte pour la raison si la requête est refusée
-                        JTextArea reasonArea = new JTextArea(3, 20);
-                        reasonArea.setLineWrap(true);
-                        reasonArea.setWrapStyleWord(true);
-                        reasonArea.setVisible(false);  // Masquer au départ
-                        JScrollPane scrollPane = new JScrollPane(reasonArea);
-                        statusPanel.add(scrollPane);
-
-                        // Créer une nouvelle fenêtre pour changer le statut de la requête
-                        JFrame statusFrame = new JFrame("Changer le statut de la requête");
-                        statusFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        statusFrame.setSize(400, 300);
-                        statusFrame.getContentPane().add(statusPanel);
-                        statusFrame.setVisible(true);
-
-                        // Action pour valider la requête
-                        validateButton.addActionListener(e3 -> {
-                            // Appel à la méthode pour valider la requête
-                            structure.validerService(connexion, nomRequete, mailEmetteur, true, "");
-                            JOptionPane.showMessageDialog(statusFrame, "La requête a été validée.");
-                            statusFrame.dispose(); // Fermer la fenêtre
-                        });
-
-                        // Action pour refuser la requête
-                        notValidateButton.addActionListener(e3 -> {
-                            // Afficher la zone de texte pour entrer la raison du refus
-                            reasonArea.setVisible(true);
-
-                            // Ajouter un bouton pour confirmer le refus
-                            JButton confirmRejectButton = new JButton("Confirmer le refus");
-                            statusPanel.add(confirmRejectButton);
-
-                            confirmRejectButton.addActionListener(e4 -> {
-                                // Récupérer la raison du refus
-                                String reason = reasonArea.getText().trim();
-
-                                if (reason.isEmpty()) {
-                                    JOptionPane.showMessageDialog(statusFrame, "Veuillez fournir une raison pour le refus.", "Erreur", JOptionPane.ERROR_MESSAGE);
-                                } else {
-                                    // Appel à la méthode pour refuser la requête avec la raison
-                                    structure.validerService(connexion, nomRequete, mailEmetteur, false, reason);
-                                    JOptionPane.showMessageDialog(statusFrame, "La requête a été refusée.");
-                                    statusFrame.dispose(); // Fermer la fenêtre
-                                }
-                            });
-                        });
-                    }
-                });
-            }
-            
-            
-            
-        });
-        return viewRpanel;
-    }*/
-    
     private JPanel handleViewRequests(Object[] data) {
         System.out.println("Action : Consulter des requêtes.");
 
@@ -657,10 +511,10 @@ public class InterfaceGUI {
 
         // Fenêtre principale
         JFrame requestFrame = new JFrame("Consulter les Requêtes");
-        requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        /*requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         requestFrame.setSize(500, 400);
         requestFrame.getContentPane().add(viewRpanel);
-        requestFrame.setVisible(true);
+        requestFrame.setVisible(true);*/
 
         // Action pour afficher les requêtes
         showRequestsButton.addActionListener(e -> {
@@ -732,8 +586,12 @@ public class InterfaceGUI {
                 if ("Structure".equals(data[6])) {
                     buttonPanel.add(validateButton);
                 }
-                buttonPanel.add(deleteButton);
-                buttonPanel.add(modifyButton);
+
+                if (getEmail().equals(contact)) {
+                	 buttonPanel.add(deleteButton);
+                     buttonPanel.add(modifyButton);
+                }
+               
 
                 singleRequestPanel.add(buttonPanel);
                 requestListPanel.add(singleRequestPanel);
@@ -752,12 +610,47 @@ public class InterfaceGUI {
                 deleteButton.addActionListener(e1 -> {
                     JOptionPane.showMessageDialog(requestFrame, "Suppression de la requête : " + nameRequete);
                     // Implémenter la suppression ici
+                    boolean supp = User.SupprimerRequete(connexion, nameRequete, contact);
+  
+                    if (supp) {
+                    	JOptionPane.showMessageDialog(requestFrame, "Requête supprimée avec succès.");
+                    } else {
+                    	JOptionPane.showMessageDialog(requestFrame, "Erreur lors de la suppression de la requête.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
                 });
 
+                
                 modifyButton.addActionListener(e1 -> {
-                    JOptionPane.showMessageDialog(requestFrame, "Modification de la requête : " + nameRequete);
-                    // Implémenter la modification ici
+                    // Afficher une boîte de dialogue pour que l'utilisateur choisisse ce qu'il veut modifier
+                	JOptionPane.showMessageDialog(requestFrame, "Modification de la requête : " + nameRequete);
+                    String[] options = {"Modifier le nom", "Modifier la description"};
+                    int choix = JOptionPane.showOptionDialog(requestFrame, 
+                                                              "Que voulez-vous modifier ?", 
+                                                              "Modifier Requête", 
+                                                              JOptionPane.DEFAULT_OPTION, 
+                                                              JOptionPane.QUESTION_MESSAGE, 
+                                                              null, options, options[0]);
+
+                    // Si l'utilisateur a choisi "Modifier le nom" ou "Modifier la description"
+                    if (choix == 0 || choix == 1) {
+                        // Demander la nouvelle valeur selon le choix
+                        String label = (choix == 0) ? "Entrez le nouveau nom de la requête :" : "Entrez la nouvelle description de la requête :";
+                        String newValue = JOptionPane.showInputDialog(requestFrame, label);
+
+                        if (newValue != null && !newValue.trim().isEmpty()) {
+                            // Appeler la méthode pour modifier la requête
+                            int typeModification = (choix == 0) ? 1 : 2;  // 1 pour modifier le nom, 2 pour la description
+                            User.modifierRequete(connexion, nameRequete, typeModification, newValue, data);
+
+                            // Confirmer la modification
+                            String field = (choix == 0) ? "nom" : "description";
+                            JOptionPane.showMessageDialog(requestFrame, field + " de la requête modifié avec succès.");
+                        } else {
+                            JOptionPane.showMessageDialog(requestFrame, "Valeur vide, la modification a été annulée.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 });
+
             }
 
             // Ajouter une barre de défilement
@@ -820,10 +713,10 @@ public class InterfaceGUI {
 
         // Créer la fenêtre et l'ajouter au contenu
         JFrame reviewFrame = new JFrame("Poster un Avis");
-        reviewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        /*reviewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         reviewFrame.setSize(400, 400);
         reviewFrame.getContentPane().add(panel);
-        reviewFrame.setVisible(true);
+        reviewFrame.setVisible(true);*/
 
         // Ajouter un écouteur pour le bouton de soumission
         submitButton.addActionListener(e -> {
@@ -879,10 +772,10 @@ public class InterfaceGUI {
 
         // Créer une fenêtre pour afficher le formulaire
         JFrame reviewFrame = new JFrame("Consulter les avis");
-        reviewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        /*reviewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         reviewFrame.setSize(400, 300);
         reviewFrame.getContentPane().add(panel);
-        reviewFrame.setVisible(true);
+        reviewFrame.setVisible(true);*/
 
         // Action lorsque l'utilisateur clique sur le bouton pour consulter les avis
         consultButton.addActionListener(e -> {
@@ -944,10 +837,10 @@ public class InterfaceGUI {
 
         // Créer la fenêtre pour afficher le formulaire
         JFrame profileFrame = new JFrame("Consulter le Profil");
-        profileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        /*profileFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         profileFrame.setSize(400, 300);
         profileFrame.getContentPane().add(panel);
-        profileFrame.setVisible(true);
+        profileFrame.setVisible(true);*/
 
         // Action lorsque l'utilisateur clique sur le bouton pour consulter le profil
         consultButton.addActionListener(e -> {

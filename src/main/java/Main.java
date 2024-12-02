@@ -13,13 +13,10 @@ public class Main {
 	
 	/*TODO encore : 
 	 * 
-	 * DONE --> Affichage si mdp ou email faux
-	 * DONE --> Supprimer son compte --> entièrement à faire
-	 * Modifier une requete --> code ok : Faire le lien interface graphique
-	 * Supprimer une requête --> code ok : faire le lien avec l'interface graphique
-	 * Plus bel affichage
-	 * DONE --> Affichage Faire une requête comme inscription
-	 * DONE --> Change Date to String --> DONE Here, do it in the Database
+	 * Voir les requetes que je dois faire "Mes missions acceptées --"
+	 * Ajouter une colonne Benevoles dans Requete
+	 * Fonction MesMissions
+	 * Affichage MesMissions sur le Menu
 	 * 
 	 */
 	
