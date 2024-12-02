@@ -19,7 +19,7 @@ public class Main {
 	 * Supprimer une requête --> code ok : faire le lien avec l'interface graphique
 	 * Plus bel affichage
 	 * Affichage Faire une requête comme inscription
-	 * Change Date to String --> DONE Here, do it in the Database
+	 * DONE --> Change Date to String --> DONE Here, do it in the Database
 	 * 
 	 */
 	
