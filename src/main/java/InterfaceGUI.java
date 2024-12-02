@@ -27,7 +27,7 @@ public class InterfaceGUI {
     public void createAndShowGUI() {
         frame = new JFrame("Help App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(800, 600);
         
         
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Ne ferme pas immédiatement
@@ -222,6 +222,10 @@ public class InterfaceGUI {
     
   
     private void showMenu() {
+    	JTabbedPane tabbedPane = new JTabbedPane();
+    	
+    	
+    	
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -262,74 +266,142 @@ public class InterfaceGUI {
         
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Space
         panel.add(logoutButton);
+        
+        
+        tabbedPane.addTab("Menu", panel);
 
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(panel);
+        frame.getContentPane().add(tabbedPane);
         frame.revalidate();
         frame.repaint();
 
-
-        option1.addActionListener(e -> handleRequestFormulation(Main.AllUserInfo(connexion, email)));
-        option2.addActionListener(e -> handleViewRequests(Main.AllUserInfo(connexion, email)));
-        option3.addActionListener(e -> handlePostReview());
-        option4.addActionListener(e -> handleViewReviews());
-        option5.addActionListener(e -> handleViewProfile());
+        
+        option1.addActionListener(e -> {
+            int index = tabbedPane.indexOfTab("Formuler une requête");
+            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+                JPanel requestPanel = handleRequestFormulation();
+                tabbedPane.addTab("Formuler une requête", requestPanel);
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Formuler une requête"));
+            } else {
+                tabbedPane.setSelectedIndex(index);
+            }
+        });
+        option2.addActionListener(e -> {
+            int index = tabbedPane.indexOfTab("Consulter des Requêtes");
+            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+                JPanel requestPanel = handleViewRequests(Main.AllUserInfo(connexion, email));
+                tabbedPane.addTab("Consulter des Requêtes", requestPanel);
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Consulter des Requêtes"));
+            } else {
+                tabbedPane.setSelectedIndex(index);
+            }
+        });
+        option3.addActionListener(e -> {
+            int index = tabbedPane.indexOfTab("Poster un Avis");
+            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+                JPanel requestPanel = handlePostReview();
+                tabbedPane.addTab("Poster un Avis", requestPanel);
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Poster un Avis"));
+            } else {
+                tabbedPane.setSelectedIndex(index);
+            }
+        });
+        option4.addActionListener(e -> {
+            int index = tabbedPane.indexOfTab("Consulter des Avis");
+            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+                JPanel requestPanel = handleViewReviews();
+                tabbedPane.addTab("Consulter des Avis", requestPanel);
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("CConsulter des Avis"));
+            } else {
+                tabbedPane.setSelectedIndex(index);
+            }
+        });
+        option5.addActionListener(e -> {
+            int index = tabbedPane.indexOfTab("Voir un profil");
+            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+                JPanel requestPanel = handleViewProfile();
+                tabbedPane.addTab("Voir un profil", requestPanel);
+                tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Voir un profil"));
+            } else {
+                tabbedPane.setSelectedIndex(index);
+            }
+        });
+        
         option6.addActionListener(e -> handleSuppression());
         logoutButton.addActionListener(e -> showWelcomePage());
     }
     
  // Fonctions correspondant aux actions possibles
     
-    
-    
-    private void handleRequestFormulation(Object[] data) {
-        System.out.println("Vous avez choisi de formuler une requête");
+    private JPanel handleRequestFormulation() {
+        // Panel pour l'onglet "Formuler une requête"
+    	System.out.println("Action : Formuler une requete");
+        JPanel requestPanel = new JPanel();
+        requestPanel.setLayout(new BoxLayout(requestPanel, BoxLayout.Y_AXIS));
 
-        // Demander le nom de la requête
-        String requestName = JOptionPane.showInputDialog(frame, "Entrez le nom de la requête:");
+        JLabel titleLabel = new JLabel("Formuler une Requête");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        if (requestName == null || requestName.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Le nom de la requête est requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        JLabel nameLabel = new JLabel("Nom de la requête :");
+        JTextField nameField = new JTextField(20);
 
-        // Demander la description de la requête
-        String description = JOptionPane.showInputDialog(frame, "Entrez la description de la requête:");
+        JLabel descriptionLabel = new JLabel("Description de la requête :");
+        JTextArea descriptionArea = new JTextArea(5, 20);
+        descriptionArea.setLineWrap(true);
+        descriptionArea.setWrapStyleWord(true);
+        JScrollPane descriptionScrollPane = new JScrollPane(descriptionArea);
 
-        if (description == null || description.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "La description de la requête est requise.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        JLabel typeLabel = new JLabel("Type de la requête :");
+        String[] types = {"Offre", "Demande"};
+        JComboBox<String> typeComboBox = new JComboBox<>(types);
 
-        // Demander le type de la requête (Offre ou Demande)
-        String[] options = {"Offre", "Demande"};
-        int choice = JOptionPane.showOptionDialog(frame,
-                "Sélectionnez le type de la requête:",
-                "Type de Requête",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
+        JButton submitButton = new JButton("Soumettre");
 
-        if (choice == JOptionPane.CLOSED_OPTION) {
-            JOptionPane.showMessageDialog(frame, "Sélection du type de requête est obligatoire.", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        // Ajout des composants au panneau
+        requestPanel.add(titleLabel);
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement
+        requestPanel.add(nameLabel);
+        requestPanel.add(nameField);
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
+        requestPanel.add(descriptionLabel);
+        requestPanel.add(descriptionScrollPane);
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacement
+        requestPanel.add(typeLabel);
+        requestPanel.add(typeComboBox);
+        requestPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacement
+        requestPanel.add(submitButton);
 
-        // Récupérer le type sélectionné
-        String requestType = options[choice];
-        
-        User.proposerRequete(connexion, requestName, description, requestType, data);
-        
+        // Action du bouton de soumission
+        submitButton.addActionListener(e -> {
+            String requestName = nameField.getText().trim();
+            String description = descriptionArea.getText().trim();
+            String requestType = (String) typeComboBox.getSelectedItem();
+
+            if (requestName.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Le nom de la requête est requis.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (description.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "La description de la requête est requise.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            User.proposerRequete(connexion, requestName, description, requestType, Main.AllUserInfo(connexion, email));
+            JOptionPane.showMessageDialog(frame, "Requête soumise avec succès !");
+        });
+        System.out.println("return requestpanel");
+        return requestPanel;
     }
 
-    private void handleViewRequests(Object[] data) {
+
+    /*private JPanel handleViewRequests(Object[] data) {
         System.out.println("Action : Consulter des requêtes.");
 
         // Créer un panneau pour afficher les requêtes
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JPanel viewRpanel = new JPanel();
+        viewRpanel.setLayout(new BoxLayout(viewRpanel, BoxLayout.Y_AXIS));
 
         // Ajouter un label pour informer l'utilisateur
         JLabel titleLabel = new JLabel("Consulter les requêtes :", SwingConstants.CENTER);
@@ -350,22 +422,22 @@ public class InterfaceGUI {
         ownRequestsButton.setSelected(true);
 
         // Ajouter les boutons radio au panneau
-        panel.add(titleLabel);
-        panel.add(ownRequestsButton);
-        panel.add(allOffersButton);
-        panel.add(allDemandsButton);
+        viewRpanel.add(titleLabel);
+        viewRpanel.add(ownRequestsButton);
+        viewRpanel.add(allOffersButton);
+        viewRpanel.add(allDemandsButton);
 
         // Créer un bouton pour afficher les requêtes en fonction de la sélection
         JButton showRequestsButton = new JButton("Afficher les requêtes");
 
         // Ajouter le bouton au panneau
-        panel.add(showRequestsButton);
+        viewRpanel.add(showRequestsButton);
 
         // Créer la fenêtre pour afficher les requêtes
         JFrame requestFrame = new JFrame("Consulter les Requêtes");
         requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         requestFrame.setSize(400, 300);
-        requestFrame.getContentPane().add(panel);
+        requestFrame.getContentPane().add(viewRpanel);
         requestFrame.setVisible(true);
 
         // Action quand l'utilisateur clique sur le bouton pour afficher les requêtes
@@ -549,12 +621,165 @@ public class InterfaceGUI {
             
             
         });
+        return viewRpanel;
+    }*/
+    
+    private JPanel handleViewRequests(Object[] data) {
+        System.out.println("Action : Consulter des requêtes.");
+
+        // Panneau principal pour les options de consultation
+        JPanel viewRpanel = new JPanel();
+        viewRpanel.setLayout(new BoxLayout(viewRpanel, BoxLayout.Y_AXIS));
+
+        // Titre
+        JLabel titleLabel = new JLabel("Consulter les requêtes :", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        viewRpanel.add(titleLabel);
+
+        // Boutons radio pour les options de consultation
+        JRadioButton ownRequestsButton = new JRadioButton("Voir mes propres requêtes");
+        JRadioButton allOffersButton = new JRadioButton("Voir toutes les offres");
+        JRadioButton allDemandsButton = new JRadioButton("Voir toutes les demandes");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(ownRequestsButton);
+        group.add(allOffersButton);
+        group.add(allDemandsButton);
+
+        ownRequestsButton.setSelected(true);
+        viewRpanel.add(ownRequestsButton);
+        viewRpanel.add(allOffersButton);
+        viewRpanel.add(allDemandsButton);
+
+        // Bouton pour afficher les requêtes
+        JButton showRequestsButton = new JButton("Afficher les requêtes");
+        viewRpanel.add(showRequestsButton);
+
+        // Fenêtre principale
+        JFrame requestFrame = new JFrame("Consulter les Requêtes");
+        requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        requestFrame.setSize(500, 400);
+        requestFrame.getContentPane().add(viewRpanel);
+        requestFrame.setVisible(true);
+
+        // Action pour afficher les requêtes
+        showRequestsButton.addActionListener(e -> {
+            String critere = null;
+            String valeur = null;
+
+            if (ownRequestsButton.isSelected()) {
+                critere = "Contact";
+                valeur = getEmail();
+            } else if (allOffersButton.isSelected()) {
+                critere = "TypeRequete";
+                valeur = "Offre";
+            } else if (allDemandsButton.isSelected()) {
+                critere = "TypeRequete";
+                valeur = "Demande";
+            }
+
+            // Récupérer les requêtes
+            List<Object[]> requetes = new ArrayList<>();
+            try {
+                requetes = Requete.RequetesParCritere(critere, valeur, connexion);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(requestFrame, "Erreur lors de la récupération des requêtes.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (requetes == null || requetes.isEmpty()) {
+                JOptionPane.showMessageDialog(requestFrame, "Aucune requête disponible pour cette option.", "Information", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            // Panneau avec une barre de défilement pour afficher les requêtes
+            JPanel requestListPanel = new JPanel();
+            requestListPanel.setLayout(new BoxLayout(requestListPanel, BoxLayout.Y_AXIS));
+
+            for (Object[] requete : requetes) {
+                // Données de la requête
+                String nameRequete = (String) requete[0];
+                String typeRequete = (String) requete[1];
+                String description = (String) requete[2];
+                String date = (String) requete[3];
+                String status = (String) requete[4];
+                String contact = (String) requete[5];
+
+                // Panneau pour chaque requête
+                JPanel singleRequestPanel = new JPanel();
+                singleRequestPanel.setLayout(new BoxLayout(singleRequestPanel, BoxLayout.Y_AXIS));
+                singleRequestPanel.setBorder(BorderFactory.createTitledBorder(nameRequete));
+
+                // Ajouter les informations au panneau
+                singleRequestPanel.add(new JLabel("Type : " + typeRequete));
+                singleRequestPanel.add(new JLabel("Description : " + description));
+                singleRequestPanel.add(new JLabel("Date : " + date));
+                singleRequestPanel.add(new JLabel("Statut : " + status));
+                singleRequestPanel.add(new JLabel("Contact : " + contact));
+
+                // Options pour chaque requête
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+                JButton acceptButton = new JButton("Accepter");
+                JButton validateButton = new JButton("Valider");
+                JButton deleteButton = new JButton("Supprimer");
+                JButton modifyButton = new JButton("Modifier");
+
+                // Ajouter les options au panneau
+                buttonPanel.add(acceptButton);
+                if ("Structure".equals(data[6])) {
+                    buttonPanel.add(validateButton);
+                }
+                buttonPanel.add(deleteButton);
+                buttonPanel.add(modifyButton);
+
+                singleRequestPanel.add(buttonPanel);
+                requestListPanel.add(singleRequestPanel);
+
+                // Actions pour les boutons
+                acceptButton.addActionListener(e1 -> {
+                    User.repondreRequete(connexion, nameRequete, contact);
+                    JOptionPane.showMessageDialog(requestFrame, "Vous avez accepté la requête : " + nameRequete);
+                });
+
+                validateButton.addActionListener(e1 -> {
+                    structure.validerService(connexion, nameRequete, contact, true, "");
+                    JOptionPane.showMessageDialog(requestFrame, "Vous avez validé la requête : " + nameRequete);
+                });
+
+                deleteButton.addActionListener(e1 -> {
+                    JOptionPane.showMessageDialog(requestFrame, "Suppression de la requête : " + nameRequete);
+                    // Implémenter la suppression ici
+                });
+
+                modifyButton.addActionListener(e1 -> {
+                    JOptionPane.showMessageDialog(requestFrame, "Modification de la requête : " + nameRequete);
+                    // Implémenter la modification ici
+                });
+            }
+
+            // Ajouter une barre de défilement
+            JScrollPane scrollPane = new JScrollPane(requestListPanel);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+            // Afficher les requêtes dans une nouvelle fenêtre
+            JFrame listFrame = new JFrame("Liste des Requêtes");
+            listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            listFrame.setSize(600, 500);
+            listFrame.getContentPane().add(scrollPane);
+            listFrame.setVisible(true);
+        });
+
+        return viewRpanel;
     }
+
 
     
 
 
-    private void handlePostReview() {
+    private JPanel handlePostReview() {
         System.out.println("Action : Poster un avis.");
 
         //Nouveau panneau pour le formulaire
@@ -618,10 +843,11 @@ public class InterfaceGUI {
 				e1.printStackTrace();
 			}
         });
+        return panel;
     }
 
 
-    private void handleViewReviews() {
+    private JPanel handleViewReviews() {
         System.out.println("Action : Consulter des avis.");
 
         // Créer un panneau pour l'interface graphique
@@ -688,10 +914,11 @@ public class InterfaceGUI {
                 JOptionPane.showMessageDialog(reviewFrame, avisLabel, "Avis de " + nom + " " + prenom, JOptionPane.INFORMATION_MESSAGE);
             }
         });
+        return panel;
     }
 
 
-    private void handleViewProfile() {
+    private JPanel handleViewProfile() {
         System.out.println("Action : Consulter un profil.");
 
         // Créer un panneau pour l'interface graphique
@@ -753,6 +980,7 @@ public class InterfaceGUI {
                 JOptionPane.showMessageDialog(profileFrame, profileLabel, "Profil de " + profile[0] + " " + profile[1], JOptionPane.INFORMATION_MESSAGE);
             }
         });
+        return panel;
     }
     
     private void handleSuppression() {

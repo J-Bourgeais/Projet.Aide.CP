@@ -44,9 +44,9 @@ public class Requete {
 	
 	//Retourne les requetes correspondant au critère choisi
 	
-	public static List<String> RequetesParCritere(String critere, String valeur, Connection connexion) throws SQLException {
-		List<String> requetes = new ArrayList<>();
-		String requeteSQL = "SELECT NameRequete, FromUser, Description, Status, Date, TypeRequete FROM requetes WHERE " + critere + " = ?";
+	public static List<Object[]> RequetesParCritere(String critere, String valeur, Connection connexion) throws SQLException {
+		List<Object[]> requetes = new ArrayList<>();
+		String requeteSQL = "SELECT NameRequete, FromUser, Description, Status, Date, TypeRequete, Contact FROM requetes WHERE " + critere + " = ?";
 		PreparedStatement stmt = connexion.prepareStatement(requeteSQL);
 
         stmt.setString(1, valeur);
@@ -55,8 +55,9 @@ public class Requete {
         System.out.println("Requêtes de type " + critere + " avec la valeur " + valeur + " :");
 
         while (rs.next()) {
+        	Object[] requete = {rs.getString("NameRequete"), rs.getString("TypeRequete"), rs.getString("Description"), rs.getString("Date"), rs.getString("Status"), rs.getString("Contact")};
         	String reque= "Nom : " + rs.getString("NameRequete") + "\n, Type : " + rs.getString("TypeRequete") + "\n, Description : '"+ rs.getString("Description")+"'\n, Date : "+ rs.getString("Date")+ "\n, Status actuel : " + rs.getString("Status"); 
-        	requetes.add(reque);
+        	requetes.add(requete);
         	reque="";
         }
         return requetes;
