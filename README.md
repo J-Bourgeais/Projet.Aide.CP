@@ -95,7 +95,7 @@ Projet.Aide.CP/
    - Launch the GUI through the main class `Main.java` using your IDE or `mvn exec:java`.
    
 2. **Register**:
-   - Create a new account as a beneficiary or volunteer.
+   - Create a new account as a beneficiary, volunteer or structure.
 
 3. **Submit a Request** (Beneficiary):
    - Enter details for the help you need and submit the request.
@@ -105,7 +105,17 @@ Projet.Aide.CP/
    
 5. **Manage Requests** (Structure):
    - Change a request status of a task from the structure.
+  
+6. **Modify or Delete your Requests** (Beneficiary and Volunteer):
+   - Modify the name of the request, or the description.
+  
+7. **Delete your account** (Everyone)
 
+8. **Post a Review** (Everyone):
+   - Post a review and see all reviews of a given user.
+  
+9. **See a profile** (Everyone)
+    
 ---
 
 ## **Testing**
