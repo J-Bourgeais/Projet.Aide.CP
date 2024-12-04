@@ -31,14 +31,14 @@ public class User {
     
     // Répondre à une offre de bénévole ou une demande de bénéficiaire
     public static void repondreRequete(Connection connexion, String NameRequete, String email) {
-        String requeteSQL = "UPDATE requetes SET Status = ? WHERE NameRequete = ? AND Contact = ?";
+        String requeteSQL = "UPDATE requetes SET Status = ?, Benevole = ? WHERE NameRequete = ? AND Contact = ?";
 
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
             etat.setString(1, "acceptée");  // MAJ l’offre ou demande à "acceptée"
-            etat.setString(2, NameRequete);
-            etat.setString(3, email);
-            
-            //TODO : Ajouter une colonne Benevole qui dis qui a accepté la requete
+            etat.setString(2, InterfaceGUI.getEmail()); //email de la personne qui accepte
+            etat.setString(3, NameRequete);
+            etat.setString(4, email);
+       
 
             int lignesAffectees = etat.executeUpdate();
             if (lignesAffectees > 0) {
@@ -51,7 +51,7 @@ public class User {
         }
     }
     
-    //TODO : fonction AfficherMesMissions qui dis quand on est Benevole sur une requete
+
     
     //Possibilité de supprimer uniquement une de ses requêtes
     public static boolean SupprimerRequete(Connection connexion, String NameRequete, String email) {

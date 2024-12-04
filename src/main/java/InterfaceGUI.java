@@ -275,6 +275,23 @@ public class InterfaceGUI {
     }
     
     
+    //RequetesParCritere("Benevole", getEmail(), connexion);
+    /*List<Object[]> requetes = new ArrayList<>();
+    try {
+        requetes = Requete.RequetesParCritere(critere, valeur, connexion);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(requestFrame, "Erreur lors de la récupération des requêtes.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (requetes == null || requetes.isEmpty()) {
+        JOptionPane.showMessageDialog(requestFrame, "Aucune requête disponible pour cette option.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }*/
+    
+    
+    
     private void showMenu() {
         JTabbedPane tabbedPane = new JTabbedPane();
         
@@ -295,40 +312,86 @@ public class InterfaceGUI {
         JButton logoutButton = new JButton("Se déconnecter");
 
         // Appliquer une taille uniforme à tous les boutons
-        Dimension buttonSize = new Dimension(300, 50); // Largeur de 300px et hauteur de 50px pour chaque bouton
-        option1.setPreferredSize(buttonSize);
-        option2.setPreferredSize(buttonSize);
-        option3.setPreferredSize(buttonSize);
-        option4.setPreferredSize(buttonSize);
-        option5.setPreferredSize(buttonSize);
-        option6.setPreferredSize(buttonSize);
-        logoutButton.setPreferredSize(buttonSize);
-
-        // Centrer les boutons
-        option1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        option2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        option3.setAlignmentX(Component.CENTER_ALIGNMENT);
-        option4.setAlignmentX(Component.CENTER_ALIGNMENT);
-        option5.setAlignmentX(Component.CENTER_ALIGNMENT);
-        option6.setAlignmentX(Component.CENTER_ALIGNMENT);
-        logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Dimension buttonSize = new Dimension(300, 50); 
+        JButton[] buttons = {option1, option2, option3, option4, option5, option6, logoutButton};
+        for (JButton button : buttons) {
+            button.setPreferredSize(buttonSize);
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
 
         // Ajouter les composants au panneau
         panel.add(menuLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espace entre le titre et le premier bouton
-        panel.add(option1);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(option2);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(option3);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(option4);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(option5);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(option6);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
-        panel.add(logoutButton);
+        for (JButton button : buttons) {
+            panel.add(button);
+            panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace entre les boutons
+        }
+
+        // Section pour les missions acceptées
+        JLabel acceptedMissionsLabel = new JLabel("Missions Acceptées", SwingConstants.CENTER);
+        acceptedMissionsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        acceptedMissionsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Récupérer les missions acceptées
+        List<Object[]> acceptedMissions = new ArrayList<>();
+        try {
+			acceptedMissions = Requete.RequetesParCritere("Benevole", getEmail(), connexion);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+        // Panneau pour afficher les missions
+        JPanel missionsPanel = new JPanel();
+        missionsPanel.setLayout(new BoxLayout(missionsPanel, BoxLayout.Y_AXIS));
+
+        if (acceptedMissions.size() == 0) {
+            JLabel noMissionLabel = new JLabel("Aucune mission acceptée pour le moment. Si vous venez d'en accepter une, ce sera mis à jour à votre prochaine connexion");
+            noMissionLabel.setFont(new Font("Arial", Font.ITALIC, 16));
+            noMissionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            missionsPanel.add(noMissionLabel);
+        } else {
+            for (Object missionObject : acceptedMissions) {
+                Object[] mission = (Object[]) missionObject;
+                String nameRequete = (String) mission[0];
+                String typeRequete = (String) mission[1];
+                String description = (String) mission[2];
+                String date = (String) mission[3];
+                String status = (String) mission[4];
+                String contact = (String) mission[5];
+                String benevole = (String) mission[6];
+
+                // Créer un panneau pour une mission
+                JPanel missionPanel = new JPanel();
+                missionPanel.setLayout(new BoxLayout(missionPanel, BoxLayout.Y_AXIS));
+                missionPanel.setBorder(BorderFactory.createTitledBorder(nameRequete)); // Titre de la mission
+                missionPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+                // Ajouter les détails de la mission
+                missionPanel.add(new JLabel("Type: " + typeRequete));
+                missionPanel.add(new JLabel("Description: " + description));
+                missionPanel.add(new JLabel("Date: " + date));
+                missionPanel.add(new JLabel("Statut: " + status));
+                missionPanel.add(new JLabel("Contact: " + contact));
+                missionPanel.add(new JLabel("Bénévole: " + benevole));
+
+                // Espacement entre les missions
+                missionPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+                // Ajouter le panneau de mission au panneau principal
+                missionsPanel.add(missionPanel);
+            }
+        }
+
+        // Ajouter un panneau défilant pour les missions
+        JScrollPane scrollPane = new JScrollPane(missionsPanel);
+        scrollPane.setPreferredSize(new Dimension(400, 200));
+        scrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Ajouter les missions sous les boutons
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espace avant les missions
+        panel.add(acceptedMissionsLabel);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espace avant la liste des missions
+        panel.add(scrollPane);
 
         // Ajouter l'onglet Menu
         tabbedPane.addTab("Menu", panel);
@@ -339,10 +402,10 @@ public class InterfaceGUI {
         frame.revalidate();
         frame.repaint();
 
-        // Action des boutons
+        // Actions des boutons
         option1.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Formuler une requête");
-            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+            if (index == -1) {
                 JPanel requestPanel = handleRequestFormulation();
                 tabbedPane.addTab("Formuler une requête", requestPanel);
                 tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Formuler une requête"));
@@ -352,7 +415,7 @@ public class InterfaceGUI {
         });
         option2.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Consulter des Requêtes");
-            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+            if (index == -1) {
                 JPanel requestPanel = handleViewRequests(Main.AllUserInfo(connexion, email));
                 tabbedPane.addTab("Consulter des Requêtes", requestPanel);
                 tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Consulter des Requêtes"));
@@ -362,7 +425,7 @@ public class InterfaceGUI {
         });
         option3.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Poster un Avis");
-            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+            if (index == -1) {
                 JPanel requestPanel = handlePostReview();
                 tabbedPane.addTab("Poster un Avis", requestPanel);
                 tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Poster un Avis"));
@@ -372,7 +435,7 @@ public class InterfaceGUI {
         });
         option4.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Consulter des Avis");
-            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+            if (index == -1) {
                 JPanel requestPanel = handleViewReviews();
                 tabbedPane.addTab("Consulter des Avis", requestPanel);
                 tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Consulter des Avis"));
@@ -382,7 +445,7 @@ public class InterfaceGUI {
         });
         option5.addActionListener(e -> {
             int index = tabbedPane.indexOfTab("Voir un profil");
-            if (index == -1) { // Vérifie si l'onglet n'existe pas déjà
+            if (index == -1) {
                 JPanel requestPanel = handleViewProfile();
                 tabbedPane.addTab("Voir un profil", requestPanel);
                 tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Voir un profil"));
@@ -390,10 +453,10 @@ public class InterfaceGUI {
                 tabbedPane.setSelectedIndex(index);
             }
         });
-
         option6.addActionListener(e -> handleSuppression());
         logoutButton.addActionListener(e -> showWelcomePage());
     }
+
 
     
  // Fonctions correspondant aux actions possibles
@@ -511,10 +574,7 @@ public class InterfaceGUI {
 
         // Fenêtre principale
         JFrame requestFrame = new JFrame("Consulter les Requêtes");
-        /*requestFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        requestFrame.setSize(500, 400);
-        requestFrame.getContentPane().add(viewRpanel);
-        requestFrame.setVisible(true);*/
+
 
         // Action pour afficher les requêtes
         showRequestsButton.addActionListener(e -> {
@@ -559,6 +619,7 @@ public class InterfaceGUI {
                 String date = (String) requete[3];
                 String status = (String) requete[4];
                 String contact = (String) requete[5];
+                String benev = (String) requete[6];
 
                 // Panneau pour chaque requête
                 JPanel singleRequestPanel = new JPanel();
@@ -571,6 +632,7 @@ public class InterfaceGUI {
                 singleRequestPanel.add(new JLabel("Date : " + date));
                 singleRequestPanel.add(new JLabel("Statut : " + status));
                 singleRequestPanel.add(new JLabel("Contact : " + contact));
+                singleRequestPanel.add(new JLabel("Benevole ayant accepté la mission: " + benev));
 
                 // Options pour chaque requête
                 JPanel buttonPanel = new JPanel();

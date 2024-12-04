@@ -10,16 +10,6 @@ import java.sql.SQLException;
 
 public class Main {
 
-	
-	/*TODO encore : 
-	 * 
-	 * Voir les requetes que je dois faire "Mes missions acceptées --"
-	 * Ajouter une colonne Benevoles dans Requete
-	 * Fonction MesMissions
-	 * Affichage MesMissions sur le Menu
-	 * 
-	 */
-	
 
     public static Object[] AllUserInfo(Connection connexion, String email){
         String requeteSQL = "SELECT Nom, Prenom, email, Adresse, Age, Password, UserType FROM Users WHERE email = ?";
@@ -55,24 +45,18 @@ public class Main {
         }
     }
 
-    //INTERFACE
-    
-	
-  
-	
 
     public static void main(String[] args) throws SQLException {
     	
     	
     	Connection connexion = ConnexionBDD.GetConnexion();
     	
-    	SwingUtilities.invokeLater(() -> new InterfaceGUI(connexion).createAndShowGUI());
-    	
     	//Lancer InterfaceGUI
+    	SwingUtilities.invokeLater(() -> new InterfaceGUI(connexion).createAndShowGUI());
     	
 
     	/*Pour tester :
-    	 * User deja inscrit : 
+    	 * User toujours inscrit : 
     	 * - email : melo@gmail.com
     	 * - mdp : chien
     	 * */
