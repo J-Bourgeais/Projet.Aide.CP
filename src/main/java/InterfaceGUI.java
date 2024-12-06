@@ -240,7 +240,11 @@ public class InterfaceGUI {
                     new String(passwordField.getPassword()),
                     userTypeComboBox.getSelectedItem()
             };
-            validateInscription(registrationData);//TOSEE
+            try {
+				validateInscription(registrationData);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
         });
     }
 
@@ -263,7 +267,7 @@ public class InterfaceGUI {
     
     
     
-    private void validateInscription(Object[] data) {
+    private void validateInscription(Object[] data) throws IOException {
         // Ici, appelez votre fonction externe pour valider les données (connexion ou inscription)
     	
     	//Se connecter : Enlever les parties de scanner
@@ -640,6 +644,7 @@ public class InterfaceGUI {
 
                 JButton acceptButton = new JButton("Accepter");
                 JButton validateButton = new JButton("Valider");
+                JButton novalidateButton = new JButton("Refuser");
                 JButton deleteButton = new JButton("Supprimer");
                 JButton modifyButton = new JButton("Modifier");
 
@@ -647,6 +652,7 @@ public class InterfaceGUI {
                 buttonPanel.add(acceptButton);
                 if ("Structure".equals(data[6])) {
                     buttonPanel.add(validateButton);
+                    buttonPanel.add(novalidateButton);
                 }
 
                 if (getEmail().equals(contact)) {
@@ -660,14 +666,36 @@ public class InterfaceGUI {
 
                 // Actions pour les boutons
                 acceptButton.addActionListener(e1 -> {
-                    User.repondreRequete(connexion, nameRequete, contact);
-                    JOptionPane.showMessageDialog(requestFrame, "Vous avez accepté la requête : " + nameRequete);
+                	System.out.println(status);
+                    if (status!="refusé" || status!="en attente") { //NE MARCHE PAS
+                    	User.repondreRequete(connexion, nameRequete, contact);
+                        JOptionPane.showMessageDialog(requestFrame, "Vous avez accepté la requête : " + nameRequete);
+                    } else {
+                    	JOptionPane.showMessageDialog(requestFrame, "La requête est en attente de validation ou refusé. Vous ne pouvez pas l'accepter.", "Erreur", JOptionPane.WARNING_MESSAGE);
+                    }
+                    
                 });
 
                 validateButton.addActionListener(e1 -> {
                     structure.validerService(connexion, nameRequete, contact, true, "");
                     JOptionPane.showMessageDialog(requestFrame, "Vous avez validé la requête : " + nameRequete);
                 });
+                
+                novalidateButton.addActionListener(e1 -> {
+                	String reason = JOptionPane.showInputDialog(requestFrame, "Veuillez indiquer la raison du refus :");
+
+                    if (reason == null || reason.trim().isEmpty()) {
+                        // Si la raison est vide ou annulée, ne pas continuer
+                        JOptionPane.showMessageDialog(requestFrame, "Vous devez fournir une raison pour refuser la requête.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        // Appeler la méthode validerService avec la raison
+                        structure.validerService(connexion, nameRequete, contact, false, reason);
+                        JOptionPane.showMessageDialog(requestFrame, "Vous avez refusé la requête : " + nameRequete + " pour la raison : " + reason);
+                    }
+
+                });
+                
+                
 
                 deleteButton.addActionListener(e1 -> {
                     JOptionPane.showMessageDialog(requestFrame, "Suppression de la requête : " + nameRequete);

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class UserConnect {
 
     
     //Utilisé par InterfaceGUI
-    public static boolean UserInscription(Connection connexion, Object[] infos) {
+    public static boolean UserInscription(Connection connexion, Object[] infos) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         
@@ -58,7 +59,9 @@ public class UserConnect {
         String prenom = (String) infos[1];
         String email = (String) infos[2];
         String adresse =(String) infos[3];
-        int age = Integer.parseInt((String)infos[4]);
+        int age;
+        age = Integer.parseInt((String)infos[4]);
+        
         String password = (String) infos[5];
         String type = (String) infos[6];
 

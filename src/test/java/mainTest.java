@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.ResultSet;
 import java.util.List;
@@ -30,7 +31,11 @@ class mainTest {
 	    
 	    //Ajouter melo
 		Object[] liste = new Object[]{"Bourgeais", "Melo", "melo@gmail.com", "5 rue des chiens", "22", "chien", "Beneficiaire"};
-	    assertTrue(UserConnect.UserInscription(connexion, liste)==true);
+	    try {
+			assertTrue(UserConnect.UserInscription(connexion, liste)==true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		ConnexionBDD.CloseConnexion(connexion);
 	}
@@ -48,7 +53,7 @@ class mainTest {
 	
 	
 	@Test
-    public void testInscription() throws SQLException {
+    public void testInscription() throws SQLException, IOException {
 		Connection connexion=ConnexionBDD.GetConnexion();
         // Ajouter un utilisateur pour le test
 		String deleteUser = "DELETE FROM Users WHERE Nom = ? AND Prenom = ?";
@@ -72,7 +77,7 @@ class mainTest {
 	
 	/*Test supprimer son compte*/
 	@Test
-	public void TestSuppression() throws SQLException {
+	public void TestSuppression() throws SQLException, IOException {
 		Connection connexion=ConnexionBDD.GetConnexion();
 		//Inscription
 		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", "65", "charlette", "Beneficiaire"};
