@@ -4,7 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class structure extends User {
+
+/*
+ * INFORMATION : Cette classe permet à une structure de valider ou non un service au sein de son établissement
+ * C'est une classe fille de la classe User
+ */
+
+public class Structure extends User {
 	
 	public static void validerService(Connection connexion, String NameRequete, String email, boolean estValidee, String raison) {
     // Déterminer le nouveau statut en fonction de estValidee

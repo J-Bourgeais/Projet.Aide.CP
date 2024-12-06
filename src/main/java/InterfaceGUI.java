@@ -13,6 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/* 
+ * INFORMATION
+ * Cette classe Interface s'occupe de tout l'affichage de l'application
+ * A chaque bouton est associé une des méthodes implantées définis dans les différentes classes
+ */
+
+
 public class InterfaceGUI {
     private JFrame frame;
     public static String email;
@@ -665,7 +672,7 @@ public class InterfaceGUI {
                 });
 
                 validateButton.addActionListener(e1 -> {
-                    structure.validerService(connexion, nameRequete, contact, true, "");
+                    Structure.validerService(connexion, nameRequete, contact, true, "");
                     JOptionPane.showMessageDialog(requestFrame, "Vous avez validé la requête : " + nameRequete);
                 });
 

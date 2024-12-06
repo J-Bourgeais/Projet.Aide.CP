@@ -420,7 +420,7 @@ class mainTest {
         }
 
         // Test 1 : Validation de la requête (pas de motif)
-        structure.validerService(connexion, nomRequete, email, true, null);
+        Structure.validerService(connexion, nomRequete, email, true, null);
 
         String selectRequete = "SELECT Status FROM requetes WHERE NameRequete = ? AND Contact = ?";
         try (PreparedStatement stmt = connexion.prepareStatement(selectRequete)) {
@@ -436,7 +436,7 @@ class mainTest {
 
         // Test 2 : Refus de la requête avec une raison
         String raisonRefus = "Les informations sont incomplètes.";
-        structure.validerService(connexion, nomRequete, email, false, raisonRefus);
+        Structure.validerService(connexion, nomRequete, email, false, raisonRefus);
 
         try (PreparedStatement stmt = connexion.prepareStatement(selectRequete)) {
             stmt.setString(1, nomRequete);
