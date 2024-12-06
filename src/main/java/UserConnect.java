@@ -5,6 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/*
+ * INFORMATION : Cette classe s'occupe de l'inscription et de la connexion d'un utilisateur à l'application d'aide
+ */
+
 public class UserConnect {
 	
 

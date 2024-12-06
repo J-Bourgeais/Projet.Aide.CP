@@ -7,7 +7,11 @@ import java.text.SimpleDateFormat;
 //import java.util.Scanner;
 //import java.util.Date;
 
-
+/*
+ * INFORMATION : Cette classe groupe la majeure partie des actions qu'un utilisateur peut réaliser
+ * Supprimer un compte, Répondre/Supprimer/Proposer/Modifier une requête, 
+ * Consulter un profil et vérifier l'existence d'un nom dans la BDD
+ */
 
 public class User {
 

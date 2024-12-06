@@ -24,9 +24,13 @@ import java.util.List;
  * */
 
 
+/* INFORMATION : classe qui s'occupe des requêtes (offre/demande)
+ * Notamment de l'affiche des requêtes selon un critère
+*/
+
+
 public class Requete {
-	
-	
+
 	public String Namerequete;
 	public String Typerequete;
 	public String Description;
@@ -34,6 +38,8 @@ public class Requete {
 	public String Status;
 	public String benev;
 	
+	// Définition d'une requête :	
+	//  Nom, Type de la requête, Description, Date, Status, Nom du bénévole 
 	public Requete(String Name, String type, String Desc, String date, String status, String benev) { 
 		this.Namerequete=Name;
 		this.Typerequete=type;
@@ -45,7 +51,6 @@ public class Requete {
 	
 	
 	//Retourne les requetes correspondant au critère choisi
-	
 	//On peut faire critère Benevole, valeur email
 	
 	public static List<Object[]> RequetesParCritere(String critere, String valeur, Connection connexion) throws SQLException {

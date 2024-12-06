@@ -21,7 +21,7 @@ public class Main {
 	            ResultSet rs = stmt.executeQuery();
 	
 	            if (rs.next()) {
-	                // Extract values from the current row
+	                // Extrait les valeurs de la ligne courante
 	                String Nom = rs.getString("Nom");
 	                String Prenom = rs.getString("Prenom");
 	                String Email = rs.getString("email");
@@ -30,10 +30,10 @@ public class Main {
 	                String Password = rs.getString("Password");
 	                String UserType = rs.getString("UserType");
 
-	                // Return an array with all the user information
+	                // Retourne un tableau avec toutes les données utilisateur
 	                return new Object[]{Nom, Prenom, Email, Adresse, Age, Password, UserType};
 	            } else {
-	                // Handle the case where no user is found
+	                // Gère le cas où l'utilisateur n'a pas été trouvé
 	                System.out.println("No user found with the given email.");
 	                return null;
 	            }

@@ -21,6 +21,10 @@ import org.json.JSONObject;
 // UserType
 // Avis
 
+/*
+ * INFORMATION : Cette classe s'occupe de Poster et consulter un avis émis par un utilisateur
+ */
+
 public class Avis {
 
     //Methode pour poster un avis à quelqu'un
@@ -50,7 +54,7 @@ public class Avis {
 
         String requeteSQL = "UPDATE Users SET Avis = ? WHERE Nom = ? AND Prenom = ?";
         try (PreparedStatement etat = connexion.prepareStatement(requeteSQL)) {
-            etat.setString(1, listeAvis.toString());  // MAJ l’offre à "acceptée"
+            etat.setString(1, listeAvis.toString());  // MàJ l’offre à "acceptée"
             etat.setString(2, pourNom);
             etat.setString(3, pourPrenom);
 
