@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class mainTest {
 	
 	@BeforeEach
-	public void DelTable() throws SQLException {
+	public void delTable() throws SQLException {
 		Connection connexion=ConnexionBDD.GetConnexion();
 		String deleteUser = "DELETE FROM Users";
 	    try (PreparedStatement etat = connexion.prepareStatement(deleteUser)) {
@@ -42,7 +42,7 @@ class mainTest {
 	
 
 	@Test
-	public void Connexiontest() {		
+	public void connexionTest() {		
 		//connexion
 		Object[] liste = new Object[]{"melo@gmail.com", "chien"};
 		Connection connexion=ConnexionBDD.GetConnexion();
@@ -77,7 +77,7 @@ class mainTest {
 	
 	/*Test supprimer son compte*/
 	@Test
-	public void TestSuppression() throws SQLException, IOException {
+	public void testSuppression() throws SQLException, IOException {
 		Connection connexion=ConnexionBDD.GetConnexion();
 		//Inscription
 		Object[] liste = new Object[]{"Jean", "Charlie", "jeancharlie@gmail.com", "5 rue des Lilas", "65", "charlette", "Beneficiaire"};
@@ -463,15 +463,5 @@ class mainTest {
         ConnexionBDD.CloseConnexion(connexion);
     }
 	
-	
-	/* Tests à faire
-	 * 
-	 * @DONE - Poster un avis --> apparait dans la bdd
-	 * @DONE - Poster une requête --> apparait dans la bdd
-	 * @DONE - Consulter avis --> Comment tester ??
-	 * Afficher requete par critère --> test bon critere, affichage, ...
-	 * Valider service --> Modification de la bdd
-	 * 
-	 * */
 
 }
