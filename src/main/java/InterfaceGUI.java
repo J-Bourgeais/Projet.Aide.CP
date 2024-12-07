@@ -674,12 +674,8 @@ public class InterfaceGUI {
                 // Actions pour les boutons
                 acceptButton.addActionListener(e1 -> {
                 	System.out.println(status);
-                    if (status!="refusé" || status!="en attente") { //NE MARCHE PAS
-                    	User.repondreRequete(connexion, nameRequete, contact);
-                        JOptionPane.showMessageDialog(requestFrame, "Vous avez accepté la requête : " + nameRequete);
-                    } else {
-                    	JOptionPane.showMessageDialog(requestFrame, "La requête est en attente de validation ou refusé. Vous ne pouvez pas l'accepter.", "Erreur", JOptionPane.WARNING_MESSAGE);
-                    }
+                	JOptionPane.showMessageDialog(requestFrame, "Vous avez accepté la requête : " + nameRequete + "Néanmoins, vous ne pourrez remplir cette mission que lorsque qu'elle sera validée. Elle est actuellement "+ status);
+                    
                     
                 });
 
@@ -696,7 +692,7 @@ public class InterfaceGUI {
                         JOptionPane.showMessageDialog(requestFrame, "Vous devez fournir une raison pour refuser la requête.", "Erreur", JOptionPane.ERROR_MESSAGE);
                     } else {
                         // Appeler la méthode validerService avec la raison
-                        structure.validerService(connexion, nameRequete, contact, false, reason);
+                        Structure.validerService(connexion, nameRequete, contact, false, reason);
                         JOptionPane.showMessageDialog(requestFrame, "Vous avez refusé la requête : " + nameRequete + " pour la raison : " + reason);
                     }
 
