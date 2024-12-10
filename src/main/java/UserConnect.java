@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-
+import java.lang.NumberFormatException;
 /*
  * INFORMATION : Cette classe s'occupe de l'inscription et de la connexion d'un utilisateur à l'application d'aide
  */
@@ -55,7 +55,6 @@ public class UserConnect {
     //Utilisé par InterfaceGUI
     public static boolean UserInscription(Connection connexion, Object[] infos) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
         
         boolean succes = false;
 
@@ -63,8 +62,15 @@ public class UserConnect {
         String prenom = (String) infos[1];
         String email = (String) infos[2];
         String adresse =(String) infos[3];
-        int age;
-        age = Integer.parseInt((String)infos[4]);
+        int age=1;
+
+        try {
+            age = Integer.parseInt((String)infos[4]);
+        } catch(NumberFormatException e) {
+            System.out.println("Seulement des chiffres pour l'age svp");
+            return succes;
+        }
+        
         
         String password = (String) infos[5];
         String type = (String) infos[6];
@@ -96,7 +102,6 @@ public class UserConnect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        scanner.close();
         return succes;
 
     }
