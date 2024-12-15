@@ -63,7 +63,7 @@ Projet.Aide.CP/
 
 ## **Prerequisites**
 
-- **Java JDK 17** or higher.
+- **Java JDK 13** or higher.
 - **Maven 3.8+**.
 - A supported IDE like IntelliJ IDEA, Eclipse, or NetBeans.
 
@@ -92,7 +92,7 @@ Projet.Aide.CP/
 ## **Usage**
 
 1. **Start the application**:
-   - Launch the GUI through the main class `Main.java` using your IDE or `mvn exec:java`.
+   - Launch the GUI through the main class `Main.java` using your IDE or `java -jar target/ProjectMaven-0.0.1-SNAPSHOT.jar`.
    
 2. **Register**:
    - Create a new account as a beneficiary, volunteer or structure.
