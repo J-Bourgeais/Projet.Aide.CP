@@ -84,7 +84,7 @@ Projet.Aide.CP/
 
 3. Run the application:
    ```bash
-   mvn exec:java
+   java -jar target/ProjectMaven-0.0.1-SNAPSHOT.jar
    ```
 
 ---
